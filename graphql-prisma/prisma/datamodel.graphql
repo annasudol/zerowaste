@@ -2,31 +2,26 @@ type User {
   id: ID! @id @unique
   name: String!
   email: String! @unique
-  recipies: [Recipie!]! @relation(name: "RecipieToUser", onDelete: CASCADE)
+  recipes: [Recipe!]! @relation(name: "RecipeToUser", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentToUser", onDelete: CASCADE)
 }
 
-type Recipie {
+type Recipe {
   id: ID! @id @unique
   title: String!
   description: String
   ingredients: [String!]! @scalarList(strategy: RELATION)
   detailedIngredients: [String!]! @scalarList(strategy: RELATION)
   directions: [String!]! @scalarList(strategy: RELATION)
-  time: Time!
-  author: User! @relation(name: "RecipieToUser", onDelete: SET_NULL)
-  comments: [Comment!]! @relation(name: "CommentToRecipie", onDelete: CASCADE)
+  prep: Int!
+  cook: Int!
+  author: User! @relation(name: "RecipeToUser", onDelete: SET_NULL)
+  comments: [Comment!]! @relation(name: "CommentToRecipe", onDelete: CASCADE)
 }
 
 type Comment {
   id: ID! @id @unique
   text: String!
   author: User! @relation(name: "CommentToUser", onDelete: SET_NULL)
-  recipie: Recipie! @relation(name: "CommentToRecipie", onDelete: SET_NULL)
-}
-
-type Time {
-  id: ID! @id
-  prep: Int!
-  cook: Int!
+  Recipe: Recipe! @relation(name: "CommentToRecipe", onDelete: SET_NULL)
 }

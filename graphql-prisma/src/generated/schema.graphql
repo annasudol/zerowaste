@@ -2,7 +2,7 @@ type AggregateComment {
   count: Int!
 }
 
-type AggregateRecipie {
+type AggregateRecipe {
   count: Int!
 }
 
@@ -19,7 +19,7 @@ type Comment implements Node {
   id: ID!
   text: String!
   author: User!
-  recipie: Recipie!
+  Recipe: Recipe!
 }
 
 # A connection to a list of items.
@@ -35,7 +35,7 @@ input CommentCreateInput {
   id: ID
   text: String!
   author: UserCreateOneWithoutCommentsInput!
-  recipie: RecipieCreateOneWithoutCommentsInput!
+  Recipe: RecipeCreateOneWithoutCommentsInput!
 }
 
 input CommentCreateManyWithoutAuthorInput {
@@ -43,18 +43,18 @@ input CommentCreateManyWithoutAuthorInput {
   connect: [CommentWhereUniqueInput!]
 }
 
-input CommentCreateManyWithoutRecipieInput {
-  create: [CommentCreateWithoutRecipieInput!]
+input CommentCreateManyWithoutRecipeInput {
+  create: [CommentCreateWithoutRecipeInput!]
   connect: [CommentWhereUniqueInput!]
 }
 
 input CommentCreateWithoutAuthorInput {
   id: ID
   text: String!
-  recipie: RecipieCreateOneWithoutCommentsInput!
+  Recipe: RecipeCreateOneWithoutCommentsInput!
 }
 
-input CommentCreateWithoutRecipieInput {
+input CommentCreateWithoutRecipeInput {
   id: ID
   text: String!
   author: UserCreateOneWithoutCommentsInput!
@@ -171,7 +171,7 @@ input CommentSubscriptionWhereInput {
 input CommentUpdateInput {
   text: String
   author: UserUpdateOneRequiredWithoutCommentsInput
-  recipie: RecipieUpdateOneRequiredWithoutCommentsInput
+  Recipe: RecipeUpdateOneRequiredWithoutCommentsInput
 }
 
 input CommentUpdateManyDataInput {
@@ -194,16 +194,16 @@ input CommentUpdateManyWithoutAuthorInput {
   upsert: [CommentUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input CommentUpdateManyWithoutRecipieInput {
-  create: [CommentCreateWithoutRecipieInput!]
+input CommentUpdateManyWithoutRecipeInput {
+  create: [CommentCreateWithoutRecipeInput!]
   connect: [CommentWhereUniqueInput!]
   set: [CommentWhereUniqueInput!]
   disconnect: [CommentWhereUniqueInput!]
   delete: [CommentWhereUniqueInput!]
-  update: [CommentUpdateWithWhereUniqueWithoutRecipieInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutRecipeInput!]
   updateMany: [CommentUpdateManyWithWhereNestedInput!]
   deleteMany: [CommentScalarWhereInput!]
-  upsert: [CommentUpsertWithWhereUniqueWithoutRecipieInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutRecipeInput!]
 }
 
 input CommentUpdateManyWithWhereNestedInput {
@@ -213,10 +213,10 @@ input CommentUpdateManyWithWhereNestedInput {
 
 input CommentUpdateWithoutAuthorDataInput {
   text: String
-  recipie: RecipieUpdateOneRequiredWithoutCommentsInput
+  Recipe: RecipeUpdateOneRequiredWithoutCommentsInput
 }
 
-input CommentUpdateWithoutRecipieDataInput {
+input CommentUpdateWithoutRecipeDataInput {
   text: String
   author: UserUpdateOneRequiredWithoutCommentsInput
 }
@@ -226,9 +226,9 @@ input CommentUpdateWithWhereUniqueWithoutAuthorInput {
   data: CommentUpdateWithoutAuthorDataInput!
 }
 
-input CommentUpdateWithWhereUniqueWithoutRecipieInput {
+input CommentUpdateWithWhereUniqueWithoutRecipeInput {
   where: CommentWhereUniqueInput!
-  data: CommentUpdateWithoutRecipieDataInput!
+  data: CommentUpdateWithoutRecipeDataInput!
 }
 
 input CommentUpsertWithWhereUniqueWithoutAuthorInput {
@@ -237,10 +237,10 @@ input CommentUpsertWithWhereUniqueWithoutAuthorInput {
   create: CommentCreateWithoutAuthorInput!
 }
 
-input CommentUpsertWithWhereUniqueWithoutRecipieInput {
+input CommentUpsertWithWhereUniqueWithoutRecipeInput {
   where: CommentWhereUniqueInput!
-  update: CommentUpdateWithoutRecipieDataInput!
-  create: CommentCreateWithoutRecipieInput!
+  update: CommentUpdateWithoutRecipeDataInput!
+  create: CommentCreateWithoutRecipeInput!
 }
 
 input CommentWhereInput {
@@ -305,7 +305,7 @@ input CommentWhereInput {
   # All values not ending with the given string.
   text_not_ends_with: String
   author: UserWhereInput
-  recipie: RecipieWhereInput
+  Recipe: RecipeWhereInput
 }
 
 input CommentWhereUniqueInput {
@@ -322,30 +322,27 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
-  createRecipie(data: RecipieCreateInput!): Recipie!
+  createRecipe(data: RecipeCreateInput!): Recipe!
   createComment(data: CommentCreateInput!): Comment!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateRecipie(
-    data: RecipieUpdateInput!
-    where: RecipieWhereUniqueInput!
-  ): Recipie
+  updateRecipe(data: RecipeUpdateInput!, where: RecipeWhereUniqueInput!): Recipe
   updateComment(
     data: CommentUpdateInput!
     where: CommentWhereUniqueInput!
   ): Comment
   deleteUser(where: UserWhereUniqueInput!): User
-  deleteRecipie(where: RecipieWhereUniqueInput!): Recipie
+  deleteRecipe(where: RecipeWhereUniqueInput!): Recipe
   deleteComment(where: CommentWhereUniqueInput!): Comment
   upsertUser(
     where: UserWhereUniqueInput!
     create: UserCreateInput!
     update: UserUpdateInput!
   ): User!
-  upsertRecipie(
-    where: RecipieWhereUniqueInput!
-    create: RecipieCreateInput!
-    update: RecipieUpdateInput!
-  ): Recipie!
+  upsertRecipe(
+    where: RecipeWhereUniqueInput!
+    create: RecipeCreateInput!
+    update: RecipeUpdateInput!
+  ): Recipe!
   upsertComment(
     where: CommentWhereUniqueInput!
     create: CommentCreateInput!
@@ -355,16 +352,16 @@ type Mutation {
     data: UserUpdateManyMutationInput!
     where: UserWhereInput
   ): BatchPayload!
-  updateManyRecipies(
-    data: RecipieUpdateManyMutationInput!
-    where: RecipieWhereInput
+  updateManyRecipes(
+    data: RecipeUpdateManyMutationInput!
+    where: RecipeWhereInput
   ): BatchPayload!
   updateManyComments(
     data: CommentUpdateManyMutationInput!
     where: CommentWhereInput
   ): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyRecipies(where: RecipieWhereInput): BatchPayload!
+  deleteManyRecipes(where: RecipeWhereInput): BatchPayload!
   deleteManyComments(where: CommentWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -407,15 +404,15 @@ type Query {
     first: Int
     last: Int
   ): [User]!
-  recipies(
-    where: RecipieWhereInput
-    orderBy: RecipieOrderByInput
+  recipes(
+    where: RecipeWhereInput
+    orderBy: RecipeOrderByInput
     skip: Int
     after: String
     before: String
     first: Int
     last: Int
-  ): [Recipie]!
+  ): [Recipe]!
   comments(
     where: CommentWhereInput
     orderBy: CommentOrderByInput
@@ -426,7 +423,7 @@ type Query {
     last: Int
   ): [Comment]!
   user(where: UserWhereUniqueInput!): User
-  recipie(where: RecipieWhereUniqueInput!): Recipie
+  recipe(where: RecipeWhereUniqueInput!): Recipe
   comment(where: CommentWhereUniqueInput!): Comment
   usersConnection(
     where: UserWhereInput
@@ -437,15 +434,15 @@ type Query {
     first: Int
     last: Int
   ): UserConnection!
-  recipiesConnection(
-    where: RecipieWhereInput
-    orderBy: RecipieOrderByInput
+  recipesConnection(
+    where: RecipeWhereInput
+    orderBy: RecipeOrderByInput
     skip: Int
     after: String
     before: String
     first: Int
     last: Int
-  ): RecipieConnection!
+  ): RecipeConnection!
   commentsConnection(
     where: CommentWhereInput
     orderBy: CommentOrderByInput
@@ -462,12 +459,16 @@ type Query {
   ): Node
 }
 
-type Recipie implements Node {
+type Recipe implements Node {
   id: ID!
   title: String!
-  description: String!
-  prep: Int
-  cook: Int
+  description: String
+  ingredients: [String!]!
+  detailedIngredients: [String!]!
+  directions: [String!]!
+  prep: Int!
+  cook: Int!
+  author: User!
   comments(
     where: CommentWhereInput
     orderBy: CommentOrderByInput
@@ -477,65 +478,85 @@ type Recipie implements Node {
     first: Int
     last: Int
   ): [Comment!]
-  author: User!
 }
 
 # A connection to a list of items.
-type RecipieConnection {
+type RecipeConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
   # A list of edges.
-  edges: [RecipieEdge]!
-  aggregate: AggregateRecipie!
+  edges: [RecipeEdge]!
+  aggregate: AggregateRecipe!
 }
 
-input RecipieCreateInput {
+input RecipeCreatedetailedIngredientsInput {
+  set: [String!]
+}
+
+input RecipeCreatedirectionsInput {
+  set: [String!]
+}
+
+input RecipeCreateingredientsInput {
+  set: [String!]
+}
+
+input RecipeCreateInput {
   id: ID
   title: String!
-  description: String!
-  prep: Int
-  cook: Int
-  comments: CommentCreateManyWithoutRecipieInput
-  author: UserCreateOneWithoutRecipiesInput!
+  description: String
+  prep: Int!
+  cook: Int!
+  ingredients: RecipeCreateingredientsInput
+  detailedIngredients: RecipeCreatedetailedIngredientsInput
+  directions: RecipeCreatedirectionsInput
+  author: UserCreateOneWithoutRecipesInput!
+  comments: CommentCreateManyWithoutRecipeInput
 }
 
-input RecipieCreateManyWithoutAuthorInput {
-  create: [RecipieCreateWithoutAuthorInput!]
-  connect: [RecipieWhereUniqueInput!]
+input RecipeCreateManyWithoutAuthorInput {
+  create: [RecipeCreateWithoutAuthorInput!]
+  connect: [RecipeWhereUniqueInput!]
 }
 
-input RecipieCreateOneWithoutCommentsInput {
-  create: RecipieCreateWithoutCommentsInput
-  connect: RecipieWhereUniqueInput
+input RecipeCreateOneWithoutCommentsInput {
+  create: RecipeCreateWithoutCommentsInput
+  connect: RecipeWhereUniqueInput
 }
 
-input RecipieCreateWithoutAuthorInput {
+input RecipeCreateWithoutAuthorInput {
   id: ID
   title: String!
-  description: String!
-  prep: Int
-  cook: Int
-  comments: CommentCreateManyWithoutRecipieInput
+  description: String
+  prep: Int!
+  cook: Int!
+  ingredients: RecipeCreateingredientsInput
+  detailedIngredients: RecipeCreatedetailedIngredientsInput
+  directions: RecipeCreatedirectionsInput
+  comments: CommentCreateManyWithoutRecipeInput
 }
 
-input RecipieCreateWithoutCommentsInput {
+input RecipeCreateWithoutCommentsInput {
   id: ID
   title: String!
-  description: String!
-  prep: Int
-  cook: Int
-  author: UserCreateOneWithoutRecipiesInput!
+  description: String
+  prep: Int!
+  cook: Int!
+  ingredients: RecipeCreateingredientsInput
+  detailedIngredients: RecipeCreatedetailedIngredientsInput
+  directions: RecipeCreatedirectionsInput
+  author: UserCreateOneWithoutRecipesInput!
 }
 
 # An edge in a connection.
-type RecipieEdge {
+type RecipeEdge {
   # The item at the end of the edge.
-  node: Recipie!
+  node: Recipe!
   # A cursor for use in pagination.
   cursor: String!
 }
 
-enum RecipieOrderByInput {
+enum RecipeOrderByInput {
   id_ASC
   id_DESC
   title_ASC
@@ -548,21 +569,24 @@ enum RecipieOrderByInput {
   cook_DESC
 }
 
-type RecipiePreviousValues {
+type RecipePreviousValues {
   id: ID!
   title: String!
-  description: String!
-  prep: Int
-  cook: Int
+  description: String
+  ingredients: [String!]!
+  detailedIngredients: [String!]!
+  directions: [String!]!
+  prep: Int!
+  cook: Int!
 }
 
-input RecipieScalarWhereInput {
+input RecipeScalarWhereInput {
   # Logical AND on all given filters.
-  AND: [RecipieScalarWhereInput!]
+  AND: [RecipeScalarWhereInput!]
   # Logical OR on all given filters.
-  OR: [RecipieScalarWhereInput!]
+  OR: [RecipeScalarWhereInput!]
   # Logical NOT on all given filters combined by AND.
-  NOT: [RecipieScalarWhereInput!]
+  NOT: [RecipeScalarWhereInput!]
   id: ID
   # All values that are not equal to given value.
   id_not: ID
@@ -676,20 +700,20 @@ input RecipieScalarWhereInput {
   cook_gte: Int
 }
 
-type RecipieSubscriptionPayload {
+type RecipeSubscriptionPayload {
   mutation: MutationType!
-  node: Recipie
+  node: Recipe
   updatedFields: [String!]
-  previousValues: RecipiePreviousValues
+  previousValues: RecipePreviousValues
 }
 
-input RecipieSubscriptionWhereInput {
+input RecipeSubscriptionWhereInput {
   # Logical AND on all given filters.
-  AND: [RecipieSubscriptionWhereInput!]
+  AND: [RecipeSubscriptionWhereInput!]
   # Logical OR on all given filters.
-  OR: [RecipieSubscriptionWhereInput!]
+  OR: [RecipeSubscriptionWhereInput!]
   # Logical NOT on all given filters combined by AND.
-  NOT: [RecipieSubscriptionWhereInput!]
+  NOT: [RecipeSubscriptionWhereInput!]
   # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
   # The subscription event gets only dispatched when one of the updated fields names is included in this list
@@ -698,95 +722,122 @@ input RecipieSubscriptionWhereInput {
   updatedFields_contains_every: [String!]
   # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
-  node: RecipieWhereInput
+  node: RecipeWhereInput
 }
 
-input RecipieUpdateInput {
+input RecipeUpdatedetailedIngredientsInput {
+  set: [String!]
+}
+
+input RecipeUpdatedirectionsInput {
+  set: [String!]
+}
+
+input RecipeUpdateingredientsInput {
+  set: [String!]
+}
+
+input RecipeUpdateInput {
   title: String
   description: String
   prep: Int
   cook: Int
-  comments: CommentUpdateManyWithoutRecipieInput
-  author: UserUpdateOneRequiredWithoutRecipiesInput
+  ingredients: RecipeUpdateingredientsInput
+  detailedIngredients: RecipeUpdatedetailedIngredientsInput
+  directions: RecipeUpdatedirectionsInput
+  author: UserUpdateOneRequiredWithoutRecipesInput
+  comments: CommentUpdateManyWithoutRecipeInput
 }
 
-input RecipieUpdateManyDataInput {
+input RecipeUpdateManyDataInput {
   title: String
   description: String
   prep: Int
   cook: Int
+  ingredients: RecipeUpdateingredientsInput
+  detailedIngredients: RecipeUpdatedetailedIngredientsInput
+  directions: RecipeUpdatedirectionsInput
 }
 
-input RecipieUpdateManyMutationInput {
+input RecipeUpdateManyMutationInput {
   title: String
   description: String
   prep: Int
   cook: Int
+  ingredients: RecipeUpdateingredientsInput
+  detailedIngredients: RecipeUpdatedetailedIngredientsInput
+  directions: RecipeUpdatedirectionsInput
 }
 
-input RecipieUpdateManyWithoutAuthorInput {
-  create: [RecipieCreateWithoutAuthorInput!]
-  connect: [RecipieWhereUniqueInput!]
-  set: [RecipieWhereUniqueInput!]
-  disconnect: [RecipieWhereUniqueInput!]
-  delete: [RecipieWhereUniqueInput!]
-  update: [RecipieUpdateWithWhereUniqueWithoutAuthorInput!]
-  updateMany: [RecipieUpdateManyWithWhereNestedInput!]
-  deleteMany: [RecipieScalarWhereInput!]
-  upsert: [RecipieUpsertWithWhereUniqueWithoutAuthorInput!]
+input RecipeUpdateManyWithoutAuthorInput {
+  create: [RecipeCreateWithoutAuthorInput!]
+  connect: [RecipeWhereUniqueInput!]
+  set: [RecipeWhereUniqueInput!]
+  disconnect: [RecipeWhereUniqueInput!]
+  delete: [RecipeWhereUniqueInput!]
+  update: [RecipeUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [RecipeUpdateManyWithWhereNestedInput!]
+  deleteMany: [RecipeScalarWhereInput!]
+  upsert: [RecipeUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input RecipieUpdateManyWithWhereNestedInput {
-  where: RecipieScalarWhereInput!
-  data: RecipieUpdateManyDataInput!
+input RecipeUpdateManyWithWhereNestedInput {
+  where: RecipeScalarWhereInput!
+  data: RecipeUpdateManyDataInput!
 }
 
-input RecipieUpdateOneRequiredWithoutCommentsInput {
-  create: RecipieCreateWithoutCommentsInput
-  connect: RecipieWhereUniqueInput
-  update: RecipieUpdateWithoutCommentsDataInput
-  upsert: RecipieUpsertWithoutCommentsInput
+input RecipeUpdateOneRequiredWithoutCommentsInput {
+  create: RecipeCreateWithoutCommentsInput
+  connect: RecipeWhereUniqueInput
+  update: RecipeUpdateWithoutCommentsDataInput
+  upsert: RecipeUpsertWithoutCommentsInput
 }
 
-input RecipieUpdateWithoutAuthorDataInput {
+input RecipeUpdateWithoutAuthorDataInput {
   title: String
   description: String
   prep: Int
   cook: Int
-  comments: CommentUpdateManyWithoutRecipieInput
+  ingredients: RecipeUpdateingredientsInput
+  detailedIngredients: RecipeUpdatedetailedIngredientsInput
+  directions: RecipeUpdatedirectionsInput
+  comments: CommentUpdateManyWithoutRecipeInput
 }
 
-input RecipieUpdateWithoutCommentsDataInput {
+input RecipeUpdateWithoutCommentsDataInput {
   title: String
   description: String
   prep: Int
   cook: Int
-  author: UserUpdateOneRequiredWithoutRecipiesInput
+  ingredients: RecipeUpdateingredientsInput
+  detailedIngredients: RecipeUpdatedetailedIngredientsInput
+  directions: RecipeUpdatedirectionsInput
+  author: UserUpdateOneRequiredWithoutRecipesInput
 }
 
-input RecipieUpdateWithWhereUniqueWithoutAuthorInput {
-  where: RecipieWhereUniqueInput!
-  data: RecipieUpdateWithoutAuthorDataInput!
+input RecipeUpdateWithWhereUniqueWithoutAuthorInput {
+  where: RecipeWhereUniqueInput!
+  data: RecipeUpdateWithoutAuthorDataInput!
 }
 
-input RecipieUpsertWithoutCommentsInput {
-  update: RecipieUpdateWithoutCommentsDataInput!
-  create: RecipieCreateWithoutCommentsInput!
+input RecipeUpsertWithoutCommentsInput {
+  update: RecipeUpdateWithoutCommentsDataInput!
+  create: RecipeCreateWithoutCommentsInput!
 }
 
-input RecipieUpsertWithWhereUniqueWithoutAuthorInput {
-  where: RecipieWhereUniqueInput!
-  update: RecipieUpdateWithoutAuthorDataInput!
-  create: RecipieCreateWithoutAuthorInput!
+input RecipeUpsertWithWhereUniqueWithoutAuthorInput {
+  where: RecipeWhereUniqueInput!
+  update: RecipeUpdateWithoutAuthorDataInput!
+  create: RecipeCreateWithoutAuthorInput!
 }
 
-input RecipieWhereInput {
+input RecipeWhereInput {
   # Logical AND on all given filters.
-  AND: [RecipieWhereInput!]
+  AND: [RecipeWhereInput!]
   # Logical OR on all given filters.
-  OR: [RecipieWhereInput!]
+  OR: [RecipeWhereInput!]
   # Logical NOT on all given filters combined by AND.
-  NOT: [RecipieWhereInput!]
+  NOT: [RecipeWhereInput!]
   id: ID
   # All values that are not equal to given value.
   id_not: ID
@@ -898,19 +949,19 @@ input RecipieWhereInput {
   cook_gt: Int
   # All values greater than or equal the given value.
   cook_gte: Int
+  author: UserWhereInput
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
   comments_none: CommentWhereInput
-  author: UserWhereInput
 }
 
-input RecipieWhereUniqueInput {
+input RecipeWhereUniqueInput {
   id: ID
 }
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  recipie(where: RecipieSubscriptionWhereInput): RecipieSubscriptionPayload
+  recipe(where: RecipeSubscriptionWhereInput): RecipeSubscriptionPayload
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
 }
 
@@ -918,15 +969,15 @@ type User implements Node {
   id: ID!
   name: String!
   email: String!
-  recipies(
-    where: RecipieWhereInput
-    orderBy: RecipieOrderByInput
+  recipes(
+    where: RecipeWhereInput
+    orderBy: RecipeOrderByInput
     skip: Int
     after: String
     before: String
     first: Int
     last: Int
-  ): [Recipie!]
+  ): [Recipe!]
   comments(
     where: CommentWhereInput
     orderBy: CommentOrderByInput
@@ -951,7 +1002,7 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String!
-  recipies: RecipieCreateManyWithoutAuthorInput
+  recipes: RecipeCreateManyWithoutAuthorInput
   comments: CommentCreateManyWithoutAuthorInput
 }
 
@@ -960,8 +1011,8 @@ input UserCreateOneWithoutCommentsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutRecipiesInput {
-  create: UserCreateWithoutRecipiesInput
+input UserCreateOneWithoutRecipesInput {
+  create: UserCreateWithoutRecipesInput
   connect: UserWhereUniqueInput
 }
 
@@ -969,10 +1020,10 @@ input UserCreateWithoutCommentsInput {
   id: ID
   name: String!
   email: String!
-  recipies: RecipieCreateManyWithoutAuthorInput
+  recipes: RecipeCreateManyWithoutAuthorInput
 }
 
-input UserCreateWithoutRecipiesInput {
+input UserCreateWithoutRecipesInput {
   id: ID
   name: String!
   email: String!
@@ -1030,7 +1081,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   name: String
   email: String
-  recipies: RecipieUpdateManyWithoutAuthorInput
+  recipes: RecipeUpdateManyWithoutAuthorInput
   comments: CommentUpdateManyWithoutAuthorInput
 }
 
@@ -1046,20 +1097,20 @@ input UserUpdateOneRequiredWithoutCommentsInput {
   upsert: UserUpsertWithoutCommentsInput
 }
 
-input UserUpdateOneRequiredWithoutRecipiesInput {
-  create: UserCreateWithoutRecipiesInput
+input UserUpdateOneRequiredWithoutRecipesInput {
+  create: UserCreateWithoutRecipesInput
   connect: UserWhereUniqueInput
-  update: UserUpdateWithoutRecipiesDataInput
-  upsert: UserUpsertWithoutRecipiesInput
+  update: UserUpdateWithoutRecipesDataInput
+  upsert: UserUpsertWithoutRecipesInput
 }
 
 input UserUpdateWithoutCommentsDataInput {
   name: String
   email: String
-  recipies: RecipieUpdateManyWithoutAuthorInput
+  recipes: RecipeUpdateManyWithoutAuthorInput
 }
 
-input UserUpdateWithoutRecipiesDataInput {
+input UserUpdateWithoutRecipesDataInput {
   name: String
   email: String
   comments: CommentUpdateManyWithoutAuthorInput
@@ -1070,9 +1121,9 @@ input UserUpsertWithoutCommentsInput {
   create: UserCreateWithoutCommentsInput!
 }
 
-input UserUpsertWithoutRecipiesInput {
-  update: UserUpdateWithoutRecipiesDataInput!
-  create: UserCreateWithoutRecipiesInput!
+input UserUpsertWithoutRecipesInput {
+  update: UserUpdateWithoutRecipesDataInput!
+  create: UserCreateWithoutRecipesInput!
 }
 
 input UserWhereInput {
@@ -1163,9 +1214,9 @@ input UserWhereInput {
   email_ends_with: String
   # All values not ending with the given string.
   email_not_ends_with: String
-  recipies_every: RecipieWhereInput
-  recipies_some: RecipieWhereInput
-  recipies_none: RecipieWhereInput
+  recipes_every: RecipeWhereInput
+  recipes_some: RecipeWhereInput
+  recipes_none: RecipeWhereInput
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
   comments_none: CommentWhereInput

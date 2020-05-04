@@ -68,14 +68,10 @@ type Recipe {
     ingredients: [String!]!
     detailedIngredients: [String!]!
     directions: [String!]!
-    time: Time!
-    author: User!
-    comments: [Comment!]!
-}
-
-type Time {
     prep: Int!
     cook: Int!
+    author: User!
+    comments: [Comment!]!
 }
 
 
