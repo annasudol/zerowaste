@@ -1,0 +1,1178 @@
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateRecipie {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  # The number of nodes that have been affected by the Batch operation.
+  count: Long!
+}
+
+type Comment implements Node {
+  id: ID!
+  text: String!
+  author: User!
+  recipie: Recipie!
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  id: ID
+  text: String!
+  author: UserCreateOneWithoutCommentsInput!
+  recipie: RecipieCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateManyWithoutAuthorInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateManyWithoutRecipieInput {
+  create: [CommentCreateWithoutRecipieInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutAuthorInput {
+  id: ID
+  text: String!
+  recipie: RecipieCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateWithoutRecipieInput {
+  id: ID
+  text: String!
+  author: UserCreateOneWithoutCommentsInput!
+}
+
+# An edge in a connection.
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  text: String!
+}
+
+input CommentScalarWhereInput {
+  # Logical AND on all given filters.
+  AND: [CommentScalarWhereInput!]
+  # Logical OR on all given filters.
+  OR: [CommentScalarWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [CommentScalarWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  text: String
+  # All values that are not equal to given value.
+  text_not: String
+  # All values that are contained in given list.
+  text_in: [String!]
+  # All values that are not contained in given list.
+  text_not_in: [String!]
+  # All values less than the given value.
+  text_lt: String
+  # All values less than or equal the given value.
+  text_lte: String
+  # All values greater than the given value.
+  text_gt: String
+  # All values greater than or equal the given value.
+  text_gte: String
+  # All values containing the given string.
+  text_contains: String
+  # All values not containing the given string.
+  text_not_contains: String
+  # All values starting with the given string.
+  text_starts_with: String
+  # All values not starting with the given string.
+  text_not_starts_with: String
+  # All values ending with the given string.
+  text_ends_with: String
+  # All values not ending with the given string.
+  text_not_ends_with: String
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [CommentSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [CommentSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [CommentSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+}
+
+input CommentUpdateInput {
+  text: String
+  author: UserUpdateOneRequiredWithoutCommentsInput
+  recipie: RecipieUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateManyDataInput {
+  text: String
+}
+
+input CommentUpdateManyMutationInput {
+  text: String
+}
+
+input CommentUpdateManyWithoutAuthorInput {
+  create: [CommentCreateWithoutAuthorInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input CommentUpdateManyWithoutRecipieInput {
+  create: [CommentCreateWithoutRecipieInput!]
+  connect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutRecipieInput!]
+  updateMany: [CommentUpdateManyWithWhereNestedInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutRecipieInput!]
+}
+
+input CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyDataInput!
+}
+
+input CommentUpdateWithoutAuthorDataInput {
+  text: String
+  recipie: RecipieUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithoutRecipieDataInput {
+  text: String
+  author: UserUpdateOneRequiredWithoutCommentsInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutAuthorDataInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutRecipieInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutRecipieDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutAuthorDataInput!
+  create: CommentCreateWithoutAuthorInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutRecipieInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutRecipieDataInput!
+  create: CommentCreateWithoutRecipieInput!
+}
+
+input CommentWhereInput {
+  # Logical AND on all given filters.
+  AND: [CommentWhereInput!]
+  # Logical OR on all given filters.
+  OR: [CommentWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [CommentWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  text: String
+  # All values that are not equal to given value.
+  text_not: String
+  # All values that are contained in given list.
+  text_in: [String!]
+  # All values that are not contained in given list.
+  text_not_in: [String!]
+  # All values less than the given value.
+  text_lt: String
+  # All values less than or equal the given value.
+  text_lte: String
+  # All values greater than the given value.
+  text_gt: String
+  # All values greater than or equal the given value.
+  text_gte: String
+  # All values containing the given string.
+  text_contains: String
+  # All values not containing the given string.
+  text_not_contains: String
+  # All values starting with the given string.
+  text_starts_with: String
+  # All values not starting with the given string.
+  text_not_starts_with: String
+  # All values ending with the given string.
+  text_ends_with: String
+  # All values not ending with the given string.
+  text_not_ends_with: String
+  author: UserWhereInput
+  recipie: RecipieWhereInput
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+# Raw JSON value
+scalar Json
+
+# The `Long` scalar type
+#  represents non-fractional signed whole numeric values.
+# Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createRecipie(data: RecipieCreateInput!): Recipie!
+  createComment(data: CommentCreateInput!): Comment!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateRecipie(
+    data: RecipieUpdateInput!
+    where: RecipieWhereUniqueInput!
+  ): Recipie
+  updateComment(
+    data: CommentUpdateInput!
+    where: CommentWhereUniqueInput!
+  ): Comment
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteRecipie(where: RecipieWhereUniqueInput!): Recipie
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  upsertUser(
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+  ): User!
+  upsertRecipie(
+    where: RecipieWhereUniqueInput!
+    create: RecipieCreateInput!
+    update: RecipieUpdateInput!
+  ): Recipie!
+  upsertComment(
+    where: CommentWhereUniqueInput!
+    create: CommentCreateInput!
+    update: CommentUpdateInput!
+  ): Comment!
+  updateManyUsers(
+    data: UserUpdateManyMutationInput!
+    where: UserWhereInput
+  ): BatchPayload!
+  updateManyRecipies(
+    data: RecipieUpdateManyMutationInput!
+    where: RecipieWhereInput
+  ): BatchPayload!
+  updateManyComments(
+    data: CommentUpdateManyMutationInput!
+    where: CommentWhereInput
+  ): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyRecipies(where: RecipieWhereInput): BatchPayload!
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+enum PrismaDatabase {
+  default
+}
+
+type Query {
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  recipies(
+    where: RecipieWhereInput
+    orderBy: RecipieOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Recipie]!
+  comments(
+    where: CommentWhereInput
+    orderBy: CommentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Comment]!
+  user(where: UserWhereUniqueInput!): User
+  recipie(where: RecipieWhereUniqueInput!): Recipie
+  comment(where: CommentWhereUniqueInput!): Comment
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
+  recipiesConnection(
+    where: RecipieWhereInput
+    orderBy: RecipieOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): RecipieConnection!
+  commentsConnection(
+    where: CommentWhereInput
+    orderBy: CommentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): CommentConnection!
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+type Recipie implements Node {
+  id: ID!
+  title: String!
+  description: String!
+  prep: Int
+  cook: Int
+  comments(
+    where: CommentWhereInput
+    orderBy: CommentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Comment!]
+  author: User!
+}
+
+# A connection to a list of items.
+type RecipieConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [RecipieEdge]!
+  aggregate: AggregateRecipie!
+}
+
+input RecipieCreateInput {
+  id: ID
+  title: String!
+  description: String!
+  prep: Int
+  cook: Int
+  comments: CommentCreateManyWithoutRecipieInput
+  author: UserCreateOneWithoutRecipiesInput!
+}
+
+input RecipieCreateManyWithoutAuthorInput {
+  create: [RecipieCreateWithoutAuthorInput!]
+  connect: [RecipieWhereUniqueInput!]
+}
+
+input RecipieCreateOneWithoutCommentsInput {
+  create: RecipieCreateWithoutCommentsInput
+  connect: RecipieWhereUniqueInput
+}
+
+input RecipieCreateWithoutAuthorInput {
+  id: ID
+  title: String!
+  description: String!
+  prep: Int
+  cook: Int
+  comments: CommentCreateManyWithoutRecipieInput
+}
+
+input RecipieCreateWithoutCommentsInput {
+  id: ID
+  title: String!
+  description: String!
+  prep: Int
+  cook: Int
+  author: UserCreateOneWithoutRecipiesInput!
+}
+
+# An edge in a connection.
+type RecipieEdge {
+  # The item at the end of the edge.
+  node: Recipie!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum RecipieOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  prep_ASC
+  prep_DESC
+  cook_ASC
+  cook_DESC
+}
+
+type RecipiePreviousValues {
+  id: ID!
+  title: String!
+  description: String!
+  prep: Int
+  cook: Int
+}
+
+input RecipieScalarWhereInput {
+  # Logical AND on all given filters.
+  AND: [RecipieScalarWhereInput!]
+  # Logical OR on all given filters.
+  OR: [RecipieScalarWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [RecipieScalarWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  title: String
+  # All values that are not equal to given value.
+  title_not: String
+  # All values that are contained in given list.
+  title_in: [String!]
+  # All values that are not contained in given list.
+  title_not_in: [String!]
+  # All values less than the given value.
+  title_lt: String
+  # All values less than or equal the given value.
+  title_lte: String
+  # All values greater than the given value.
+  title_gt: String
+  # All values greater than or equal the given value.
+  title_gte: String
+  # All values containing the given string.
+  title_contains: String
+  # All values not containing the given string.
+  title_not_contains: String
+  # All values starting with the given string.
+  title_starts_with: String
+  # All values not starting with the given string.
+  title_not_starts_with: String
+  # All values ending with the given string.
+  title_ends_with: String
+  # All values not ending with the given string.
+  title_not_ends_with: String
+  description: String
+  # All values that are not equal to given value.
+  description_not: String
+  # All values that are contained in given list.
+  description_in: [String!]
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+  # All values less than the given value.
+  description_lt: String
+  # All values less than or equal the given value.
+  description_lte: String
+  # All values greater than the given value.
+  description_gt: String
+  # All values greater than or equal the given value.
+  description_gte: String
+  # All values containing the given string.
+  description_contains: String
+  # All values not containing the given string.
+  description_not_contains: String
+  # All values starting with the given string.
+  description_starts_with: String
+  # All values not starting with the given string.
+  description_not_starts_with: String
+  # All values ending with the given string.
+  description_ends_with: String
+  # All values not ending with the given string.
+  description_not_ends_with: String
+  prep: Int
+  # All values that are not equal to given value.
+  prep_not: Int
+  # All values that are contained in given list.
+  prep_in: [Int!]
+  # All values that are not contained in given list.
+  prep_not_in: [Int!]
+  # All values less than the given value.
+  prep_lt: Int
+  # All values less than or equal the given value.
+  prep_lte: Int
+  # All values greater than the given value.
+  prep_gt: Int
+  # All values greater than or equal the given value.
+  prep_gte: Int
+  cook: Int
+  # All values that are not equal to given value.
+  cook_not: Int
+  # All values that are contained in given list.
+  cook_in: [Int!]
+  # All values that are not contained in given list.
+  cook_not_in: [Int!]
+  # All values less than the given value.
+  cook_lt: Int
+  # All values less than or equal the given value.
+  cook_lte: Int
+  # All values greater than the given value.
+  cook_gt: Int
+  # All values greater than or equal the given value.
+  cook_gte: Int
+}
+
+type RecipieSubscriptionPayload {
+  mutation: MutationType!
+  node: Recipie
+  updatedFields: [String!]
+  previousValues: RecipiePreviousValues
+}
+
+input RecipieSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [RecipieSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [RecipieSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [RecipieSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: RecipieWhereInput
+}
+
+input RecipieUpdateInput {
+  title: String
+  description: String
+  prep: Int
+  cook: Int
+  comments: CommentUpdateManyWithoutRecipieInput
+  author: UserUpdateOneRequiredWithoutRecipiesInput
+}
+
+input RecipieUpdateManyDataInput {
+  title: String
+  description: String
+  prep: Int
+  cook: Int
+}
+
+input RecipieUpdateManyMutationInput {
+  title: String
+  description: String
+  prep: Int
+  cook: Int
+}
+
+input RecipieUpdateManyWithoutAuthorInput {
+  create: [RecipieCreateWithoutAuthorInput!]
+  connect: [RecipieWhereUniqueInput!]
+  set: [RecipieWhereUniqueInput!]
+  disconnect: [RecipieWhereUniqueInput!]
+  delete: [RecipieWhereUniqueInput!]
+  update: [RecipieUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [RecipieUpdateManyWithWhereNestedInput!]
+  deleteMany: [RecipieScalarWhereInput!]
+  upsert: [RecipieUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input RecipieUpdateManyWithWhereNestedInput {
+  where: RecipieScalarWhereInput!
+  data: RecipieUpdateManyDataInput!
+}
+
+input RecipieUpdateOneRequiredWithoutCommentsInput {
+  create: RecipieCreateWithoutCommentsInput
+  connect: RecipieWhereUniqueInput
+  update: RecipieUpdateWithoutCommentsDataInput
+  upsert: RecipieUpsertWithoutCommentsInput
+}
+
+input RecipieUpdateWithoutAuthorDataInput {
+  title: String
+  description: String
+  prep: Int
+  cook: Int
+  comments: CommentUpdateManyWithoutRecipieInput
+}
+
+input RecipieUpdateWithoutCommentsDataInput {
+  title: String
+  description: String
+  prep: Int
+  cook: Int
+  author: UserUpdateOneRequiredWithoutRecipiesInput
+}
+
+input RecipieUpdateWithWhereUniqueWithoutAuthorInput {
+  where: RecipieWhereUniqueInput!
+  data: RecipieUpdateWithoutAuthorDataInput!
+}
+
+input RecipieUpsertWithoutCommentsInput {
+  update: RecipieUpdateWithoutCommentsDataInput!
+  create: RecipieCreateWithoutCommentsInput!
+}
+
+input RecipieUpsertWithWhereUniqueWithoutAuthorInput {
+  where: RecipieWhereUniqueInput!
+  update: RecipieUpdateWithoutAuthorDataInput!
+  create: RecipieCreateWithoutAuthorInput!
+}
+
+input RecipieWhereInput {
+  # Logical AND on all given filters.
+  AND: [RecipieWhereInput!]
+  # Logical OR on all given filters.
+  OR: [RecipieWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [RecipieWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  title: String
+  # All values that are not equal to given value.
+  title_not: String
+  # All values that are contained in given list.
+  title_in: [String!]
+  # All values that are not contained in given list.
+  title_not_in: [String!]
+  # All values less than the given value.
+  title_lt: String
+  # All values less than or equal the given value.
+  title_lte: String
+  # All values greater than the given value.
+  title_gt: String
+  # All values greater than or equal the given value.
+  title_gte: String
+  # All values containing the given string.
+  title_contains: String
+  # All values not containing the given string.
+  title_not_contains: String
+  # All values starting with the given string.
+  title_starts_with: String
+  # All values not starting with the given string.
+  title_not_starts_with: String
+  # All values ending with the given string.
+  title_ends_with: String
+  # All values not ending with the given string.
+  title_not_ends_with: String
+  description: String
+  # All values that are not equal to given value.
+  description_not: String
+  # All values that are contained in given list.
+  description_in: [String!]
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+  # All values less than the given value.
+  description_lt: String
+  # All values less than or equal the given value.
+  description_lte: String
+  # All values greater than the given value.
+  description_gt: String
+  # All values greater than or equal the given value.
+  description_gte: String
+  # All values containing the given string.
+  description_contains: String
+  # All values not containing the given string.
+  description_not_contains: String
+  # All values starting with the given string.
+  description_starts_with: String
+  # All values not starting with the given string.
+  description_not_starts_with: String
+  # All values ending with the given string.
+  description_ends_with: String
+  # All values not ending with the given string.
+  description_not_ends_with: String
+  prep: Int
+  # All values that are not equal to given value.
+  prep_not: Int
+  # All values that are contained in given list.
+  prep_in: [Int!]
+  # All values that are not contained in given list.
+  prep_not_in: [Int!]
+  # All values less than the given value.
+  prep_lt: Int
+  # All values less than or equal the given value.
+  prep_lte: Int
+  # All values greater than the given value.
+  prep_gt: Int
+  # All values greater than or equal the given value.
+  prep_gte: Int
+  cook: Int
+  # All values that are not equal to given value.
+  cook_not: Int
+  # All values that are contained in given list.
+  cook_in: [Int!]
+  # All values that are not contained in given list.
+  cook_not_in: [Int!]
+  # All values less than the given value.
+  cook_lt: Int
+  # All values less than or equal the given value.
+  cook_lte: Int
+  # All values greater than the given value.
+  cook_gt: Int
+  # All values greater than or equal the given value.
+  cook_gte: Int
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+  author: UserWhereInput
+}
+
+input RecipieWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  recipie(where: RecipieSubscriptionWhereInput): RecipieSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  recipies(
+    where: RecipieWhereInput
+    orderBy: RecipieOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Recipie!]
+  comments(
+    where: CommentWhereInput
+    orderBy: CommentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Comment!]
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  name: String!
+  email: String!
+  recipies: RecipieCreateManyWithoutAuthorInput
+  comments: CommentCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutRecipiesInput {
+  create: UserCreateWithoutRecipiesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCommentsInput {
+  id: ID
+  name: String!
+  email: String!
+  recipies: RecipieCreateManyWithoutAuthorInput
+}
+
+input UserCreateWithoutRecipiesInput {
+  id: ID
+  name: String!
+  email: String!
+  comments: CommentCreateManyWithoutAuthorInput
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [UserSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  recipies: RecipieUpdateManyWithoutAuthorInput
+  comments: CommentUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+}
+
+input UserUpdateOneRequiredWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCommentsDataInput
+  upsert: UserUpsertWithoutCommentsInput
+}
+
+input UserUpdateOneRequiredWithoutRecipiesInput {
+  create: UserCreateWithoutRecipiesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutRecipiesDataInput
+  upsert: UserUpsertWithoutRecipiesInput
+}
+
+input UserUpdateWithoutCommentsDataInput {
+  name: String
+  email: String
+  recipies: RecipieUpdateManyWithoutAuthorInput
+}
+
+input UserUpdateWithoutRecipiesDataInput {
+  name: String
+  email: String
+  comments: CommentUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsDataInput!
+  create: UserCreateWithoutCommentsInput!
+}
+
+input UserUpsertWithoutRecipiesInput {
+  update: UserUpdateWithoutRecipiesDataInput!
+  create: UserCreateWithoutRecipiesInput!
+}
+
+input UserWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserWhereInput!]
+  # Logical OR on all given filters.
+  OR: [UserWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+  # All values that are not equal to given value.
+  name_not: String
+  # All values that are contained in given list.
+  name_in: [String!]
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+  # All values less than the given value.
+  name_lt: String
+  # All values less than or equal the given value.
+  name_lte: String
+  # All values greater than the given value.
+  name_gt: String
+  # All values greater than or equal the given value.
+  name_gte: String
+  # All values containing the given string.
+  name_contains: String
+  # All values not containing the given string.
+  name_not_contains: String
+  # All values starting with the given string.
+  name_starts_with: String
+  # All values not starting with the given string.
+  name_not_starts_with: String
+  # All values ending with the given string.
+  name_ends_with: String
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  email: String
+  # All values that are not equal to given value.
+  email_not: String
+  # All values that are contained in given list.
+  email_in: [String!]
+  # All values that are not contained in given list.
+  email_not_in: [String!]
+  # All values less than the given value.
+  email_lt: String
+  # All values less than or equal the given value.
+  email_lte: String
+  # All values greater than the given value.
+  email_gt: String
+  # All values greater than or equal the given value.
+  email_gte: String
+  # All values containing the given string.
+  email_contains: String
+  # All values not containing the given string.
+  email_not_contains: String
+  # All values starting with the given string.
+  email_starts_with: String
+  # All values not starting with the given string.
+  email_not_starts_with: String
+  # All values ending with the given string.
+  email_ends_with: String
+  # All values not ending with the given string.
+  email_not_ends_with: String
+  recipies_every: RecipieWhereInput
+  recipies_some: RecipieWhereInput
+  recipies_none: RecipieWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}
+

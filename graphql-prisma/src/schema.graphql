@@ -1,0 +1,87 @@
+type Query {
+    users(query: String): [User!]!
+    recipes(query: String): [Recipe!]!
+    comments: [Comment!]!
+}
+
+type Mutation {
+    createUser(data: CreateUserInput!): User!
+    deleteUser(id: ID!): User!
+    updateUser(id: ID!, data: UpdateUserInput!): User!
+    createRecipe(data: CreateReciepieInput!): Recipe!
+    updateRecipe(data: UpdateReciepieInput!): Recipe!
+    deleteRecipe(id: ID!): Recipe!
+    createComment(data: CreateCommentInput!): Comment!
+    deleteComment(id: ID!): Comment!
+}
+
+type Subscription {
+    comment(recipeId: ID!): Comment!
+}
+
+input CreateUserInput {
+    name: String!
+    email: String!
+}
+
+input UpdateUserInput {
+    name: String
+    email: String
+}
+
+input CreateReciepieInput {
+    id: ID!
+    title: String!
+    description: String!
+    ingredients: [String!]!
+    detailedIngredients: [String!]!
+    directions: [String!]!
+    prep: Int!
+    cook: Int!
+    author: ID!
+}
+
+input UpdateReciepieInput {
+    title: String!
+    description: String!
+}
+
+input CreateCommentInput {
+    text: String!
+    author: ID!
+    recipe: ID!
+}
+
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    recipes: [Recipe!]!
+    comments: [Comment!]!
+}
+
+type Recipe {
+    id: ID!
+    title: String!
+    description: String!
+    ingredients: [String!]!
+    detailedIngredients: [String!]!
+    directions: [String!]!
+    time: Time!
+    author: User!
+    comments: [Comment!]!
+}
+
+type Time {
+    prep: Int!
+    cook: Int!
+}
+
+
+type Comment {
+    id: ID!
+    text: String!
+    author: User!
+    recipe: Recipe!
+}
