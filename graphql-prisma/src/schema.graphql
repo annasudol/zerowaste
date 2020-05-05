@@ -23,6 +23,7 @@ type Subscription {
 input CreateUserInput {
     name: String!
     email: String!
+    password: String!
 }
 
 input UpdateUserInput {
@@ -60,6 +61,7 @@ input CreateCommentInput {
 type User {
     id: ID!
     name: String!
+    password: String!
     email: String!
     recipes: [Recipe!]!
     comments: [Comment!]!

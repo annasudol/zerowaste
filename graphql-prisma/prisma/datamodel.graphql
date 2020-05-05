@@ -1,6 +1,7 @@
 type User {
   id: ID! @id @unique
   name: String!
+  password: String!
   email: String! @unique
   recipes: [Recipe!]! @relation(name: "RecipeToUser", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentToUser", onDelete: CASCADE)
