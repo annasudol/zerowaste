@@ -2,7 +2,9 @@ import { Prisma } from 'prisma-binding';
 const prisma = new Prisma({
     typeDefs: 'src/generated/schema.graphql',
     endpoint: 'http://localhost:4466',
-})
+});
+
+export { prisma as default }
 
 
 const createRecipeForUser = async (authorId, data) => {
@@ -25,20 +27,22 @@ const createRecipeForUser = async (authorId, data) => {
 
     return recipe
 }
-createRecipeForUser("ck9sgen4y008c078218f6n1h4", {
-    title: "exaple",
-    description: "ex",
-    prep: 10,
-    cook: 10
+// createRecipeForUser("ck9sgen4y008c078218f6n1h4", {
+//     title: "cheese",
+//     description: "apple pie",
+//     ingredients: { set: ['apple', 'baking powder', 'sugar'] },
+//     prep: 10,
+//     cook: 10
 
-}).then((user) => {
-    console.log(JSON.stringify(user))
-}).catch(err => console.warn(err, "err"))
-// // Retrieve `name` of a specific user
-// prisma.query.users(null, '{id name email recipes { id }}').then(data => console.log(data, "data"))
+// }).then((user) => {
+//     console.log(JSON.stringify(user))
+// }).catch(err => console.warn(err, "err"))
+// Retrieve `name` of a specific user
+// prisma.query.users(null, '{id name email recipes { id }}').then(data => console.log(data, "data")).catch(err => console.warn(err, "err"))
 
-// // Retrieve `id` and `name` of all users
-// prisma.query.users(null, '{ id name }')
+// // // Retrieve `id` and `name` of all users
+// prisma.query.recipes(null, '{id title description }').then(data => console.log(data, "data")).catch(err => console.warn(err, "err"))
+
 
 // // Create new user called `Sarah` and retrieve the `id`
 // prisma.mutation.createUser({ data: { name: 'Sarah' } }, '{ id }')

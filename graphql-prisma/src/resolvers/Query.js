@@ -1,27 +1,43 @@
 const Query = {
-    users(parent, args, { db }, info) {
-        if (!args.query) {
-            return db.users
+    users(parent, args, { prisma }, info) {
+        const opArds = {}
+
+        if (args.query) {
+            opArds.where = {
+                OR: [{
+                    name_contains: args.query
+                }, {
+                    email_contains: args.query
+                }]
+            }
         }
 
-        return db.users.filter((user) => {
-            return user.name.toLowerCase().includes(args.query.toLowerCase())
-        })
+        return prisma.query.users(opArds, info);
     },
-    recipes(parent, args, { db }, info) {
-        if (!args.query) {
-            return db.recipes
+    recipes(parent, args, { prisma }, info) {
+        const opArds = {}
+        if (args.query) {
+            opArds.where = {
+                OR: [{
+                    title_contains: args.query
+                }, {
+                    description_contains: args.query
+                }]
+            }
         }
-
-        return db.recipes.filter((recipe) => {
-            const isTitleMatch = recipe.title.toLowerCase().includes(args.query.toLowerCase())
-            const isIngredientsMatch = recipe.ingredients.includes(args.query.toLowerCase())
-            return isTitleMatch || isIngredientsMatch
-        })
+        return prisma.query.recipes(null, info);
     },
-    comments(parent, args, { db }, info) {
-        return db.comments
-    }
+    recipesByIngredients(parent, args, { prisma }, info) {
+        if (!args.query) {
+            return prisma.query.recipes(null, '{ id title description ingredients}');
+        }
+        return prisma.query.recipes(null, '{ id title description ingredients}')
+            .then(results => results.filter(result => result.ingredients.includes(args.query)))
+            .catch(err => console.warn(err));
+    },
+    comments(parent, args, { prisma }, info) {
+        return prisma.query.comments(null, info)
+    },
 }
 
 export { Query as default }

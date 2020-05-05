@@ -11,7 +11,6 @@ type Recipe {
   title: String!
   description: String
   ingredients: [String!]! @scalarList(strategy: RELATION)
-  detailedIngredients: [String!]! @scalarList(strategy: RELATION)
   directions: [String!]! @scalarList(strategy: RELATION)
   prep: Int!
   cook: Int!
@@ -23,5 +22,5 @@ type Comment {
   id: ID! @id @unique
   text: String!
   author: User! @relation(name: "CommentToUser", onDelete: SET_NULL)
-  Recipe: Recipe! @relation(name: "CommentToRecipe", onDelete: SET_NULL)
+  recipe: Recipe! @relation(name: "CommentToRecipe", onDelete: SET_NULL)
 }

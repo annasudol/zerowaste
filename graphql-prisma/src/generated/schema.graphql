@@ -19,7 +19,7 @@ type Comment implements Node {
   id: ID!
   text: String!
   author: User!
-  Recipe: Recipe!
+  recipe: Recipe!
 }
 
 # A connection to a list of items.
@@ -35,7 +35,7 @@ input CommentCreateInput {
   id: ID
   text: String!
   author: UserCreateOneWithoutCommentsInput!
-  Recipe: RecipeCreateOneWithoutCommentsInput!
+  recipe: RecipeCreateOneWithoutCommentsInput!
 }
 
 input CommentCreateManyWithoutAuthorInput {
@@ -51,7 +51,7 @@ input CommentCreateManyWithoutRecipeInput {
 input CommentCreateWithoutAuthorInput {
   id: ID
   text: String!
-  Recipe: RecipeCreateOneWithoutCommentsInput!
+  recipe: RecipeCreateOneWithoutCommentsInput!
 }
 
 input CommentCreateWithoutRecipeInput {
@@ -171,7 +171,7 @@ input CommentSubscriptionWhereInput {
 input CommentUpdateInput {
   text: String
   author: UserUpdateOneRequiredWithoutCommentsInput
-  Recipe: RecipeUpdateOneRequiredWithoutCommentsInput
+  recipe: RecipeUpdateOneRequiredWithoutCommentsInput
 }
 
 input CommentUpdateManyDataInput {
@@ -213,7 +213,7 @@ input CommentUpdateManyWithWhereNestedInput {
 
 input CommentUpdateWithoutAuthorDataInput {
   text: String
-  Recipe: RecipeUpdateOneRequiredWithoutCommentsInput
+  recipe: RecipeUpdateOneRequiredWithoutCommentsInput
 }
 
 input CommentUpdateWithoutRecipeDataInput {
@@ -305,7 +305,7 @@ input CommentWhereInput {
   # All values not ending with the given string.
   text_not_ends_with: String
   author: UserWhereInput
-  Recipe: RecipeWhereInput
+  recipe: RecipeWhereInput
 }
 
 input CommentWhereUniqueInput {
@@ -464,7 +464,6 @@ type Recipe implements Node {
   title: String!
   description: String
   ingredients: [String!]!
-  detailedIngredients: [String!]!
   directions: [String!]!
   prep: Int!
   cook: Int!
@@ -489,10 +488,6 @@ type RecipeConnection {
   aggregate: AggregateRecipe!
 }
 
-input RecipeCreatedetailedIngredientsInput {
-  set: [String!]
-}
-
 input RecipeCreatedirectionsInput {
   set: [String!]
 }
@@ -508,7 +503,6 @@ input RecipeCreateInput {
   prep: Int!
   cook: Int!
   ingredients: RecipeCreateingredientsInput
-  detailedIngredients: RecipeCreatedetailedIngredientsInput
   directions: RecipeCreatedirectionsInput
   author: UserCreateOneWithoutRecipesInput!
   comments: CommentCreateManyWithoutRecipeInput
@@ -531,7 +525,6 @@ input RecipeCreateWithoutAuthorInput {
   prep: Int!
   cook: Int!
   ingredients: RecipeCreateingredientsInput
-  detailedIngredients: RecipeCreatedetailedIngredientsInput
   directions: RecipeCreatedirectionsInput
   comments: CommentCreateManyWithoutRecipeInput
 }
@@ -543,7 +536,6 @@ input RecipeCreateWithoutCommentsInput {
   prep: Int!
   cook: Int!
   ingredients: RecipeCreateingredientsInput
-  detailedIngredients: RecipeCreatedetailedIngredientsInput
   directions: RecipeCreatedirectionsInput
   author: UserCreateOneWithoutRecipesInput!
 }
@@ -574,7 +566,6 @@ type RecipePreviousValues {
   title: String!
   description: String
   ingredients: [String!]!
-  detailedIngredients: [String!]!
   directions: [String!]!
   prep: Int!
   cook: Int!
@@ -725,10 +716,6 @@ input RecipeSubscriptionWhereInput {
   node: RecipeWhereInput
 }
 
-input RecipeUpdatedetailedIngredientsInput {
-  set: [String!]
-}
-
 input RecipeUpdatedirectionsInput {
   set: [String!]
 }
@@ -743,7 +730,6 @@ input RecipeUpdateInput {
   prep: Int
   cook: Int
   ingredients: RecipeUpdateingredientsInput
-  detailedIngredients: RecipeUpdatedetailedIngredientsInput
   directions: RecipeUpdatedirectionsInput
   author: UserUpdateOneRequiredWithoutRecipesInput
   comments: CommentUpdateManyWithoutRecipeInput
@@ -755,7 +741,6 @@ input RecipeUpdateManyDataInput {
   prep: Int
   cook: Int
   ingredients: RecipeUpdateingredientsInput
-  detailedIngredients: RecipeUpdatedetailedIngredientsInput
   directions: RecipeUpdatedirectionsInput
 }
 
@@ -765,7 +750,6 @@ input RecipeUpdateManyMutationInput {
   prep: Int
   cook: Int
   ingredients: RecipeUpdateingredientsInput
-  detailedIngredients: RecipeUpdatedetailedIngredientsInput
   directions: RecipeUpdatedirectionsInput
 }
 
@@ -799,7 +783,6 @@ input RecipeUpdateWithoutAuthorDataInput {
   prep: Int
   cook: Int
   ingredients: RecipeUpdateingredientsInput
-  detailedIngredients: RecipeUpdatedetailedIngredientsInput
   directions: RecipeUpdatedirectionsInput
   comments: CommentUpdateManyWithoutRecipeInput
 }
@@ -810,7 +793,6 @@ input RecipeUpdateWithoutCommentsDataInput {
   prep: Int
   cook: Int
   ingredients: RecipeUpdateingredientsInput
-  detailedIngredients: RecipeUpdatedetailedIngredientsInput
   directions: RecipeUpdatedirectionsInput
   author: UserUpdateOneRequiredWithoutRecipesInput
 }

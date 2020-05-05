@@ -1,6 +1,7 @@
 type Query {
     users(query: String): [User!]!
     recipes(query: String): [Recipe!]!
+    recipesByIngredients(query: String): [Recipe!]!
     comments: [Comment!]!
 }
 
@@ -30,11 +31,9 @@ input UpdateUserInput {
 }
 
 input CreateReciepieInput {
-    id: ID!
     title: String!
     description: String!
     ingredients: [String!]!
-    detailedIngredients: [String!]!
     directions: [String!]!
     prep: Int!
     cook: Int!
@@ -42,8 +41,13 @@ input CreateReciepieInput {
 }
 
 input UpdateReciepieInput {
+    id: ID!
     title: String!
     description: String!
+    ingredients: [String!]!
+    directions: [String!]!
+    prep: Int!
+    cook: Int!
 }
 
 input CreateCommentInput {
@@ -66,7 +70,6 @@ type Recipe {
     title: String!
     description: String!
     ingredients: [String!]!
-    detailedIngredients: [String!]!
     directions: [String!]!
     prep: Int!
     cook: Int!
