@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import getUserId from '../utils/getUserId'
 import generateToken from '../utils/generateToken'
