@@ -44,6 +44,13 @@ const Mutation = {
     async deleteUser(parent, args, { prisma, request }, info) {
         const userId = getUserId(request);
 
+        const userExists = await prisma.exists.User({
+            id: userId
+        });
+        if (!userExists) {
+            throw new Error('Unable to delete user')
+        }
+
         return prisma.mutation.deleteUser({
             where: {
                 id: userId
@@ -52,6 +59,13 @@ const Mutation = {
     },
     async updateUser(parent, args, { prisma, request }, info) {
         const userId = getUserId(request);
+
+        const userExists = await prisma.exists.User({
+            id: userId
+        });
+        if (!userExists) {
+            throw new Error('Unable to update user')
+        }
         return prisma.mutation.updateUser({
             where: {
                 id: userId
