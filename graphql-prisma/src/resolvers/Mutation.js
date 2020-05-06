@@ -72,12 +72,31 @@ const Mutation = {
             }
         }, info)
     },
+    async deleteRecipe(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
+        const recipeExists = await prisma.exists.Recipe({
+            id: args.id,
+            author: {
+                id: userId
+            }
+        });
+        if (!recipeExists) {
+            throw new Error('Unable to delete recipe')
+        }
 
-    async deleteRecipe(parent, args, { prisma }, info) {
         return await prisma.mutation.deleteRecipe({ where: { id: args.id } }, info);
     },
-
-    async updateRecipe(parent, args, { prisma }, info) {
+    async updateRecipe(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
+        const recipeExists = await prisma.exists.Recipe({
+            id: args.data.id,
+            author: {
+                id: userId
+            }
+        });
+        if (!recipeExists) {
+            throw new Error('Unable to update recipe')
+        }
         return await prisma.mutation.updateRecipe({
             where: { id: args.data.id },
             data: {
@@ -89,20 +108,14 @@ const Mutation = {
             }
         }, info);
     },
-    //mutation {
-    //   updateRecipe(data: {id: "ck9toxros024a08141qbmuaaj" title: "soup" description: "tomato soup" ingredients: ["tomato", "onion"] directions: ["cook"] prep: 20 cook: 10 }){
-    //     title
-    //   }}
-
     async createComment(parent, args, { prisma, request }, info) {
         const userId = getUserId(request);
-        console.log(userId, "userId")
         return await prisma.mutation.createComment({
             data: {
                 text: args.data.text,
                 author: {
                     connect: {
-                        id: "ck9u8s20r00ze0838sqj0z8fh"
+                        id: userId
                     }
                 },
                 recipe: {
@@ -113,24 +126,23 @@ const Mutation = {
             }
         }, info)
     },
-    //mutation {
-    //   createComment(data: {text: "delicious" author: "ck9twqyob02ho0814gt4iv4tl" recipe: "ck9tpxw4q02g30814kz9i0ksm" }){
-    //     text
-    //   }
-    // }
-    async deleteComment(parent, args, { prisma }, info) {
+    async deleteComment(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
+        const commentExists = await prisma.exists.Comment({
+            id: args.id,
+            author: {
+                id: userId
+            }
+        });
+        if (!commentExists) {
+            throw new Error('Unable to delete comment')
+        }
         return await prisma.mutation.deleteComment({
             where: {
                 id: args.id
             }
         }, info)
     },
-
-    //mutation {
-    // deleteComment(id: "ck9u136hb02k80814837p43oy") {
-    //     text
-    // }
-    // }
 }
 
 export { Mutation as default }
