@@ -38,7 +38,7 @@ const Mutation = {
 
         return {
             user,
-            token: jwt.sign({ userId: user.id }, 'thisisasecret')
+            token: jwt.sign({ userId: user.id }, 'thisIsSecret')
         }
     },
     async deleteUser(parent, args, { prisma, request }, info) {
@@ -72,18 +72,10 @@ const Mutation = {
             }
         }, info)
     },
-    // mutation {
-    //   createRecipe(data: {title: "bannana bread" description: "babana bread" ingredients: ["banana", "flour"] directions: ["dir"] prep: 20 cook: 10 author: "ck9twqyob02ho0814gt4iv4tl"}) {
-    //     title
-    //   }
-    // }
+
     async deleteRecipe(parent, args, { prisma }, info) {
         return await prisma.mutation.deleteRecipe({ where: { id: args.id } }, info);
     },
-    //mutation {
-    //   deleteRecipe(id: "ck9tz1e0802i10814r0pctce2"){
-    //     title
-    //   }
 
     async updateRecipe(parent, args, { prisma }, info) {
         return await prisma.mutation.updateRecipe({
@@ -104,12 +96,13 @@ const Mutation = {
 
     async createComment(parent, args, { prisma, request }, info) {
         const userId = getUserId(request);
+        console.log(userId, "userId")
         return await prisma.mutation.createComment({
             data: {
                 text: args.data.text,
                 author: {
                     connect: {
-                        id: userId
+                        id: "ck9u8s20r00ze0838sqj0z8fh"
                     }
                 },
                 recipe: {
