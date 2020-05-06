@@ -1,33 +1,35 @@
 import { Prisma } from 'prisma-binding';
+import { fragmentReplacements } from './resolvers/index'
 const prisma = new Prisma({
     typeDefs: 'src/generated/schema.graphql',
     endpoint: 'http://localhost:4466',
-    secret: 'supersecrettext'
+    secret: 'supersecrettext',
+    fragmentReplacements
 });
 
 export { prisma as default }
 
 
-const createRecipeForUser = async (authorId, data) => {
-    const userExists = await prisma.exists.User({ id: authorId })
+// const createRecipeForUser = async (authorId, data) => {
+//     const userExists = await prisma.exists.User({ id: authorId })
 
-    if (!userExists) {
-        throw new Error('User not found')
-    }
+//     if (!userExists) {
+//         throw new Error('User not found')
+//     }
 
-    const recipe = await prisma.mutation.createRecipe({
-        data: {
-            ...data,
-            author: {
-                connect: {
-                    id: authorId
-                }
-            }
-        }
-    }, '{ author { id name email recipes { id title description } } }')
+//     const recipe = await prisma.mutation.createRecipe({
+//         data: {
+//             ...data,
+//             author: {
+//                 connect: {
+//                     id: authorId
+//                 }
+//             }
+//         }
+//     }, '{ author { id name email recipes { id title description } } }')
 
-    return recipe
-}
+//     return recipe
+// }
 // createRecipeForUser("ck9sgen4y008c078218f6n1h4", {
 //     title: "cheese",
 //     description: "apple pie",

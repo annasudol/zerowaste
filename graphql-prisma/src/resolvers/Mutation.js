@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import getUserId from '../utils/getUserId'
 
 const Mutation = {
     async createUser(parent, args, { prisma }, info) {
@@ -7,12 +8,12 @@ const Mutation = {
             throw new Error('Password must be 8 characters or longer')
         }
         const password = await bcrypt.hash(args.data.password, 10);
-        const user = prisma.mutation.createUser({
+        const user = await prisma.mutation.createUser({
             data: {
                 ...args.data,
                 password
             }
-        })
+        });
         return {
             user,
             token: jwt.sign({ userId: user.id }, 'thisIsSecret')
@@ -40,23 +41,26 @@ const Mutation = {
             token: jwt.sign({ userId: user.id }, 'thisisasecret')
         }
     },
-    async deleteUser(parent, args, { prisma }, info) {
+    async deleteUser(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
 
         return prisma.mutation.deleteUser({
             where: {
-                id: args.id
+                id: userId
             }
         }, info)
     },
-    async updateUser(parent, args, { prisma }, info) {
+    async updateUser(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
         return prisma.mutation.updateUser({
             where: {
-                id: args.id
+                id: userId
             },
             data: args.data
         }, info)
     },
-    async createRecipe(parent, args, { prisma }, info) {
+    async createRecipe(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
         return await prisma.mutation.createRecipe({
             data: {
                 title: args.data.title,
@@ -64,11 +68,11 @@ const Mutation = {
                 ingredients: { set: args.data.ingredients },
                 prep: args.data.prep,
                 cook: args.data.cook,
-                author: { connect: { id: args.data.author } }
+                author: { connect: { id: userId } }
             }
         }, info)
     },
-    //mutation {
+    // mutation {
     //   createRecipe(data: {title: "bannana bread" description: "babana bread" ingredients: ["banana", "flour"] directions: ["dir"] prep: 20 cook: 10 author: "ck9twqyob02ho0814gt4iv4tl"}) {
     //     title
     //   }
@@ -98,13 +102,14 @@ const Mutation = {
     //     title
     //   }}
 
-    async createComment(parent, args, { prisma }, info) {
+    async createComment(parent, args, { prisma, request }, info) {
+        const userId = getUserId(request);
         return await prisma.mutation.createComment({
             data: {
                 text: args.data.text,
                 author: {
                     connect: {
-                        id: args.data.author
+                        id: userId
                     }
                 },
                 recipe: {
