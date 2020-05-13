@@ -34,7 +34,7 @@ export const Recipes: React.FunctionComponent<{ recipesList: ListType[] }> = ({ 
     { variables: { ingredients } }
   );
   const classes = useStyles();
-
+  console.log(data)
   if (loading) return <div className={classes.root}><CircularProgress color="secondary" /></div>;
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
   if (!data) return <p>Not found</p>;

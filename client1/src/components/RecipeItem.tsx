@@ -12,6 +12,8 @@ interface PlaylistItemProps {
 }
 
 export const RecipeItem: React.FunctionComponent<PlaylistItemProps> = ({ id, title, image, ingredients }): React.ReactElement => {
+
+
     return (
         <NavLink
             key={id}

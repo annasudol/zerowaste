@@ -6,7 +6,7 @@ import App from '../src/components/App';
 it('App is rendered', () => {
     // Render App in the document
     const appElement: App = TestUtils.renderIntoDocument(
-        <App/>
+        <App />
     );
 
     const appNode = ReactDOM.findDOMNode(appElement);
