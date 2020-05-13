@@ -6,6 +6,6 @@ import * as React from "react";
 export const App: React.FunctionComponent = () => {
 
     return (<div>
-        <p>hello</p>
+        <p className="font-gotham">hello</p>
     </div>)
 }

@@ -1,7 +1,7 @@
 import './RecipeItem.css';
 import { NavLink } from 'react-router-dom';
-import React, { FunctionComponent, ReactElement } from 'react';
-import { Image } from './../../components/';
+import * as React from "react";
+import { Image } from '../components';
 
 
 interface PlaylistItemProps {
@@ -11,7 +11,7 @@ interface PlaylistItemProps {
     ingredients: string[]
 }
 
-export const RecipeItem: FunctionComponent<PlaylistItemProps> = ({ id, title, image, ingredients }): ReactElement => {
+export const RecipeItem: React.FunctionComponent<PlaylistItemProps> = ({ id, title, image, ingredients }): React.ReactElement => {
 
 
     return (

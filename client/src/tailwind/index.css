@@ -1,0 +1,29 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@font-face {
+    font-family: 'gotham-light';
+    src: url('../assets/fonts/gotham/GothamRounded-Light.otf') format('otf');
+    font-weight: lighter;
+    font-style: lighter;
+  }
+  
+  @font-face {
+    font-family: 'gotham-bold';
+    src: url('../assets/fonts/gotham/GothamRounded-Bold.otf') format('otf');
+    font-weight: bold;
+    font-style: bold;
+  }
+
+  @font-face {
+    font-family: 'gotham-normal';
+    src: url('../assets/fonts/gotham/GothamRounded-Book.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  
+

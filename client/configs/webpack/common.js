@@ -1,6 +1,6 @@
 // shared config (dev and prod)
-const {resolve} = require('path');
-const {CheckerPlugin} = require('awesome-typescript-loader');
+const { resolve } = require('path');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -19,9 +19,16 @@ module.exports = {
         test: /\.tsx?$/,
         use: ['babel-loader', 'awesome-typescript-loader'],
       },
+
       {
-        test: /\.css$/,
-        use: ['style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }],
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: [
+            require('tailwindcss'),
+            require('autoprefixer'),
+          ],
+        },
       },
       {
         test: /\.(scss|sass)$/,
@@ -42,7 +49,9 @@ module.exports = {
   },
   plugins: [
     new CheckerPlugin(),
-    new HtmlWebpackPlugin({template: 'index.html.ejs',}),
+    new HtmlWebpackPlugin({ template: 'index.html.ejs', }),
+    require('tailwindcss'),
+    require('autoprefixer')
   ],
   externals: {
     'react': 'React',
