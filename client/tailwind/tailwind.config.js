@@ -251,14 +251,6 @@ module.exports = {
         'Times',
         'serif',
       ],
-      mono: [
-        'Menlo',
-        'Monaco',
-        'Consolas',
-        '"Liberation Mono"',
-        '"Courier New"',
-        'monospace',
-      ],
       gotham: ['gotham-light', 'gotham-bold', 'gotham-normal']
     },
     fontSize: {

@@ -4,26 +4,30 @@
 
 @tailwind utilities;
 
+
 @font-face {
-    font-family: 'gotham-light';
-    src: url('../assets/fonts/gotham/GothamRounded-Light.otf') format('otf');
-    font-weight: lighter;
-    font-style: lighter;
-  }
-  
-  @font-face {
-    font-family: 'gotham-bold';
-    src: url('../assets/fonts/gotham/GothamRounded-Bold.otf') format('otf');
-    font-weight: bold;
-    font-style: bold;
-  }
+  font-family: 'Gotham';
+  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Book.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Book.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+} 
 
-  @font-face {
-    font-family: 'gotham-normal';
-    src: url('../assets/fonts/gotham/GothamRounded-Book.otf') format('otf');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  
+@font-face {
+  font-family: 'Gotham-medium';
+  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Medium.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Mexcellent';
+  src: url('../src/assets/fonts/mexcellent/mexcellent 3d.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
