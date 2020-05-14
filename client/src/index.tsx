@@ -1,11 +1,10 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { App } from "./components/App";
-import { List } from "./components/List";
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-// import './tailwind/tailwind.css';
+import '../tailwind/tailwind.css';
 
 
 const client = new ApolloClient({

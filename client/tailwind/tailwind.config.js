@@ -14,14 +14,15 @@ module.exports = {
     },
     colors: {
       transparent: 'transparent',
-
+      milk: '#F2F1E9',
       black: '#000',
       white: '#fff',
-      oceanGreen: '#45c39f',
-      darkOrange: '#ef8229',
-      lightBlue: '#76a5bf',
-      jellyBean: '#d85249',
-      deepPurple: '#97266d',
+      intenseOrange: '#F2A649',
+      coffeeAndMilk: '#D9C2A7',
+      lightCoral: '#F28379',
+      coral: '#F25757',
+      midGray: '#8E8D8A',
+      lightGreen: '#8de0a8',
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',

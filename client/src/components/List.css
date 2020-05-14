@@ -1,0 +1,20 @@
+.fridge {
+    display: block;
+    width: 400px;
+    height: 500px;
+    background: url('../assets/images/svg/fridge.svg');
+    background-repeat: no-repeat;
+    background-size: 110% 110%;
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.fridge_inside {
+  position: relative;
+  top: 70px;
+  z-index: 10;
+  text-align: center;
+}

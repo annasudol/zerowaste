@@ -1,30 +1,13 @@
 import * as React from "react";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            '& > *': {
-                margin: theme.spacing(1),
-            },
-        },
-    }),
-);
 
 export interface ButtonProps {
-    outlined?: boolean
-    size: "small" | "medium" | "large"
     onClick?: VoidFunction;
-    color?: "primary" | "secondary"
 }
 
-export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ outlined, size, color = "primary", onClick, children, ...props }) => {
-    const classes = useStyles();
+export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ onClick, children }) => {
 
     return (
-        <div className={classes.root}>
-            <Button variant={outlined === true ? "outlined" : undefined} color={color} size={size} onClick={onClick}>{children}</Button>
-        </div>
+        <button onClick={onClick} className='bg-transparent hover:bg-green text-green font-semibold hover:text-white py-2 px-4 border border-green hover:border-transparent rounded outline-none'>{children}</button>
     );
 }
