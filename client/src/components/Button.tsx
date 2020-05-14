@@ -15,7 +15,7 @@ export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ onClick, childr
     if (to) {
         return (
             <Link
-                className="m-1 block text-blue-500 hover:text-blue-800 no-underline"
+                className={`w-xs block no-underline text-coral mb-4 mt-4`}
                 to={to}
             >{children}
             </Link>

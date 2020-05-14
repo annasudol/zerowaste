@@ -9,14 +9,16 @@
   margin: 0 auto;
 }
 body {
- margin: 20px;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .content {
   background-color: #f3efe7;
-  width: calc(100vw - 40px);
+  width: 100vw calc(100vw - 40px);
   height: calc(100vh - 40px);
   overflow: hidden;
+  margin: 20px;
 
 }
 
@@ -1033,6 +1035,10 @@ body {
 
 .border-coral {
   border-color: #F25757;
+}
+
+.border-coffe {
+  border-color: #D8C3A5;
 }
 
 .border-grey-darkest {
@@ -2454,25 +2460,6 @@ body {
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
-/* @font-face {
-  font-family: 'Bebas Neue', sans-serif;
-  src: url('../assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-} 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('../assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('../assets/fonts/Roboto/Roboto-Medium.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-} */
 
 
 .font-bebas {
@@ -2487,6 +2474,9 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.font-balsamic {
+  font-family: 'Balsamiq Sans', sans-serif;
+}
 .font-hairline {
   font-weight: 100;
 }
@@ -4396,7 +4386,7 @@ body {
   color: #8de0a8;
 }
 .text-lightGreen {
-  color: #A69A77;
+  color: #b1a47e;
 }
 .text-midgray {
   color:#8E8D8A;

@@ -13,14 +13,14 @@
 } 
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;;
   src: url('../src/assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;;
   src: url('../src/assets/fonts/Roboto/Roboto-Medium.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;

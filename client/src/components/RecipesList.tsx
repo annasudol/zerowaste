@@ -35,7 +35,7 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({ ingredie
   if (loading) return <div className={classes.root}><CircularProgress color="secondary" /></div>;
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
   if (!data) return <p>Not found</p>;
-  return (<div className="">
+  return (<div className="flex-col w-full h-full">
     {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
   </div>)
 
