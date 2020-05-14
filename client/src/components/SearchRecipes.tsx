@@ -2,22 +2,14 @@ import * as React from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { ButtonUI, Recipes, Image } from '../components';
-import './List.css'
+import { ButtonUI } from '../components';
 import products = require("../assets/data/products.json");
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import Modal from 'react-modal';
-import cx from 'classnames';
-const fridge = require("./../assets/images/svg/fridge.svg");
+import './SearchRecipes.css'
+import { AppRoutes } from "../../routes";
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const GET_RECIPES = gql`
-  query GetRecipes($id: String) {
-    recipeDetails(id: $id) {
-      title
-    }
-  }
-`;
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '500',
@@ -33,10 +25,12 @@ export interface ListType {
     id: number
 }
 
-export const List: React.FunctionComponent = () => {
+export const SearchRecipes: React.FunctionComponent = () => {
     const [selectedProducts, setSelectedProducts] = React.useState<string[]>(["apple", "sugar", "flour"]);
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const classes = useStyles();
+    const history = useHistory();
+
     const changeProductList = (event: object, value: ListType[], reason: string) => {
         // tslint:disable-next-line: no-shadowed-variable
         const selectedProductsTitles = value.reduce((accumulator: any, currentValue: ListType) => {
@@ -49,16 +43,11 @@ export const List: React.FunctionComponent = () => {
         return products[index]
     });
 
-    console.log(selectedProductsInDB, "selectedProducts")
-    const searchRecipes = (): void => {
-        // tslint:disable-next-line: no-shadowed-variable
-
+    const searchRecipes = (): any => {
+        history.push({ pathname: AppRoutes.RecipesList, state: { ingredients: selectedProducts });
     }
 
-    // const selectedProductsTitles = selectedProducts?.reduce((accumulator: any, currentValue: ListType) => {
-    //     return [...accumulator, currentValue.title]
-    // }, []);
-    // console.log())
+
 
 
     return (<div className="w-full h-screen min-h-64">
@@ -98,6 +87,8 @@ export const List: React.FunctionComponent = () => {
                             </div>
                             <div className='flex w-full h-16 justify-end items-end'>
                                 <ButtonUI full={true} onClick={searchRecipes}>Search</ButtonUI>
+
+
                             </div>
                         </div>
 
@@ -107,5 +98,8 @@ export const List: React.FunctionComponent = () => {
         </div>
     </div>)
 }
-
-// <Recipes recipesList={selectedProducts} />
+// <Link
+// to={{ pathname: `${AppRoutes.RecipesList}`, state: { selectedProducts } }}
+// exact={true}
+// className="btn--game max-w-xl bg-transparent focus:outline-none hover:bg-orange-500 text-orange-500 font-semibold hover:text-indigo-900 py-2 border border-orange-500 hover:border-transparent rounded m-1 mt-4 pl-4 pr-4"
+// >Search</Link>

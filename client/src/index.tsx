@@ -5,6 +5,7 @@ import { App } from "./components/App";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import '../tailwind/tailwind.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 const client = new ApolloClient({
@@ -17,7 +18,9 @@ const rootEl = document.getElementById("root");
 
 render(
   <ApolloProvider client={client}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ApolloProvider>,
   rootEl,
 );

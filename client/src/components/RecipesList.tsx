@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { ListType } from '../components';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ErrorMessage } from '../components';
@@ -25,10 +24,8 @@ const GET_RECIPES = gql`
 `;
 
 
-export const Recipes: React.FunctionComponent<{ recipesList: ListType[] }> = ({ recipesList }) => {
-  const ingredients = recipesList?.reduce((accumulator: any, currentValue: ListType) => {
-    return [...accumulator, currentValue.title]
-  }, []);
+export const RecipesList: React.FunctionComponent<{ ingredients?: string[] }> = ({ ingredients = ['apple'] }) => {
+  console.log(ingredients)
   const { data, loading, error } = useQuery(
     GET_RECIPES,
     { variables: { ingredients } }
@@ -42,6 +39,7 @@ export const Recipes: React.FunctionComponent<{ recipesList: ListType[] }> = ({ 
   // recipesList.reduce((item: any, acc: any) => {
   //     return console.log(item, "items");
   // });
+  console.log(data)
 
   return <p>recipes</p>
 }

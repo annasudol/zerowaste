@@ -1,4 +1,4 @@
-import './RecipeItem.css';
+// import './RecipeItem.css';
 import { NavLink } from 'react-router-dom';
 import * as React from "react";
 import { Image } from '../components';
