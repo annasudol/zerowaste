@@ -9,6 +9,6 @@ export interface ImageProps {
 }
 
 export const Image: React.FunctionComponent<ImageProps> = ({ alt, size = "medium", src, className }): React.ReactElement => {
-    const sizeOptions = size === 'small' ? 'w-16' : size === 'medium' ? 'w-32' : '300';
+    const sizeOptions = size === 'small' ? 'w-16' : size === 'medium' ? 'w-64' : '300';
     return <img src={src} alt={alt} className={cx(sizeOptions, className)} />;
 };

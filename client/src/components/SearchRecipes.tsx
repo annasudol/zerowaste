@@ -2,13 +2,12 @@ import * as React from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { ButtonUI } from '../components';
+import { ButtonUI, Image } from '../components';
 import products = require("../assets/data/products.json");
-import './SearchRecipes.css'
 import { AppRoutes } from "../../routes";
-import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+const fridge = require("./../assets/images/svg/technology.svg");
+import cx from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +26,6 @@ export interface ListType {
 
 export const SearchRecipes: React.FunctionComponent = () => {
     const [selectedProducts, setSelectedProducts] = React.useState<string[]>(["apple", "sugar", "flour"]);
-    const [modalIsOpen, setIsOpen] = React.useState(false);
     const classes = useStyles();
     const history = useHistory();
 
@@ -50,49 +48,35 @@ export const SearchRecipes: React.FunctionComponent = () => {
 
 
 
-    return (<div className="w-full h-screen min-h-64">
-        <div className="flex flex-col items-center mb-8">
-            <h1 className="font-bebas uppercase text-darkGray text-center">your spare food</h1>
-        </div>
-
-        <div className="fridge">
-            <div className="fridge_inside">
-                {selectedProducts.map(product => <p className="text-milk font-gotham m-1">{product} </p>)}
-                <ButtonUI onClick={(): void => setIsOpen(true)}>add ingredients</ButtonUI>
-                {modalIsOpen && (
-                    <div className="modal-background">
-                        <div className="modal-box">
-                            <div className='flex w-full h-8 justify-start items-start'>
-                                <ButtonUI type="cancel" onClick={(): void => setIsOpen(false)} />
-                            </div>
-                            <div className={classes.root}>
-                                <Autocomplete
-                                    multiple
-                                    id="tags-outlined"
-                                    options={products}
-                                    getOptionLabel={option => option.title}
-                                    defaultValue={selectedProductsInDB}
-                                    filterSelectedOptions
-                                    onChange={(event, value, reason): void => changeProductList(event, value, reason)}
-                                    includeInputInList={true}
-                                    renderInput={params => (
-                                        <TextField
-                                            {...params}
-                                            variant="outlined"
-                                            label="Select grocery products"
-                                            placeholder="..."
-                                        />
-                                    )}
-                                />
-                            </div>
-                            <div className='flex w-full h-16 justify-end items-end'>
-                                <ButtonUI full={true} onClick={searchRecipes}>Search</ButtonUI>
-                            </div>
-                        </div>
-
-                    </div>
-                )}
+    return (<div className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen">
+        <div className="mb-8 text-center md:text-left min-h-32">
+            <h1 className="font-bebas uppercase text-darkGray">your spare food</h1>
+            <div className={cx(classes.root, 'mb-3')}>
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={products}
+                    getOptionLabel={option => option.title}
+                    defaultValue={selectedProductsInDB}
+                    filterSelectedOptions
+                    onChange={(event, value, reason): void => changeProductList(event, value, reason)}
+                    includeInputInList={true}
+                    renderInput={params => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Select grocery products"
+                            placeholder="..."
+                        />
+                    )}
+                />
             </div>
+            <ButtonUI onClick={searchRecipes}>Search</ButtonUI>
+
         </div>
+        <Image src={fridge.default} alt="fridge" size="medium" />
+
+
+
     </div>)
 }
