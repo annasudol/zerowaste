@@ -1,5 +1,6 @@
 import * as React from "react";
 import CancelIcon from '@material-ui/icons/Cancel';
+import { Link } from 'react-router-dom';
 
 export interface ButtonProps {
     onClick?: VoidFunction;
@@ -7,9 +8,20 @@ export interface ButtonProps {
     text?: 'white' | 'green' | 'coral' | 'gray'
     full?: boolean
     type?: 'cancel' | 'normal'
+    to?: string
 }
 
-export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ onClick, children, color = 'green', text = 'white', full, type = 'normal' }) => {
+export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ onClick, children, color = 'green', text = 'white', full, type = 'normal', to }) => {
+    if (to) {
+        return (
+            <Link
+                className="m-1 block text-blue-500 hover:text-blue-800 no-underline"
+                to={to}
+            >{children}
+            </Link>
+        )
+    }
+
     if (type === 'cancel') {
         return (
             <button onClick={onClick} className="outline-none border-none bg-transparent m-0 p-0"><CancelIcon style={{ color: '#F25757' }} /></button>

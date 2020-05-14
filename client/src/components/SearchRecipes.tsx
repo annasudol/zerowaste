@@ -44,7 +44,7 @@ export const SearchRecipes: React.FunctionComponent = () => {
     });
 
     const searchRecipes = (): any => {
-        history.push({ pathname: AppRoutes.RecipesList, state: { ingredients: selectedProducts });
+        history.push({ pathname: AppRoutes.RecipesList, state: { ingredients: selectedProducts } });
     }
 
 
@@ -52,13 +52,13 @@ export const SearchRecipes: React.FunctionComponent = () => {
 
     return (<div className="w-full h-screen min-h-64">
         <div className="flex flex-col items-center mb-8">
-            <h1 className="font-mexcellent text-center">your spare food</h1>
+            <h1 className="font-bebas uppercase text-darkGray text-center">your spare food</h1>
         </div>
 
         <div className="fridge">
             <div className="fridge_inside">
                 {selectedProducts.map(product => <p className="text-milk font-gotham m-1">{product} </p>)}
-                <ButtonUI onClick={(): void => setIsOpen(true)}>add ingridients</ButtonUI>
+                <ButtonUI onClick={(): void => setIsOpen(true)}>add ingredients</ButtonUI>
                 {modalIsOpen && (
                     <div className="modal-background">
                         <div className="modal-box">
@@ -87,8 +87,6 @@ export const SearchRecipes: React.FunctionComponent = () => {
                             </div>
                             <div className='flex w-full h-16 justify-end items-end'>
                                 <ButtonUI full={true} onClick={searchRecipes}>Search</ButtonUI>
-
-
                             </div>
                         </div>
 
@@ -98,8 +96,3 @@ export const SearchRecipes: React.FunctionComponent = () => {
         </div>
     </div>)
 }
-// <Link
-// to={{ pathname: `${AppRoutes.RecipesList}`, state: { selectedProducts } }}
-// exact={true}
-// className="btn--game max-w-xl bg-transparent focus:outline-none hover:bg-orange-500 text-orange-500 font-semibold hover:text-indigo-900 py-2 border border-orange-500 hover:border-transparent rounded m-1 mt-4 pl-4 pr-4"
-// >Search</Link>

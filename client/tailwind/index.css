@@ -6,28 +6,22 @@
 
 
 @font-face {
-  font-family: 'Gotham';
-  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Book.otf') format('otf');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Gotham';
-  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Book.otf') format('otf');
+  font-family: 'Bebas Neue', sans-serif;
+  src: url('../src/assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 } 
 
 @font-face {
-  font-family: 'Gotham-medium';
-  src: url('../src/assets/fonts/gotham-rounded/GothamRounded-Medium.otf') format('otf');
+  font-family: 'Open Sans';
+  src: url('../src/assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Mexcellent';
-  src: url('../src/assets/fonts/mexcellent/mexcellent 3d.ttf') format('ttf');
+  font-family: 'Roboto';
+  src: url('../src/assets/fonts/Roboto/Roboto-Medium.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }

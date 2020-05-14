@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 export const App: React.FunctionComponent = () => {
 
-    return (<div className="bg-intenseOrang w-screen h-screen overflow-x-hidden">
+    return (<div className="content">
         <div className="container">
             <Switch>
                 <Route path={AppRoutes.Search} component={SearchRecipes} exact />

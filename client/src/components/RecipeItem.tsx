@@ -1,24 +1,23 @@
-// import './RecipeItem.css';
-import { NavLink } from 'react-router-dom';
 import * as React from "react";
-import { Image } from '../components';
+import { Image, ButtonUI } from '../components';
 
 
-interface PlaylistItemProps {
+interface RecipeItemProps {
     id: string
     title: string
     image: string
     ingredients: string[]
 }
 
-export const RecipeItem: React.FunctionComponent<PlaylistItemProps> = ({ id, title, image, ingredients }): React.ReactElement => {
+export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients }): React.ReactElement => {
     return (
-        <NavLink
-            key={id}
-            className="w-5/12 md:w-1/5 m-1"
-            to={`/recipe/${id}`}
-        >
-            <Image src={image} className="playlists-img" size="full" alt={title} />
-        </NavLink>
+        <div className="flex bg-milk rounded-lg mb-4 max-w-sm" key={id}>
+            <Image src={image} className="playlists-img" size="medium" alt={title} />
+            <div><h3 className="font-gotham text-coral mb-1">{title}</h3>
+                <span className="font-gotham uppercase text-xs font-semibold">ingredients: </span>
+                <span className='text-midgray font-gotham text-xs'>{ingredients.join(', ')}</span>
+                <ButtonUI to={`/recipe/${id}`}>see more</ButtonUI>
+            </div>
+        </div>
     );
 };
