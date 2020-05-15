@@ -46,7 +46,7 @@ export const SearchRecipes: React.FunctionComponent = () => {
     }
 
 
-    return (<div className="content">
+    return (<div className="content overflow-hidden">
         <div className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen">
             <div className="mb-8 text-center md:text-left min-h-32">
                 <h1 className="font-bebas uppercase text-darkGray">your spare food</h1>

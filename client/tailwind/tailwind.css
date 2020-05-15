@@ -10,21 +10,21 @@
 }
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .content {
   background-color: #f3efe7;
   width: 100vw calc(100vw - 40px);
   height: calc(100vh - 40px);
-  overflow: hidden;
-  margin: 20px;
+  border: 20px solid #fff;
 
 }
 
 @media (min-width: 576px) {
   .container {
     max-width: 576px;
+    min-width: 400px;
   }
 }
 
@@ -5549,6 +5549,10 @@ body {
 
 .invisible {
   visibility: hidden;
+}
+
+.border-0 {
+  border-width: 0;
 }
 
 .whitespace-normal {

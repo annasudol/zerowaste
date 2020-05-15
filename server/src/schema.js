@@ -26,7 +26,7 @@ const typeDefs = gql`
     image: String!
     readyInMinutes: Int!
     detailedIngredients: [String!]!
-    author: String!
+    author: String
     sourceUrl: String!
   }
 
