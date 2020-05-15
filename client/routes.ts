@@ -1,5 +1,7 @@
 export const AppRoutes = {
-    Search: '/',
+    Home: '/',
     RecipesList: '/recipes',
     Recipe: '/recipe/:recipeID',
+    Login: '/login',
+    Register: '/register'
 };

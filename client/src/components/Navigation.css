@@ -1,0 +1,97 @@
+
+    /* drawer menu pane - note the 0px width */ 
+    
+    .closed-nav { 
+        position: fixed; 
+        top: 0; 
+        right:-200px; 
+        height: 100%; 
+        width: 200px; 
+
+    .opened-nav {
+        position: fixed; 
+        top: 0; 
+        right:0; 
+        height: 100%; 
+        width: 200px;
+        background: #D8C3A5; 
+    }
+
+    .nav {
+        width: 100px;
+        position: relative;
+        left: 30px;
+        top: 50px;
+    }
+
+    .nav ul {
+        list-style-type:none;
+    }
+
+    
+    /* actual page content pane */ 
+    
+
+    
+    /* checked styles (menu open state) */ 
+    
+    #drawer-toggle:checked ~ #drawer-toggle-label { 
+    height: 100%; 
+    width: calc(100% - 300px); 
+    background: rgba(255,255,255,.8); 
+    } 
+    
+    #drawer-toggle:checked ~ #drawer-toggle-label, 
+    #drawer-toggle:checked ~ header { 
+    left: 300px; 
+    } 
+    
+    #drawer-toggle:checked ~ #drawer { 
+    left: 0px; 
+    } 
+    
+    #drawer-toggle:checked ~ #page-content { 
+    margin-left: 300px; 
+    }
+    
+    /* Menu item styles */ 
+    
+    #drawer ul { 
+    list-style-type:none; 
+    } 
+    
+    #drawer ul a { 
+    display:block; 
+    padding:10px; 
+    color:#c7c7c7; 
+    text-decoration:none; 
+    } 
+    
+    #drawer ul a:hover { 
+    color:white; 
+    } 
+    
+    /* Responsive MQ */ 
+/*     
+    @media all and (max-width:350px) { 
+    
+        #drawer-toggle:checked ~ #drawer-toggle-label { 
+        height: 100%; 
+        width: 50px; 
+        } 
+        
+        #drawer-toggle:checked ~ #drawer-toggle-label, 
+        #drawer-toggle:checked ~ header { 
+        left: calc(100% - 50px); 
+        } 
+        
+        #drawer-toggle:checked ~ #drawer { 
+        width: calc(100% - 50px); 
+        padding: 20px; 
+        } 
+        
+        #drawer-toggle:checked ~ #page-content { 
+        margin-left: calc(100% - 50px); 
+        } 
+        
+    } */

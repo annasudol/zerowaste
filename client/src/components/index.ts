@@ -3,6 +3,7 @@ export * from './Button';
 export * from './ErrorMessage';
 export * from './Image';
 export * from './LoadingBar';
+export * from './Navigation';
 export * from './RecipesList';
 export * from './RecipeDetails';
 export * from './RecipeItem';

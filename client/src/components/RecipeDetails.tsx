@@ -34,7 +34,7 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
     if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;
 
-    const backRecipes = (): any => {
+    const backRecipes = (): void => {
         return history.push({ pathname: AppRoutes.RecipesList });
     }
 
