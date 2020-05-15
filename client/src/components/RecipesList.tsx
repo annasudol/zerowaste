@@ -1,18 +1,10 @@
 import * as React from "react";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { ErrorMessage, RecipeItem } from '../components';
+import { ErrorMessage, RecipeItem, LoadingBar } from '../components';
+import { useLocation } from 'react-router';
+import { LocationTypes } from '../utils/types';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
-  },
-}));
 const GET_RECIPES = gql`
   query GetRecipes($ingredients: [String!]!) {
     recipes(ingredients: $ingredients) {
@@ -23,18 +15,20 @@ const GET_RECIPES = gql`
     }
   }
 `;
-export interface RecipeListProps { ingredients?: string[] }
 
-export const RecipesList: React.FunctionComponent<RecipeListProps> = ({ ingredients = ['apple', 'sugar'] }) => {
+
+export const RecipesList: React.FunctionComponent = () => {
+  const location: LocationTypes = useLocation();
+  const ingredients: string[] = location?.state.ingredients;
+
   const { data, loading, error } = useQuery(
     GET_RECIPES,
     { variables: { ingredients } }
   );
-  const classes = useStyles();
 
-  if (loading) return <div className={classes.root}><CircularProgress color="secondary" /></div>;
+  if (loading) return <LoadingBar />
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
-  if (!data) return <p>Not found</p>;
+  if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;;
   return (<div className="flex-col w-full h-full">
     {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
   </div>)

@@ -45,6 +45,7 @@ export const SearchRecipes: React.FunctionComponent = () => {
         history.push({ pathname: AppRoutes.RecipesList, state: { ingredients: selectedProducts } });
     }
 
+
     return (<div className="content">
         <div className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen">
             <div className="mb-8 text-center md:text-left min-h-32">
@@ -70,11 +71,8 @@ export const SearchRecipes: React.FunctionComponent = () => {
                     />
                 </div>
                 <ButtonUI onClick={searchRecipes}>Search</ButtonUI>
-
             </div>
             <Image src={fridge.default} alt="fridge" size="medium" />
-
-
         </div>
     </div>)
 }

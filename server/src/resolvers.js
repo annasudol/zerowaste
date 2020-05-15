@@ -3,7 +3,7 @@ const { paginateResults } = require('./utils');
 module.exports = {
   Query: {
     recipes: async (_, { ingredients, numberOfResults = 30, pageSize = 20, page }, { dataSources }) => {
-      const allRecipes = await dataSources.dataAPI.getAllLaunches(ingredients, numberOfResults);
+      const allRecipes = await dataSources.dataAPI.getAllRecipes(ingredients, numberOfResults);
 
       const recipes = paginateResults({
         page,

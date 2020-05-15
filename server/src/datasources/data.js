@@ -31,7 +31,7 @@ class DataAPI extends RESTDataSource {
         };
     }
 
-    async getAllLaunches(query, numberOfResults) {
+    async getAllRecipes(query, numberOfResults) {
         const responses = await this.get('findByIngredients', { ingredients: query.join(',+'), apiKey: app_key, numberOfResults });
         return Array.isArray(responses)
             ? responses.map(response => this.basicRecipeReducer(response))
