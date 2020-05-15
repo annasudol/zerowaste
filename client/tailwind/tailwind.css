@@ -65,25 +65,23 @@ body {
 
 .opened-nav, .closed-nav {
   z-index: 30;
-  height: 100%;
-  background: #D8C3A5; 
+  height: calc(100vh - 40px);
+  background: #D8C3A5;
   z-index: 30;
   width: 150px;
   background: #D8C3A5; 
-  border-top: 20px solid #fff;
-  border-bottom: 20px solid #fff;
+  top: 20px;
+  z-index: 100;
 }
 
-.closed-nav { 
+.closed-nav {
   position: fixed; 
-  top: 0; 
-  right:-150px; 
+  right:-150px;
 }
 
 .opened-nav {
   position: fixed; 
-  top: 0; 
-  right:0; 
+  right:0;
 }
 
 
@@ -106,14 +104,19 @@ body {
 }
 
 .nav-btn {
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 20px;
+  z-index: 100;
 }
 
 .list-reset {
   list-style: none;
   padding: 0;
+}
+
+.list {
+  border: 20px solid #fff;
 }
 
 .appearance-none {

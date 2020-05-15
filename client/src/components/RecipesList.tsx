@@ -29,7 +29,7 @@ export const RecipesList: React.FunctionComponent = () => {
   if (loading) return <LoadingBar />
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
   if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;;
-  return (<div className="flex-col w-full h-full">
+  return (<div className="flex-col w-full h-full list">
     {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
   </div>)
 
