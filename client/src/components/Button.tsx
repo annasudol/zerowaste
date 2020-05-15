@@ -22,7 +22,7 @@ export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ href, className
     if (to) {
         return (
             <Link
-                className={`w-xs block no-underline text-white mb-4 mt-4`}
+                className={cx(`w-xs block no-underline text-coral mb-4 mt-4`, className)}
                 to={to}
             >{children}
             </Link>

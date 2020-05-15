@@ -31,10 +31,9 @@ body {
 
 .content {
   background-color: #f3efe7;
-  width: 100vw calc(100vw - 40px);
-  height: calc(100vh - 40px);
+  width: 100vw;
+  height: 100vh;
   border: 20px solid #fff;
-
 }
 
 
@@ -61,6 +60,49 @@ body {
   .container {
     max-width: 1200px;
   }
+}
+
+
+.opened-nav, .closed-nav {
+  z-index: 30;
+  height: 100%;
+  background: #D8C3A5; 
+  z-index: 30;
+  width: 150px;
+  background: #D8C3A5; 
+  border-top: 20px solid #fff;
+  border-bottom: 20px solid #fff;
+}
+
+.closed-nav { 
+  position: fixed; 
+  top: 0; 
+  right:-150px; 
+}
+
+.opened-nav {
+  position: fixed; 
+  top: 0; 
+  right:0; 
+}
+
+
+
+@media all and (min-width:750px) { 
+  .opened-nav, .closed-nav {
+      right:0;
+  }
+} 
+
+.nav {
+  width: 100px;
+  position: relative;
+  left: 30px;
+  top: 50px;
+}
+
+.nav ul {
+  list-style-type:none;
 }
 
 .nav-btn {

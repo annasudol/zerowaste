@@ -50,7 +50,7 @@ export const SearchRecipes: React.FunctionComponent = () => {
         <div className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen">
             <div className="mb-8 text-center md:text-left min-h-32">
                 <h1 className="font-bebas uppercase text-darkGray">your spare food</h1>
-                <div className={cx(classes.root, 'mb-3')}>
+                <div className={cx(classes.root, 'mb-3', 'z-0')}>
                     <Autocomplete
                         multiple
                         id="tags-outlined"

@@ -1,5 +1,4 @@
 import * as React from "react";
-import './Navigation.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -16,10 +15,10 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
                 <nav className="nav">
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 md:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
                     <ul>
-                        <li><ButtonUI to={AppRoutes.Home}>Home</ButtonUI></li>
-                        <li><ButtonUI to={AppRoutes.RecipesList}>Recipes</ButtonUI></li>
-                        <li><ButtonUI to={AppRoutes.Login}>Login</ButtonUI></li>
-                        <li><ButtonUI to={AppRoutes.Register}>Register</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.Home}>Home</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.RecipesList}>Recipes</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.Login}>Login</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.Register}>Register</ButtonUI></li>
                     </ul>
                 </nav>
             </div>
