@@ -40,8 +40,8 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
 
     return (
         <div className="content">
-            <div className="max-w-lg p-4">
-                <ButtonUI color="coral">back to results</ButtonUI>
+            <div className="max-w-md p-4">
+                <ButtonUI onClick={backRecipes} color="coral">back to results</ButtonUI>
                 <h2 className="font-bebas uppercase text-darkGray mb-0">{data.recipeDetails.title}</h2>
                 <div>
                     <p className="font-roboto text-darkGray inline">Ready in: </p>
