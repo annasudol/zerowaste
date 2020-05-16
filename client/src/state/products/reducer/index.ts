@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 
 const products = createReducer<string[]>([], {
   [actionCreateProductsListSuccess.type]: (state, action) => {
-    return [...state, ...action.payload];
+    return [...action.payload];
 
   },
   [actionClearProductsList.type]: () => [],

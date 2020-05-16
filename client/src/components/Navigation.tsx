@@ -10,10 +10,10 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
 
     return (
         <div>
-            {!open && <button onClick={(): any => toggleOpen(true)} className="w-12 h-12 rounded-full border-0 bg-green md:hidden nav-btn"><MenuIcon style={{ color: '#fff' }} /></button>}
+            {!open && <button onClick={(): any => toggleOpen(true)} className="w-12 h-12 rounded-full border-0 bg-green lg:hidden nav-btn"><MenuIcon style={{ color: '#fff' }} /></button>}
             <div className={cx(open ? 'opened-nav' : 'closed-nav')}>
                 <nav className="nav">
-                    <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 md:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
+                    <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
                     <ul>
                         <li><ButtonUI className="text-white" to={AppRoutes.Home}>Home</ButtonUI></li>
                         <li><ButtonUI className="text-white" to={AppRoutes.RecipesList}>Recipes</ButtonUI></li>
