@@ -2,8 +2,8 @@ import * as React from "react";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { ErrorMessage, RecipeItem, LoadingBar } from '../components';
-import { useLocation } from 'react-router';
-import { LocationTypes } from '../utils/types';
+import { useSelector } from 'react-redux';
+import { getProducts } from '../state/products/selectors/';
 
 const GET_RECIPES = gql`
   query GetRecipes($ingredients: [String!]!) {
@@ -18,9 +18,8 @@ const GET_RECIPES = gql`
 
 
 export const RecipesList: React.FunctionComponent = () => {
-  const location: LocationTypes = useLocation();
-  const ingredients: string[] = location?.state.ingredients;
 
+  const ingredients = useSelector(getProducts);
   const { data, loading, error } = useQuery(
     GET_RECIPES,
     { variables: { ingredients } }

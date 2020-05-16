@@ -6,8 +6,11 @@ import { ButtonUI, Image } from '../components';
 import products = require("../assets/data/products.json");
 import { AppRoutes } from "../../routes";
 import { useHistory } from 'react-router-dom';
-const fridge = require("./../assets/images/svg/technology.svg");
+import { useDispatch } from 'react-redux';
+import { createProductsList } from '../state/products/actions'
 import cx from 'classnames';
+const fridge = require("./../assets/images/svg/technology.svg");
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +31,7 @@ export const SearchRecipes: React.FunctionComponent = () => {
     const [selectedProducts, setSelectedProducts] = React.useState<string[]>(["apple", "sugar", "flour"]);
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const changeProductList = (event: object, value: ListType[], reason: string) => {
         // tslint:disable-next-line: no-shadowed-variable
@@ -41,8 +45,9 @@ export const SearchRecipes: React.FunctionComponent = () => {
         return products[index]
     });
 
-    const searchRecipes = (): any => {
-        history.push({ pathname: AppRoutes.RecipesList, state: { ingredients: selectedProducts } });
+    const searchRecipes = (): void => {
+        dispatch(createProductsList(selectedProducts))
+        return history.push({ pathname: AppRoutes.RecipesList });
     }
 
 
