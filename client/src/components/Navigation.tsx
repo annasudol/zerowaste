@@ -16,9 +16,9 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
                     <ul>
                         <li><ButtonUI className="text-white" to={AppRoutes.Home}>Home</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.RecipesList}>Recipes</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.Login}>Login</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.Register}>Register</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.Register}>Add Recipe</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.RecipesList}>My recipes</ButtonUI></li>
+                        <li><ButtonUI className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</ButtonUI></li>
                     </ul>
                 </nav>
             </div>

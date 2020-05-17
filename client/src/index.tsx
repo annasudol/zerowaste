@@ -14,7 +14,6 @@ const client = new ApolloClient({
 });
 
 
-
 const rootEl = document.getElementById("root");
 
 render(

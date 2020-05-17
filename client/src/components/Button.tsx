@@ -30,7 +30,7 @@ export const ButtonUI: React.FunctionComponent<ButtonProps> = ({ href, className
     }
 
     return (
-        <button onClick={onClick} className={`bg-${color} hover:bg-${color} text-white font-bold py-2 px-4 rounded outline-none m-1 border-0`}>
+        <button onClick={onClick} className={cx(`bg-${color} hover:bg-${color} text-white font-bold py-2 px-4 rounded outline-none m-1 border-0`, className)}>
             {children}
         </button>
     );
