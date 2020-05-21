@@ -118,7 +118,39 @@ body {
 .list {
   border: 20px solid #fff;
 }
+@media (min-width: 768px) {
+  .list--item {
+    width: 55%;
+  }
+}
 
+
+
+
+.form {
+  width: 16rem;
+}
+
+.search-form {
+  max-width: 500px;
+  margin: 0 80px 0 20px;
+}
+
+@media (min-width: 768px) {
+  .search-form {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 260px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main {
+    position: relative;
+    left: 320px;
+  }
+}
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;

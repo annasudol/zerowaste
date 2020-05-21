@@ -11,7 +11,7 @@ interface RecipeItemProps {
 
 export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients }): React.ReactElement => {
     return (
-        <div className="flex bg-milk bo mb-4 max-w-sm mb-3" key={id}>
+        <div className="flex bg-milk bo mb-4 mr-4 max-w-sm lg:max-w-xl mb-3 list--item" key={id}>
             <div className="w-42"><Image src={image} className="rounded-m m-4" size="small" alt={title} /></div>
             <div className="mt-4 mb-4">
                 <h3 className="font-bebas text-lightGreen mb-1">{title}</h3>

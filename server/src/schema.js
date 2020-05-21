@@ -4,9 +4,6 @@ const typeDefs = gql`
   type Query {
     recipes(
     ingredients: [String!]!
-    numberOfResults: Int
-    pageSize: Int
-    page: Int
   ): [Recipe]!
   recipeDetails(id: String): RecipeDetails
   }

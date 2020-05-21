@@ -7,5 +7,7 @@ export * from './LoginSignUp';
 export * from './Navigation';
 export * from './RecipesList';
 export * from './RecipeDetails';
+export * from './RecipeForm';
 export * from './RecipeItem';
-export * from './SearchRecipes';
+export * from './SearchRecipesPage';
+export * from './SearchRecipesForm';

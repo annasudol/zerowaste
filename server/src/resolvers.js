@@ -1,17 +1,8 @@
-const { paginateResults } = require('./utils');
-
 module.exports = {
   Query: {
-    recipes: async (_, { ingredients, numberOfResults = 30, pageSize = 20, page }, { dataSources }) => {
-      const allRecipes = await dataSources.dataAPI.getAllRecipes(ingredients, numberOfResults);
-
-      const recipes = paginateResults({
-        page,
-        pageSize,
-        results: allRecipes
-      });
-
-      return recipes
+    recipes: async (_, { ingredients }, { dataSources }) => {
+      const allRecipes = await dataSources.dataAPI.getAllRecipes(ingredients);
+      return allRecipes
     },
     recipeDetails: (_, { id }, { dataSources }) => dataSources.dataAPI.getRecipeDetails(id),
   }
