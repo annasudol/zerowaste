@@ -8,13 +8,14 @@ module.exports.recipes = [
             'Add the sugar and mix through, then cover the fruit with the crumble mixture.',
             'Bake for around 20 minutes, or until golden and cooked through.'
         ],
-        userId: "3"
+        author: "kevin",
+        authorId: "1"
     },
 ];
 
 module.exports.users = [
-    { id: "1", username: "kevin", email: "kevin@gmail.com", password: 'hello1', recipes: ['1'] },
-    { id: "2", username: "john", email: "john@gmail.com", password: 'hello1', recipes: [] },
-    { id: "3", username: "peter", email: "peter@gmail.com", password: 'hello1', recipes: [] },
-    { id: "4", username: "bob", email: "bob@gmail.com", password: 'hello1', recipes: [] },
+    { id: "1", username: "kevin", email: "kevin@gmail.com", password: 'hello1' },
+    { id: "2", username: "john", email: "john@gmail.com", password: 'hello1' },
+    { id: "3", username: "peter", email: "peter@gmail.com", password: 'hello1' },
+    { id: "4", username: "bob", email: "bob@gmail.com", password: 'hello1' },
 ];

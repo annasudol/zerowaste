@@ -4,28 +4,32 @@ module.exports = {
   Query: {
     recipes: async (_, { ingredients }, { dataSources }) => {
       const recipesDB = recipes.filter(recipe => ![...ingredients].includes(recipe.ingredients));
-      console.log(recipesDB, ingredients, "recipesDB")
       const allRecipes = await dataSources.dataAPI.getAllRecipes(ingredients);
       return [...recipesDB, ...allRecipes];
     },
-    recipeDetails: (_, { id }, { dataSources }) => {
+    recipe: (_, { id }, { dataSources }) => {
       const recipeFromDb = recipes.find(recipe => recipe.id === id);
       return recipeFromDb ? recipeFromDb : dataSources.dataAPI.getRecipeDetails(id)
     },
+    recipeInfo: (_, { id }, { dataSources }) => {
+      const recipeFromDb = recipes.find(recipe => recipe.id === id);
+      return recipeFromDb
+    },
+    user: (_, { id }, { dataSources }) => {
+      const user = users.find(user => user.id === id);
+      return user;
+    },
 
+  },
+
+  User: {
+    recipes: (parent, args, info) => {
+      return recipes.filter(recipe => recipe.authorId === parent.id)
+    }
   },
   Recipe: {
     user: (parent, args, info) => {
-      console.log(parent, args, info)
-      return users.find(user => user.id === userId)
+      return users.find(user => user.id === parent.authorId)
     }
-  },
-
-  // User: {
-  //   recipe: (parent, args, info) => {
-  //     console.log(parent)
-  //     return recipes.find(recipe => recipe.id === id)
-  //   }
-  // }
-
+  }
 };

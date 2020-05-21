@@ -5,7 +5,9 @@ const typeDefs = gql`
     recipes(
     ingredients: [String!]!
   ): [Recipe]!
-  recipeDetails(id: String): RecipeDetails
+    recipe(id: String!): RecipeDetails!
+    recipeInfo(id: String!): Recipe!
+    user(id: String!): User!
   }
 
   type Mutation {
@@ -31,6 +33,7 @@ const typeDefs = gql`
     user: User
   }
 
+
   type RecipeDetails {
     id: ID!
     title: String!
@@ -50,8 +53,6 @@ const typeDefs = gql`
     password: String!
     recipes: [RecipeDetails!]!
   }
-  
-
 `;
 
 module.exports = typeDefs;
