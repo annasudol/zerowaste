@@ -11,7 +11,6 @@ const GET_RECIPE_DETAILS = gql`
     recipeDetails(id: $id) {
         id,
         title,
-        summary,
         image,
         readyInMinutes,
         detailedIngredients,
