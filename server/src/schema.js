@@ -5,24 +5,27 @@ const typeDefs = gql`
     recipes(
     ingredients: [String!]!
   ): [Recipe]!
-    recipe(id: String!): RecipeDetails!
+    recipeDetails(id: String!): RecipeDetails!
     recipeInfo(id: String!): Recipe!
     user(id: String!): User!
   }
 
   type Mutation {
     login(email: String): String
-    createRecipe(data: CreateRecipeInput!): RecipeDetails!
+    createRecipe(data: CreateRecipeInput!): Recipe!
   }
 
 
   input CreateRecipeInput {
     title: String!
-    image: String!
+    image: String
     readyInMinutes: Int!
+    ingredients: [String!]!
     detailedIngredients: [String!]!
     steps: [String!]
     sourceUrl: String!
+    author: String
+    authorId: String
   }
 
   type Recipe {

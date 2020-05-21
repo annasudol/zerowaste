@@ -1,6 +1,9 @@
 module.exports.recipes = [
     {
-        id: "1", title: "apple pie", image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes: 20, ingredients: ['almond meal', 'apple', 'puff pastry', 'strawberries', 'strawberry', 'jam'], detailedIngredients: ['almond meal', 'apple', 'puff pastry', 'strawberries', 'strawberry', 'jam'], steps: [
+        id: "1", title: "apple pie", image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg',
+        readyInMinutes: 20,
+        ingredients: ['almond meal', 'apple', 'puff pastry', 'strawberries', 'strawberry', 'jam'],
+        detailedIngredients: ['almond meal', 'apple', 'puff pastry', 'strawberries', 'strawberry', 'jam'], steps: [
             'Preheat the oven to 190°C/375°F/gas 5.',
             'Peel and core the apples, then quarter and cut in to chunks.',
             'Put the apples into a pan with the sugar and 1 tablespoon of water, then cook over a low heat for 5 minutes to soften slightly, stirring occasionally, then tip into a small ovenproof baking dish.',
