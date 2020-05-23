@@ -2,7 +2,7 @@ import * as React from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { ButtonUI } from '../components';
+import { Button } from '../UElements';
 import products = require("../assets/data/products.json");
 import { AppRoutes } from "../../routes";
 import { useHistory } from 'react-router-dom';
@@ -71,7 +71,7 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
                 )}
             />
         </div>
-        {selectedProducts.length === 0 ? <p>Add at least one product</p> : <ButtonUI onClick={searchRecipes}>{btnText}</ButtonUI>}
+        {selectedProducts.length === 0 ? <p>Add at least one product</p> : <Button onClick={searchRecipes}>{btnText}</Button>}
 
     </>
     )

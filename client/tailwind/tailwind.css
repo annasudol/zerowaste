@@ -125,7 +125,24 @@ body {
 }
 
 
+input {
+  padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+}
 
+input:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+  outline: none;
+  background: #fff;
+}
 
 .form {
   width: 16rem;
@@ -151,6 +168,12 @@ body {
     left: 320px;
   }
 }
+
+.recipe-form {
+  min-width: 300px;
+}
+
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;

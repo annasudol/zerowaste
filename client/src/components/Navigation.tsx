@@ -2,7 +2,7 @@ import * as React from "react";
 import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { ButtonUI } from '../components';
+import { Button } from '../UElements/';
 import { AppRoutes } from '../../routes';
 
 export const Navigation: React.FunctionComponent = (): React.ReactElement => {
@@ -15,10 +15,10 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
                 <nav className="nav">
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
                     <ul>
-                        <li><ButtonUI className="text-white" to={AppRoutes.Home}>Home</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.RecipesList}>My recipes</ButtonUI></li>
-                        <li><ButtonUI className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</ButtonUI></li>
+                        <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
+                        <li><Button className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</Button></li>
+                        <li><Button className="text-white" to={AppRoutes.RecipesList}>My recipes</Button></li>
+                        <li><Button className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</Button></li>
                     </ul>
                 </nav>
             </div>

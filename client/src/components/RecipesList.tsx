@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { ErrorMessage, RecipeItem, LoadingBar, SearchRecipesForm } from '../components';
+import { RecipeItem } from '../components';
+import { ErrorMessage, LoadingBar, SearchRecipesForm } from '../UElements/';
+
 import { useSelector } from 'react-redux';
 import { getProducts } from '../state/products/selectors/';
 

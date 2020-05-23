@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, ButtonUI } from '../components';
+import { Image, Button } from '../UElements/';
 
 
 interface RecipeItemProps {
@@ -17,7 +17,7 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
                 <h3 className="font-bebas text-lightGreen mb-1">{title}</h3>
                 <span className="font-roboto uppercase text-xs font-semibold text-darkGray">ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
-                <ButtonUI to={`/recipe/${id}`}>see more</ButtonUI>
+                <Button to={`/recipe/${id}`}>see more</Button>
             </div>
         </div>
     );

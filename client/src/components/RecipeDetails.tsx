@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, ButtonUI, LoadingBar, ErrorMessage } from '../components';
+import { Image, Button, LoadingBar, ErrorMessage } from '../UElements';
 import { useParams, useHistory } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -40,7 +40,7 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
     return (
         <div className="content">
             <div className="max-w-md p-4">
-                <ButtonUI onClick={backRecipes} color="coral">back to results</ButtonUI>
+                <Button onClick={backRecipes} color="coral">back to results</Button>
                 <h2 className="font-bebas uppercase text-darkGray mb-0">{data.recipeDetails.title}</h2>
                 <div>
                     <p className="font-roboto text-darkGray inline">Ready in: </p>
@@ -55,7 +55,7 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
                     <div>
                         <h3 className="font-roboto text-darkGray mb-0">Ingredients:</h3>
                         {data.recipeDetails.detailedIngredients.map(ingredient => <p>{ingredient}</p>)}
-                        <ButtonUI href={data.recipeDetails.sourceUrl} >source link</ButtonUI>
+                        <Button href={data.recipeDetails.sourceUrl} >source link</Button>
                     </div>
                 </div>
             </div>
