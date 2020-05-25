@@ -9,7 +9,7 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
     const [open, toggleOpen] = React.useState(false);
 
     return (
-        <div>
+        <>
             {!open && <button onClick={(): any => toggleOpen(true)} className="w-12 h-12 rounded-full border-0 bg-green lg:hidden nav-btn"><MenuIcon style={{ color: '#fff' }} /></button>}
             <div className={cx(open ? 'opened-nav' : 'closed-nav')}>
                 <nav className="nav">
@@ -22,7 +22,6 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
                     </ul>
                 </nav>
             </div>
-
-        </div >
+        </>
     );
 }

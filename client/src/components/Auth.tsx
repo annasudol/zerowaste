@@ -21,7 +21,6 @@ export const Auth: React.FunctionComponent = (): React.ReactElement => {
 
     return (
         <div className="content overflow-hidden flex justify-center items-center">
-
             <div className="form  flex flex-col">
                 <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">{loginPage ? 'Log in' : 'Create an account'}</h1>
                 <p className="font-roboto text-center mb-4">{!loginPage ? 'Already have an account?' : "Don't have an account?"}</p>
@@ -41,7 +40,6 @@ export const Auth: React.FunctionComponent = (): React.ReactElement => {
                         })}
                     />
                     <input name="password" type="password" placeholder="Set a password" ref={register({ required: true })} />
-
                     <input type="submit" title="Submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0" />
                 </form>
             </div>

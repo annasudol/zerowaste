@@ -12,7 +12,15 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String): String
-    createRecipe(data: CreateRecipeInput!): Recipe!
+    createRecipe(title: String!
+    image: String
+    readyInMinutes: Int!
+    ingredients: [String!]!
+    detailedIngredients: [String!]!
+    steps: [String!]
+    sourceUrl: String
+    author: String
+    authorId: String): Recipe!
   }
 
 

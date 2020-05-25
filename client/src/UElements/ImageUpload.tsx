@@ -5,7 +5,7 @@ import { Button } from '../UElements';
 
 interface ImageUploadProps {
     onInput?(id: string, pickedFile: string, fileIsValid: boolean): VoidFunction
-    id: string
+    id?: string
 }
 export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ onInput, id }): React.ReactElement => {
     const [file, setFile] = React.useState();

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 export const useDetailedIngredientState = () => {
-    const [ingredientList, setIngredientList] = useState<string[] | []>(['1 tbsp olive oil', '1 onion diced']);
+    const [detailedIngredients, setDetailedIngredients] = useState<string[] | []>([]);
 
     return {
-        ingredientList,
-        addIngredient: (text: string) => {
-            setIngredientList([...ingredientList, text]);
+        detailedIngredients,
+        addDetailedIngredient: (text: string) => {
+            setDetailedIngredients([...detailedIngredients, text]);
         },
-        deleteIngredient: ingredientIndex => {
-            const newIngredient = ingredientList.filter((_, index) => index !== ingredientIndex);
-            setIngredientList(newIngredient);
+        deleteDetailedIngredient: ingredientIndex => {
+            const newIngredient = detailedIngredients.filter((_, index) => index !== ingredientIndex);
+            setDetailedIngredients(newIngredient);
         }
     };
 };

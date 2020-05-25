@@ -43,7 +43,7 @@ module.exports = {
 
       const recipe = {
         id: uuidv4(),
-        ...args.data
+        ...args
       }
       recipes.push(recipe)
       return recipe

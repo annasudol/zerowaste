@@ -7,25 +7,22 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 interface IngredientsListProps {
-    ingredients: string[]
-    deleteIngredient(index: number): VoidFunction
+    list: string[]
+    deleteItem(index: number): VoidFunction
 }
-export const DetailedIngredientsList: React.FunctionComponent<IngredientsListProps> = ({ ingredients, deleteIngredient }): React.ReactElement => (
+export const ListUI: React.FunctionComponent<IngredientsListProps> = ({ list, deleteItem }): React.ReactElement => (
     <List>
-        {ingredients.map((todo, index) => (
-            <ListItem key={index.toString()} dense button>
-                <ListItemText primary={todo} />
+        {list.map((item, index) => (
+            <ListItem key={index.toString()}>
+                <ListItemText primary={item} />
                 <ListItemSecondaryAction>
                     <IconButton
                         aria-label="Delete"
-                        onClick={() => {
-                            deleteIngredient(index);
-                        }}
-                    >
+                        onClick={() => deleteItem(index)}>
                         <DeleteIcon />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>
         ))}
-    </List>
+    </List >
 );
