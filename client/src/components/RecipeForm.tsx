@@ -42,8 +42,7 @@ type Inputs = {
 
 
 export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
-    // const [recipeData, setRecipeData] = React.useState<Inputs>();
-    const { handleSubmit, register, reset, control, errors } = useForm();
+    const { handleSubmit, register, reset, control, errors, clearError, setError } = useForm<Inputs>();
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState();
     const { steps, addStep, deleteStep } = useStepsState();
     const [createRecipe, { data, loading, error }] = useMutation(ADD_RECIPE);
@@ -51,12 +50,20 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
 
     const history = useHistory();
 
+
     const onSubmit = info => {
-        const { title, ingredients, sourceUrl, readyInMinutes } = info;
+
+        const { title, ingredients, sourceUrl, readyInMinutes, detIng } = info;
+        // tslint:disable-next-line: no-unused-expression
+
+        console.log(info)
 
         // createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes: 20, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } });
         // return data && data.createRecipe && history.push({ pathname: `/recipe/${data.createRecipe.id}` });
     }
+
+    console.log(errors)
+
     return (
         <div className="content p-10">
             <div className="flex justify-center items-center">
@@ -64,40 +71,26 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Add Recipe</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {errors.title && <ErrorMessage validationMessage='Title is Required' />}
-                        <input name="title" type="text" placeholder="Title" ref={register({ required: true })} />
+                        <input name="title" type="text" placeholder="Title" ref={register({ required: true })} className="mt-2 mb-2" />
                         {errors.readyInMinutes && <ErrorMessage validationMessage='Add preparation time' />}
 
                         <input name="readyInMinutes" type="number" placeholder="Ready In Minutes" ref={register({
                             required: true, min: 0
-                        })} />
-
+                        })} className="mt-2 mb-2" />
+                        {errors.ingredients && <ErrorMessage validationMessage='Add at least one ingredient' />}
                         <Controller
                             as={
-                                <Autocomplete
-                                    multiple
-                                    options={productsTitles}
-                                    getOptionLabel={option => option}
-                                    renderOption={option => (
-                                        <span>
-                                            {option}
-                                        </span>
-                                    )}
-                                    renderInput={params => (
-                                        <TextField
-                                            {...params}
-                                            label="Add ingredients to make the recipe searchable"
-                                            variant="outlined"
-                                        />
-                                    )}
-                                />
+                                <IngredientSelect control={control} />
                             }
                             // tslint:disable-next-line: no-shadowed-variable
                             onChange={([, data]) => data}
                             name="ingredients"
                             control={control}
-                            ref={register({ required: true, minLength: 1 })}
+                            rules={{ required: true }}
+                        />
+                        {errors.detIng && <ErrorMessage validationMessage='Add at least one detailed ingredients' />}
 
-                        />                        <ListAddForm saveItem={(text: string) => {
+                        <ListAddForm saveItem={(text: string) => {
                             const trimmedText = text.trim();
                             if (trimmedText.length > 0) {
                                 addDetailedIngredient(trimmedText);
@@ -105,8 +98,8 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
                         }}
                             placeholder="Add detailed ingredients eg: 1 tbsp olive oil"
                         />
-                        <ListUI list={detailedIngredients} deleteItem={(index: number): any => deleteDetailedIngredient(index)} />
 
+                        <ListUI list={detailedIngredients} deleteItem={(index: number): any => deleteDetailedIngredient(index)} />
                         <ListAddForm saveItem={(text: string) => {
                             const trimmedText = text.trim();
                             if (trimmedText.length > 0) {
@@ -117,8 +110,9 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
                             textarea={true}
                         />
                         <ListUI list={steps} deleteItem={(index: number): any => deleteStep(index)} />
+
                         <input name="sourceUrl" type="text" placeholder="Source Url" ref={register({ required: false })} />
-                        <input type="submit" title="Submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0" />
+                        <input type="submit" title="Submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0" onClick={() => clearError("detIng")} />
                     </form>
                 </div>
             </div>

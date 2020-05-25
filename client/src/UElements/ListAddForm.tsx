@@ -15,6 +15,7 @@ export const ListAddForm: React.FunctionComponent<DetailedIngredientSelectProps>
                 saveItem(item);
                 setItem('');
             }}
+            className="mt-1 mb-1"
         >
             {textarea ? (<><textarea placeholder={placeholder}
                 onChange={event => {

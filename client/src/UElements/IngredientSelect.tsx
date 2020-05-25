@@ -20,6 +20,7 @@ export const IngredientSelect: React.FunctionComponent<IngredientSelectProps> = 
             as={
                 <Autocomplete
                     multiple
+                    className="mt-2 mb-4"
                     options={productsTitles}
                     getOptionLabel={option => option}
                     renderOption={option => (
