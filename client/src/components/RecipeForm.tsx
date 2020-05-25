@@ -33,7 +33,8 @@ const ADD_RECIPE = gql`
 
 type Inputs = {
     title: string
-    ingredients: string[]
+    ingredients: string[] | []
+    detailedIngredients: string[] | []
     readyInMinutes: number
     sourceUrl: string
 }
@@ -42,53 +43,67 @@ type Inputs = {
 
 
 export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
-    const { handleSubmit, register, reset, control, errors, clearError, setError } = useForm<Inputs>();
+    // const { handleSubmit, register, reset, control, errors, clearError, setError } = useForm<Inputs>();
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState();
     const { steps, addStep, deleteStep } = useStepsState();
     const [createRecipe, { data, loading, error }] = useMutation(ADD_RECIPE);
-
+    const [title, setTitle] = React.useState<string>('');
+    const [readyInMinutes, setReadyInMinutes] = React.useState<number>(0);
+    const [ingredients, setIngredients] = React.useState<string[] | []>([]);
+    const [sourceUrl, setSourceUrl] = React.useState<string>('');
+    const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
 
     const history = useHistory();
 
 
-    const onSubmit = info => {
+    const handleSubmit = (event): any => {
 
-        const { title, ingredients, sourceUrl, readyInMinutes, detIng } = info;
-        // tslint:disable-next-line: no-unused-expression
+        event.preventDefault();
 
-        console.log(info)
+        if (title === '' || readyInMinutes === 0 || ingredients.length === 0 || detailedIngredients.length === 0 || steps.length === 0) {
+            setEmptyInput(true)
+        } else {
+            setEmptyInput(false)
+            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes: 20, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } });
+            history.push({ pathname: `/recipe/${data.createRecipe.id}` });
+        }
 
-        // createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes: 20, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } });
-        // return data && data.createRecipe && history.push({ pathname: `/recipe/${data.createRecipe.id}` });
     }
 
-    console.log(errors)
+
 
     return (
         <div className="content p-10">
             <div className="flex justify-center items-center">
                 <div className="flex flex-col w-1/2 recipe-form">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Add Recipe</h1>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        {errors.title && <ErrorMessage validationMessage='Title is Required' />}
-                        <input name="title" type="text" placeholder="Title" ref={register({ required: true })} className="mt-2 mb-2" />
-                        {errors.readyInMinutes && <ErrorMessage validationMessage='Add preparation time' />}
-
-                        <input name="readyInMinutes" type="number" placeholder="Ready In Minutes" ref={register({
-                            required: true, min: 0
-                        })} className="mt-2 mb-2" />
-                        {errors.ingredients && <ErrorMessage validationMessage='Add at least one ingredient' />}
-                        <Controller
-                            as={
-                                <IngredientSelect control={control} />
-                            }
-                            // tslint:disable-next-line: no-shadowed-variable
-                            onChange={([, data]) => data}
-                            name="ingredients"
-                            control={control}
-                            rules={{ required: true }}
+                    <form onSubmit={(e): any => handleSubmit(e)}>
+                        {emptyInput && title === '' && <ErrorMessage validationMessage='Add title' />}
+                        <input name="title" type="text" placeholder="Title" className="mt-2 mb-2" value={title} onChange={(e: any): any => setTitle(e.target.value)} />
+                        {emptyInput && readyInMinutes === 0 && <ErrorMessage validationMessage='Add preparation time' />}
+                        <input name="readyInMinutes" type="number" placeholder="Ready In Minutes" className="mt-2 mb-2" value={readyInMinutes} onChange={(e: any): any => setReadyInMinutes(e.target.value)} />
+                        {emptyInput && ingredients.length === 0 && <ErrorMessage validationMessage='Add ingredients to make the recipe searchable' />}
+                        <Autocomplete
+                            multiple
+                            className="mt-4 mb-4"
+                            options={productsTitles}
+                            getOptionLabel={option => option}
+                            renderOption={option => (
+                                <span>
+                                    {option}
+                                </span>
+                            )}
+                            renderInput={params => (
+                                <TextField
+                                    {...params}
+                                    label="Search for ingredients"
+                                    variant="outlined"
+                                />
+                            )}
+                            onChange={(event, value, reason): any => setIngredients(value)}
+                            value={ingredients}
                         />
-                        {errors.detIng && <ErrorMessage validationMessage='Add at least one detailed ingredients' />}
+                        {emptyInput && detailedIngredients.length === 0 && <ErrorMessage validationMessage='Add detailed ingredients eg: 1 tbsp olive oil' />}
 
                         <ListAddForm saveItem={(text: string) => {
                             const trimmedText = text.trim();
@@ -96,10 +111,10 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
                                 addDetailedIngredient(trimmedText);
                             }
                         }}
-                            placeholder="Add detailed ingredients eg: 1 tbsp olive oil"
+                            placeholder="Add detailed ingredients"
                         />
-
                         <ListUI list={detailedIngredients} deleteItem={(index: number): any => deleteDetailedIngredient(index)} />
+                        {emptyInput && steps.length === 0 && <ErrorMessage validationMessage='Add recipe steps' />}
                         <ListAddForm saveItem={(text: string) => {
                             const trimmedText = text.trim();
                             if (trimmedText.length > 0) {
@@ -110,9 +125,8 @@ export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
                             textarea={true}
                         />
                         <ListUI list={steps} deleteItem={(index: number): any => deleteStep(index)} />
-
-                        <input name="sourceUrl" type="text" placeholder="Source Url" ref={register({ required: false })} />
-                        <input type="submit" title="Submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0" onClick={() => clearError("detIng")} />
+                        <input name="sourceUrl" type="text" placeholder="Source Url" value={sourceUrl} onChange={(e: any): any => setSourceUrl(e.target.value)} />
+                        <button type="submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0">Send Recipe</button>
                     </form>
                 </div>
             </div>
