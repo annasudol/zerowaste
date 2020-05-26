@@ -47,7 +47,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
                 <div className="flex flex-col w-1/2 recipe-form">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Add Recipe</h1>
                     <form onSubmit={(e): any => handleSubmit(e)}>
-                        {emptyInput && initialState.title && <ErrorMessage validationMessage='Add title' />}
+                        {emptyInput && title === '' && <ErrorMessage validationMessage='Add title' />}
                         <input name="title" type="text" placeholder="Title" className="mt-2 mb-2" value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>): void => dispatch({ TYPE: 'ADD_TITLE', setTitle: e.target.value })} />
                         {emptyInput && readyInMinutes === 0 && <ErrorMessage validationMessage='Add preparation time' />}
                         <input name="readyInMinutes" type="number" placeholder="Ready In Minutes" className="mt-2 mb-2" value={readyInMinutes}

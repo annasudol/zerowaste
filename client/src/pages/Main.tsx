@@ -6,7 +6,7 @@ const fridge = require("./../assets/images/svg/technology.svg");
 export const Main: React.FunctionComponent = () => (
     <div className="content overflow-hidden">
         <div className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen">
-            <div className="mb-8 text-center md:text-left min-h-32">
+            <div className="mb-8 text-center md:w-1/2 lg:w-1/3 md:text-left min-h-32">
                 <h1 className="font-bebas uppercase text-darkGray mb-3">your spare food</h1>
                 <SearchRecipesForm />
             </div>

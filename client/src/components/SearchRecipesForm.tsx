@@ -29,7 +29,6 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
     return (<>
         <AutocompleteIngredients dispatch={dispatch} ingredients={ingredients} placeholder="Search for products in recipes" />
         {ingredients.length === 0 ? <p>Add at least one product</p> : <Button onClick={searchRecipes}>{btnText}</Button>}
-
     </>
     )
 }
