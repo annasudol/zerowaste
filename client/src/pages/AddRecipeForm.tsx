@@ -1,19 +1,9 @@
 import * as React from "react";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { TextField } from "@material-ui/core";
-import { ListUI, ErrorMessage, ListAddForm, ListType } from '../components'
+import { ListUI, ErrorMessage, ListAddForm, AutocompleteIngredients } from '../components'
 import { useStepsState, useDetailedIngredientState, useRecipeFormState, initialState } from "../hooks";
 import { useHistory } from 'react-router';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-
-import products = require("../assets/data/products.json");
-
-const productsTitles = products.reduce((accumulator: any, currentValue: ListType) => {
-    return [...accumulator, currentValue.title]
-}, []);
-
-
 
 const ADD_RECIPE = gql`
   mutation AddRecipe($title: String! $image: String $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $steps: [String!] $sourceUrl: String $author: String $authorId: String) {
@@ -24,7 +14,6 @@ const ADD_RECIPE = gql`
   }
 
 `;
-
 
 export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState();
@@ -67,26 +56,8 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
                                 if (val > 0) dispatch({ TYPE: 'ADD_READY_IN_MINUTES', setMinutes: val })
                             }} />
                         {emptyInput && ingredients.length === 0 && <ErrorMessage validationMessage='Add ingredients to make the recipe searchable' />}
-                        <Autocomplete
-                            multiple
-                            className="mt-4 mb-4"
-                            options={productsTitles}
-                            getOptionLabel={option => option}
-                            renderOption={option => (
-                                <span>
-                                    {option}
-                                </span>
-                            )}
-                            renderInput={params => (
-                                <TextField
-                                    {...params}
-                                    label="Search for ingredients"
-                                    variant="outlined"
-                                />
-                            )}
-                            onChange={(event, value: string[], reason): void => dispatch({ TYPE: 'ADD_INGREDIENTS', setIngredients: value })}
-                            value={ingredients}
-                        />
+                        <AutocompleteIngredients dispatch={dispatch} ingredients={ingredients} />
+
                         {emptyInput && detailedIngredients.length === 0 && <ErrorMessage validationMessage='Add detailed ingredients eg: 1 tbsp olive oil' />}
 
                         <ListAddForm saveItem={(text: string) => {

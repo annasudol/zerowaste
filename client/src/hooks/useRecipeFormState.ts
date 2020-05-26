@@ -1,4 +1,6 @@
 import { Dispatch, useReducer } from 'react';
+import { useSelector } from "react-redux";
+
 
 type StateType = {
     title: string
@@ -24,14 +26,15 @@ function reducer(state: StateType, action: Action): StateType {
     }
 }
 
-export function useRecipeFormState(): {
+export function useRecipeFormState(ingredientsState?: string[]): {
     dispatch: Dispatch<Action>;
     title: string
     ingredients: string[] | []
     readyInMinutes: number
     sourceUrl: string
 } {
-    const [{ title, ingredients, readyInMinutes, sourceUrl }, dispatch] = useReducer(reducer, initialState);
+
+    const [{ title, ingredients, readyInMinutes, sourceUrl }, dispatch] = useReducer(reducer, ingredientsState ? { title: '', ingredients: ingredientsState, readyInMinutes: 0, sourceUrl: '' } : initialState);
 
     return { dispatch, title, ingredients, readyInMinutes, sourceUrl };
 }
