@@ -5,7 +5,7 @@ import { App } from "./components/App";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import '../tailwind/tailwind.css';
-import { BrowserRouter as Router } from './UIElements/node_modules/react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './state';
 
