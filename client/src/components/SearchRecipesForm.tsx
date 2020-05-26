@@ -2,7 +2,7 @@ import * as React from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button } from '../UElements';
+import { Button } from '../components';
 import products = require("../assets/data/products.json");
 import { AppRoutes } from "../../routes";
 import { useHistory } from 'react-router-dom';

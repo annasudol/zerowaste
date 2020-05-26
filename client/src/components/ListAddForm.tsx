@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TextField, makeStyles } from "@material-ui/core";
-import { Button } from '../UElements'
+import { Button } from '.'
 interface DetailedIngredientSelectProps {
     saveItem(text: string): void
     placeholder: string

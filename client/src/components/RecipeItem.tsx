@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Button } from '../UElements/';
+import { Image, Button } from '../components';
 
 
 interface RecipeItemProps {

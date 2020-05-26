@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button } from '../UElements';
+import { Button } from '.';
 // import './ImageUpload.css';
 
 interface ImageUploadProps {

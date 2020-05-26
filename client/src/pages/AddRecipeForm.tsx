@@ -1,8 +1,7 @@
 import * as React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { TextField } from "@material-ui/core";
-import { ErrorMessage, ListAddForm, ListType } from "../UElements";
-import { ListUI } from '../components'
+import { ListUI, ErrorMessage, ListAddForm, ListType } from '../components'
 import { useStepsState, useDetailedIngredientState, useRecipeFormState, initialState } from "../hooks";
 import { useHistory } from 'react-router';
 import gql from 'graphql-tag';
@@ -27,13 +26,12 @@ const ADD_RECIPE = gql`
 `;
 
 
-export const RecipeForm: React.FunctionComponent = (): React.ReactElement => {
+export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState();
     const { steps, addStep, deleteStep } = useStepsState();
-    const [createRecipe, { data, error }] = useMutation(ADD_RECIPE);
-    const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
     const { title, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState();
-
+    const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
+    const [createRecipe, { data, error }] = useMutation(ADD_RECIPE);
     const history = useHistory();
 
     const handleSubmit = (event): any => {

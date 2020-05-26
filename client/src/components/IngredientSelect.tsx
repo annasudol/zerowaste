@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Controller, Control } from "react-hook-form";
 import products = require("../assets/data/products.json");
-import { ListType } from "../UElements/";
+import { ListType } from ".";
 
 const productsTitles = products.reduce((accumulator: any, currentValue: ListType) => {
     return [...accumulator, currentValue.title]

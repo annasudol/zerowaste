@@ -2,7 +2,7 @@ import * as React from "react";
 import MenuIcon from '@material-ui/icons/Menu';
 import cx from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { Button } from '../UElements/';
+import { Button } from '../components';
 import { AppRoutes } from '../../routes';
 
 export const Navigation: React.FunctionComponent = (): React.ReactElement => {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Button, LoadingBar, ErrorMessage } from '../UElements';
+import { Image, Button, LoadingBar, ErrorMessage } from '../components';
 import { useParams, useHistory } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 

@@ -2,10 +2,9 @@ import * as React from "react";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { RecipeItem } from '../components';
-import { ErrorMessage, LoadingBar, SearchRecipesForm } from '../UElements/';
-
+import { ErrorMessage, LoadingBar, SearchRecipesForm } from '../components';
 import { useSelector } from 'react-redux';
-import { getProducts } from '../state/products/selectors/';
+import { getProducts } from '../state/products/selectors';
 
 const GET_RECIPES = gql`
   query GetRecipes($ingredients: [String!]!) {

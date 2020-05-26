@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../UElements";
+import { Button } from "../components";
 
 type Inputs = {
     example: string,
