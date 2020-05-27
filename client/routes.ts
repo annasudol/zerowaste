@@ -4,5 +4,5 @@ export const AppRoutes = {
     Recipe: '/recipe/:recipeID',
     AddRecipe: '/addRecipe',
     LoginSignUp: '/login',
-
+    User: '/user',
 };

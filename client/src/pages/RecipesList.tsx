@@ -29,10 +29,10 @@ export const RecipesList: React.FunctionComponent = () => {
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
   if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;;
   return (<div className="main">
-    <div className="mt-5 ml-5  search-form">
+    <div className="ml-2  search-form">
       <SearchRecipesForm btnText='Update Results' />
     </div>
-    <div className="flex-col w-full h-full list">
+    <div className="flex-col list">
       {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
     </div>
   </div>)

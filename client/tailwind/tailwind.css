@@ -138,13 +138,25 @@ button:disabled {
 }
 
 .list {
-  border: 20px solid #fff;
+  position: relative;
+  top: 150px;
+  z-index: 0;
 }
 @media (min-width: 768px) {
   .list--item {
-    width: 55%;
+    width: 100%;
+  }
+  .list {
+    top: 10px;
   }
 }
+
+@media (min-width: 1024px) {
+  .list--item {
+    width: 80%;
+  }
+}
+
 
 
 input, textarea {
@@ -177,23 +189,28 @@ input, textarea {
 }
 
 .search-form {
-  max-width: 500px;
-  margin: 0 80px 0 20px;
+  position: fixed;
+  top: 5px;
+  left: 0px;
+  background-color: #fff;
+  width: 100%;
+  padding-right: 120px;
 }
 
 @media (min-width: 768px) {
   .search-form {
     position: fixed;
-    top: 20px;
+    top: 10px;
     left: 20px;
     width: 260px;
+    width: 350px;
+    background-color: transparent;
   }
 }
 
 @media (min-width: 768px) {
   .main {
-    position: relative;
-    left: 320px;
+    margin-left: 320px;
   }
 }
 

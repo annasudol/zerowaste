@@ -6,13 +6,12 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 const ADD_RECIPE = gql`
-  mutation AddRecipe($title: String! $image: String $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $steps: [String!] $sourceUrl: String $author: String $authorId: String) {
+  mutation AddRecipe($title: String!, $image: String, $readyInMinutes: Int!, $ingredients: [String!]!, $detailedIngredients: [String!]!, $steps: [String!], $sourceUrl: String $author: String, $authorId: String) {
     createRecipe(title: $title, image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, steps: $steps, sourceUrl: $sourceUrl, author: $author, authorId: $authorId) {
         id
         title
     }
   }
-
 `;
 
 export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
@@ -31,7 +30,8 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
             setEmptyInput(true)
         } else {
             setEmptyInput(false)
-            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } });
+            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } },
+            );
             history.push({ pathname: `/recipe/${data.createRecipe.id}` });
         }
 
@@ -39,8 +39,9 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
 
 
     if (error) {
-        return (<ErrorMessage message='Error with adding recipe, please try later' />)
+        return (<ErrorMessage message={typeof error === 'string' ? error : 'Error with adding recipe, please try later'} />)
     }
+
     return (
         <div className="content p-10">
             <div className="flex justify-center items-center">

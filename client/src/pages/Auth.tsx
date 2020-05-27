@@ -1,23 +1,69 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../components";
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
+import ApolloClient from 'apollo-client';
+
+export const LOGIN_USER = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+        token
+        name
+        email
+    }
+  }
+`;
+
+// export const SIGNUP_USER = gql`
+//   mutation signup($input: {name: String!, email: String!, password: String!}) {
+//     signup(input: $input) {
+//         name
+//         email
+//         password
+//     }
+//   }
+// `;
 type Inputs = {
     example: string,
     exampleRequired: string,
 };
 
 
+// export interface LoginProps {
+//     login: string;
+//   }
+
+
+
 
 export const Auth: React.FunctionComponent = (): React.ReactElement => {
+    const client: ApolloClient<any> = useApolloClient();
     const { register, handleSubmit, watch, errors } = useForm<Inputs>();
     const [loginPage, setLoginPage] = React.useState(false);
+
+    const [login, { loading, error }] = useMutation(
+        LOGIN_USER,
+        {
+            // tslint:disable-next-line: no-shadowed-variable
+            onCompleted({ login }) {
+                localStorage.setItem('token', login.token);
+                client.writeData({ data: { isLoggedIn: true } });
+            }
+        }
+    );
 
     const toggleSetLoginPage = (): void => {
         setLoginPage(!loginPage);
     }
 
-    const submit = data => console.log(data, "data");
+    const submit = data => {
+        if (loginPage) {
+            console.log(data)
+            login({ variables: { email: data.email, password: data.password } });
+        }
+    }
 
     return (
         <div className="content overflow-hidden flex justify-center items-center">

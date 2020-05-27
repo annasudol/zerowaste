@@ -1,28 +1,47 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { App } from "./components/App";
-
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
 import '../tailwind/tailwind.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './state';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+const token = localStorage.getItem('token')
+
+// Set up our apollo-client to point at the server we created
+// this can be local or a remote endpoint
+const cache = new InMemoryCache();
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache,
+  link: new HttpLink({
+    uri: 'http://localhost:4000/graphql',
+    headers: {
+      authorization: token ? `Bearer ${token}` : ''
+    },
+  })
 });
 
+cache.writeData({
+  data: {
+    isLoggedIn: !!localStorage.getItem('token'),
+  },
+});
 
 const rootEl = document.getElementById("root");
 
 render(
-  <ApolloProvider client={client}>
-    <Provider store={store}>
-      <Router>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
         <App />
-      </Router>
-    </Provider>
-  </ApolloProvider>,
+      </Provider>
+    </ApolloProvider>
+  </BrowserRouter>,
   rootEl,
 );

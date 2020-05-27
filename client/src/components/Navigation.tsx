@@ -7,6 +7,16 @@ import { AppRoutes } from '../../routes';
 
 export const Navigation: React.FunctionComponent = (): React.ReactElement => {
     const [open, toggleOpen] = React.useState(false);
+    const token = localStorage.getItem('token')
+    const loggedIn = (<ul>
+        <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
+        <li><Button className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</Button></li>
+        <li><Button className="text-white" to={AppRoutes.User}>Account</Button></li>
+    </ul>);
+    const loggedOut = (<ul>
+        <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
+        <li> <Button className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</Button></li>
+    </ul>)
 
     return (
         <>
@@ -14,12 +24,7 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
             <div className={cx(open ? 'opened-nav' : 'closed-nav')}>
                 <nav className="nav">
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
-                    <ul>
-                        <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
-                        <li><Button className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</Button></li>
-                        <li><Button className="text-white" to={AppRoutes.RecipesList}>My recipes</Button></li>
-                        <li><Button className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</Button></li>
-                    </ul>
+                    {token ? loggedIn : loggedOut}
                 </nav>
             </div>
         </>
