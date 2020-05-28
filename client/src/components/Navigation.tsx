@@ -24,6 +24,7 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
             <div className={cx(open ? 'opened-nav' : 'closed-nav')}>
                 <nav className="nav">
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
+                    {token && <button onClick={(): void => localStorage.removeItem('token')}>logout</button>}
                     {token ? loggedIn : loggedOut}
                 </nav>
             </div>

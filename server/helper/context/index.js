@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../database/models/user');
-
+// const TokenExpiredError = require('../../node_modules/')
+// import { TokenExpiredError } from "jsonwebtoken";
 module.exports.verifyUser = async (req) => {
   try {
+
     req.email = null;
     req.loggedInUserId = null;
     const bearerHeader = req.headers.authorization;
@@ -14,7 +16,9 @@ module.exports.verifyUser = async (req) => {
       req.loggedInUserId = user.id;
     }
   } catch (error) {
-    console.log(error);
+    if (error instanceof jwt.TokenExpiredError) {
+      return attemptRenewal()
+    }
     throw error;
   }
 }

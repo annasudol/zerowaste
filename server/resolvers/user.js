@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { combineResolvers } = require('graphql-resolvers');
 
@@ -11,6 +11,8 @@ const { userEvents } = require('../subscription/events');
 module.exports = {
   Query: {
     user: combineResolvers(isAuthenticated, async (_, __, { email }) => {
+      console.log(email, "user")
+
       try {
         const user = await User.findOne({ email });
         if (!user) {
@@ -18,7 +20,6 @@ module.exports = {
         }
         return user;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     })
@@ -38,7 +39,6 @@ module.exports = {
         });
         return result;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     },
@@ -48,15 +48,16 @@ module.exports = {
         if (!user) {
           throw new Error('User not found');
         }
-        const isPasswordValid = await bcrypt.compare(input.password, user.password);
+        const isPasswordValid = await bcrypt.compare(input.password, user[0].password);
         if (!isPasswordValid) {
+
           throw new Error('Incorrect Password');
         }
+
         const secret = process.env.JWT_SECRET_KEY || 'mysecretkey';
         const token = jwt.sign({ email: user.email }, secret, { expiresIn: '1d' });
         return { token };
       } catch (error) {
-        console.log(error);
         throw error;
       }
     }

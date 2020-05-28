@@ -30,7 +30,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
             setEmptyInput(true)
         } else {
             setEmptyInput(false)
-            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl, author: 'kevin', authorId: "2" } },
+            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl } },
             );
             history.push({ pathname: `/recipe/${data.createRecipe.id}` });
         }

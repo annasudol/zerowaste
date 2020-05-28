@@ -3,15 +3,15 @@ import { useForm } from "react-hook-form";
 import { Button } from "../components";
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
+import { useHistory } from 'react-router';
 import ApolloClient from 'apollo-client';
-
+import { AppRoutes } from "../../routes";
+import { Main } from "../pages";
+import { Route, Redirect } from "react-router-dom";
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
-        name
-        email
     }
   }
 `;
@@ -39,6 +39,8 @@ type Inputs = {
 
 
 export const Auth: React.FunctionComponent = (): React.ReactElement => {
+    const history = useHistory();
+
     const client: ApolloClient<any> = useApolloClient();
     const { register, handleSubmit, watch, errors } = useForm<Inputs>();
     const [loginPage, setLoginPage] = React.useState(false);
@@ -58,11 +60,14 @@ export const Auth: React.FunctionComponent = (): React.ReactElement => {
         setLoginPage(!loginPage);
     }
 
-    const submit = data => {
+    const submit = (data: any) => {
         if (loginPage) {
             console.log(data)
             login({ variables: { email: data.email, password: data.password } });
+            return history.push({ pathname: `${AppRoutes.Home}` });
+            // return <Redirect to={{ pathname: `${AppRoutes.Home}` }} />
         }
+
     }
 
     return (
@@ -71,7 +76,7 @@ export const Auth: React.FunctionComponent = (): React.ReactElement => {
                 <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">{loginPage ? 'Log in' : 'Create an account'}</h1>
                 <p className="font-roboto text-center mb-4">{!loginPage ? 'Already have an account?' : "Don't have an account?"}</p>
                 <Button onClick={toggleSetLoginPage} color="coral" className="mb-4">{!loginPage ? 'Switch to Log in' : 'Switch to Sign in'}</Button>
-                <form onSubmit={handleSubmit(submit)}>
+                <form onSubmit={handleSubmit(submit}>
                     {!loginPage && <input name="username" type="text" placeholder="User Name" ref={register({ required: true, maxLength: 30 })} />}
                     <input
                         name="email"

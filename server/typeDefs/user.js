@@ -30,7 +30,7 @@ module.exports = gql`
   }
 
   type User {
-    id: ID!
+    id: ID
     name: String!
     email: String!
     recipes: [RecipeDetails!]
