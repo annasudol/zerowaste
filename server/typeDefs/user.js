@@ -11,6 +11,7 @@ module.exports = gql`
       email: String!
       password: String!
       ): User
+
     login(email: String! password: String!): Token
   }
 
@@ -30,7 +31,7 @@ module.exports = gql`
   }
 
   type User {
-    id: ID
+    id: ID!
     name: String!
     email: String!
     recipes: [RecipeDetails!]

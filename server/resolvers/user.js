@@ -10,11 +10,12 @@ const { userEvents } = require('../subscription/events');
 
 module.exports = {
   Query: {
-    user: combineResolvers(isAuthenticated, async (_, __, { email }) => {
-      console.log(email, "user")
+    user: combineResolvers(isAuthenticated, async (_, __, user) => {
+      const email = user?.email
 
       try {
-        const user = await User.findOne({ email });
+        const user = await email && User.findOne({ email });
+
         if (!user) {
           throw new Error('User not found!');
         }
@@ -43,19 +44,22 @@ module.exports = {
       }
     },
     login: async (_, input) => {
+
       try {
-        const user = await User.find({ email: input.email });
+        const user = await User.findOne({ email: input.email });
         if (!user) {
           throw new Error('User not found');
         }
-        const isPasswordValid = await bcrypt.compare(input.password, user[0].password);
+        const isPasswordValid = await bcrypt.compare(input.password, user.password);
         if (!isPasswordValid) {
 
           throw new Error('Incorrect Password');
         }
 
-        const secret = process.env.JWT_SECRET_KEY || 'mysecretkey';
+        const secret = 'mysecretkey';
         const token = jwt.sign({ email: user.email }, secret, { expiresIn: '1d' });
+        const payload = jwt.decode(token, secret);
+        console.log(payload, "payload")
         return { token };
       } catch (error) {
         throw error;

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 const User = require('../../database/models/user');
 // const TokenExpiredError = require('../../node_modules/')
 // import { TokenExpiredError } from "jsonwebtoken";
@@ -10,7 +11,9 @@ module.exports.verifyUser = async (req) => {
     const bearerHeader = req.headers.authorization;
     if (bearerHeader) {
       const token = bearerHeader.split(' ')[1];
-      const payload = jwt.verify(token, process.env.JWT_SECRET_KEY || 'mysecretkey');
+      const secret = 'mysecretkey';
+
+      const payload = jwt.decode(token, secret);
       req.email = payload.email;
       const user = await User.findOne({ email: payload.email });
       req.loggedInUserId = user.id;

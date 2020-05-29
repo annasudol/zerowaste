@@ -76,7 +76,7 @@ export const Auth: React.FunctionComponent = (): React.ReactElement => {
                 <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">{loginPage ? 'Log in' : 'Create an account'}</h1>
                 <p className="font-roboto text-center mb-4">{!loginPage ? 'Already have an account?' : "Don't have an account?"}</p>
                 <Button onClick={toggleSetLoginPage} color="coral" className="mb-4">{!loginPage ? 'Switch to Log in' : 'Switch to Sign in'}</Button>
-                <form onSubmit={handleSubmit(submit}>
+                <form onSubmit={handleSubmit(submit)}>
                     {!loginPage && <input name="username" type="text" placeholder="User Name" ref={register({ required: true, maxLength: 30 })} />}
                     <input
                         name="email"
