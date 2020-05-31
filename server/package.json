@@ -13,13 +13,14 @@
   "dependencies": {
     "apollo-datasource-rest": "^0.9.2",
     "apollo-server-express": "^2.9.3",
-    "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dataloader": "^1.4.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "graphql-iso-date": "^3.6.1",
     "graphql-resolvers": "^0.3.3",
+    "isemail": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1",
     "uuid": "^3.3.3"

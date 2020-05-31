@@ -8,6 +8,7 @@ import ApolloClient from 'apollo-client';
 import { AppRoutes } from "../../routes";
 import { Main } from "../pages";
 import { Route, Redirect } from "react-router-dom";
+
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

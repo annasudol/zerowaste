@@ -3,16 +3,17 @@ const Recipe = require('../../database/models/recipe');
 const { isValidObjectId } = require('../../database/util');
 
 module.exports.isAuthenticated = (_, __, { email }) => {
+
   if (!email) {
     throw new Error('Access Denied! Please login to continue');
   }
   return skip;
 }
 
-module.exports.isRecipeOwner = async (_, { id }, { loggedInUserId }) => {
+module.exports.isTaskOwner = async (_, { id }, { loggedInUserId }) => {
   try {
     if (!isValidObjectId(id)) {
-      throw new Error('Invalid Task id');
+      throw new Error('Invalid Recipe id');
     }
     const recipe = await Recipe.findById(id);
     if (!recipe) {

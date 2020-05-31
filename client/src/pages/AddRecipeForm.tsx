@@ -6,8 +6,8 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 const ADD_RECIPE = gql`
-  mutation AddRecipe($title: String!, $image: String, $readyInMinutes: Int!, $ingredients: [String!]!, $detailedIngredients: [String!]!, $steps: [String!], $sourceUrl: String $author: String, $authorId: String) {
-    createRecipe(title: $title, image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, steps: $steps, sourceUrl: $sourceUrl, author: $author, authorId: $authorId) {
+  mutation CreateRecipe($title: String! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $steps: [String!]! $sourceUrl: String) {
+    createRecipe(title: $title, image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, steps: $steps, sourceUrl: $sourceUrl) {
         id
         title
     }
@@ -30,8 +30,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
             setEmptyInput(true)
         } else {
             setEmptyInput(false)
-            console.log({ title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl });
-            createRecipe({ variables: { title, image: 'https://spoonacular.com/recipeImages/543832-556x370.jpg', readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl } },
+            createRecipe({ variables: { title, image: "https://spoonacular.com/recipeImages/543832-556x370.jpg", readyInMinutes, ingredients, detailedIngredients, steps } },
             );
             history.push({ pathname: `/recipe/${data.createRecipe.id}` });
         }
@@ -40,7 +39,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
 
 
     if (error) {
-        return (<ErrorMessage message={typeof error === 'string' ? error : 'Error with adding recipe, please try later'} />)
+        return (<ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>)
     }
 
     return (

@@ -19,6 +19,7 @@ class DataAPI extends RESTDataSource {
     }
     detailedRecipeReducer(recipe) {
         const detailedIngredients = recipe.extendedIngredients?.map(ingredient => ingredient.originalString);
+
         return {
             id: recipe.id,
             title: recipe.title,
@@ -30,8 +31,8 @@ class DataAPI extends RESTDataSource {
         };
     }
 
-    async getAllRecipes(query, numberOfResults = 30) {
-        const responses = await this.get('findByIngredients', { ingredients: query.join(',+'), apiKey: app_key, numberOfResults });
+    async getAllRecipes(query) {
+        const responses = await this.get('findByIngredients', { ingredients: query.join(',+'), apiKey: app_key });
         return Array.isArray(responses)
             ? responses.map(response => this.basicRecipeReducer(response))
             : [];

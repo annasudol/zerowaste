@@ -10,8 +10,7 @@ module.exports = gql`
       name: String!
       email: String!
       password: String!
-      ): User
-
+    ): User
     login(email: String! password: String!): Token
   }
 
@@ -34,7 +33,7 @@ module.exports = gql`
     id: ID!
     name: String!
     email: String!
-    recipes: [RecipeDetails!]
+    recipes: [Recipe!]
     createdAt: Date!
     updatedAt: Date!
   }

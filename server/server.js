@@ -3,13 +3,16 @@ const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
 const Dataloader = require('dataloader');
+const jwt = require('jsonwebtoken');
+
 const resolvers = require('./resolvers');
 const typeDefs = require('./typeDefs');
 const connection = require('./database/util');
-const { verifyUser } = require('./helper/context');
 const loaders = require('./loaders');
-
+const User = require('./database/models/user');
 const DataAPI = require('./database/dataAPI');
+
+
 // set env variables
 dotEnv.config();
 
@@ -27,18 +30,29 @@ app.use(express.json());
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req, connection }) => {
-    const contextObj = {};
-    if (req) {
-      // console.log(req, "req")
-      await verifyUser(req)
-      contextObj.email = req.email;
-      contextObj.loggedInUserId = req.loggedInUserId;
+  context: async ({ req }) => {
+    try {
+      const header = await req.headers;
+      const bearerHeader = await header.authorization;
+      if (bearerHeader) {
+        const token = bearerHeader.split(' ')[1];
+        const payload = jwt.verify(token, 'mysecretkey');
+
+        const user = await User.findOne({ email: payload.email });
+        // console.log({ user }, "email: user.email, userId: user._id, user")
+        return { user }
+      }
+    } catch (error) {
+      if (error instanceof jwt.JsonWebTokenError) {
+        return attemptRenewal()
+      }
+
+      console.log(error);
+      throw error;
     }
-    contextObj.loaders = {
-      user: new Dataloader(keys => loaders.user.batchUsers(keys))
-    };
-    return contextObj;
+    // contextObj.loaders = {
+    //   user: new Dataloader(keys => loaders.user.batchUsers(keys))
+    // };
   },
   dataSources: () => ({
     dataAPI: new DataAPI()
@@ -48,6 +62,10 @@ const apolloServer = new ApolloServer({
       message: error.message
     };
   }
+
+
+
+
 });
 
 apolloServer.applyMiddleware({ app, path: '/graphql' });
