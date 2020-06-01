@@ -3,7 +3,6 @@ const { combineResolvers } = require('graphql-resolvers');
 const Recipe = require('../database/models/recipe');
 const User = require('../database/models/user');
 const { isAuthenticated, isRecipeOwner } = require('./middleware');
-const { dataToString, paginateResults } = require('../helper');
 
 module.exports = {
   Query: {

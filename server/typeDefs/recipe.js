@@ -14,7 +14,7 @@ module.exports = gql`
       readyInMinutes: Int!
       ingredients: [String!]!
       detailedIngredients: [String!]!
-      steps: [String!]!
+      instructions: String!
       sourceUrl: String
     ): RecipeDetails!
     # updateRecipe(id: ID!, input: updateRecipeInput!): Recipe
@@ -39,7 +39,7 @@ module.exports = gql`
     image: String!
     detailedIngredients: [String!]!
     readyInMinutes: Int
-    steps: [String]
+    instructions: String
     user: User
     author: String
     sourceUrl: String

@@ -3,7 +3,7 @@ import { TextField } from "@material-ui/core";
 
 interface DetailedIngredientSelectProps {
     saveItem(text: string): void
-    placeholder: string
+    placeholder?: string
     textarea?: boolean
 }
 

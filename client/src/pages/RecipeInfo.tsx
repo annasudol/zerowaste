@@ -68,7 +68,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                     <Image src={image} alt={`${title}'s image`} size="medium" />
                     <div>
                         <h3 className="font-roboto text-darkGray mb-0">Ingredients:</h3>
-                        {detailedIngredients.map(ingredient => <p>{ingredient}</p>)}
+                        {detailedIngredients.map((ingredient: string, index: number) => <p key={index}>{ingredient}</p>)}
                         <Button href={sourceUrl} >source link</Button>
                     </div>
                 </div>
