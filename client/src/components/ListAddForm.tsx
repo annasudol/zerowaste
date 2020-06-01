@@ -1,11 +1,12 @@
 import * as React from "react";
-import { TextField, makeStyles } from "@material-ui/core";
-import { Button } from '.'
+import { TextField } from "@material-ui/core";
+
 interface DetailedIngredientSelectProps {
     saveItem(text: string): void
     placeholder: string
     textarea?: boolean
 }
+
 export const ListAddForm: React.FunctionComponent<DetailedIngredientSelectProps> = ({ saveItem, placeholder, textarea }) => {
     const [item, setItem] = React.useState<string>('');
     return (

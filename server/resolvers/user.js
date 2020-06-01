@@ -10,7 +10,8 @@ const { userEvents } = require('../subscription/events');
 
 module.exports = {
   Query: {
-    user: combineResolvers(isAuthenticated, async (_, __, { email }) => {
+    user: combineResolvers(isAuthenticated, async (_, __, { user }) => {
+      const email = user?.email;
       try {
         const user = await User.findOne({ email });
         if (!user) {
@@ -24,7 +25,7 @@ module.exports = {
     })
   },
   Mutation: {
-    signup: async (_, input) => {
+    signUpUser: async (_, input) => {
       try {
         const user = await User.findOne({ email: input.email });
         if (user) {

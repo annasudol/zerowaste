@@ -34,12 +34,15 @@ const apolloServer = new ApolloServer({
     try {
       const header = await req.headers;
       const bearerHeader = await header.authorization;
+      const contextObj = {};
       if (bearerHeader) {
         const token = bearerHeader.split(' ')[1];
         const payload = jwt.verify(token, 'mysecretkey');
 
         const user = await User.findOne({ email: payload.email });
-        // console.log({ user }, "email: user.email, userId: user._id, user")
+        contextObj.loaders = {
+          user: new Dataloader(keys => loaders.user.batchUsers(keys))
+        };
         return { user }
       }
     } catch (error) {
@@ -50,9 +53,7 @@ const apolloServer = new ApolloServer({
       console.log(error);
       throw error;
     }
-    // contextObj.loaders = {
-    //   user: new Dataloader(keys => loaders.user.batchUsers(keys))
-    // };
+
   },
   dataSources: () => ({
     dataAPI: new DataAPI()

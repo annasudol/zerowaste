@@ -7,9 +7,7 @@ const { dataToString, paginateResults } = require('../helper');
 
 module.exports = {
   Query: {
-    // recipes: combineResolvers(isAuthenticated, async (_, { cursor, pageSize = 10 }, { loggedInUserId }) => {
-
-    recipes: async (_, { ingredients, cursor, pageSize = 5 }, { dataSources, user }) => {
+    recipes: async (_, { ingredients, cursor, pageSize = 5 }, { dataSources }) => {
       try {
         const recipesDB = await Recipe.find({});
         const filteredRecipesDB = await recipesDB.filter(recipe => {
@@ -38,8 +36,9 @@ module.exports = {
       }
     },
     recipeDetails: async (_, { id }, { dataSources }) => {
+      console.log(id, "id")
       try {
-        console.log(id, "id")
+
         const recipeFromDb = await Recipe.findById(id);
         return recipeFromDb ? recipeFromDb : dataSources.dataAPI.getRecipeDetails(id)
       } catch (error) {
@@ -47,42 +46,9 @@ module.exports = {
         throw error;
       }
     },
-    // recipes: combineResolvers(isAuthenticated, async (_, { cursor, pageSize = 10 }, { loggedInUserId }) => {
-    //   try {
-    //     const query = { user: loggedInUserId };
-    //     if (cursor) {
-    //       query['_id'] = {
-    //         '$lt': base64ToString(cursor)
-    //       }
-    //     };
-    // let recipes = await Recipe.find(query).sort({ _id: -1 }).pageSize(pageSize + 1);
-    // const hasNextPage = recipes.length > pageSize;
-    // recipes = hasNextPage ? recipes.slice(0, -1) : recipes;
-    // return {
-    //   recipeFeed: recipes,
-    //   pageInfo: {
-    //     nextPageCursor: hasNextPage ? stringToBase64(recipes[recipes.length - 1].id) : null,
-    //     hasNextPage
-    //   }
-    // };
-    //   } catch (error) {
-    //     console.log(error);
-    //     throw error;
-    //   }
-    // }),
-    recipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }) => {
-      try {
-        const recipe = await Recipe.findById(id);
-        return recipe;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    }),
   },
   Mutation: {
     createRecipe: combineResolvers(isAuthenticated, async (_, input, { user }) => {
-      console.log(user.email, "user.email");
       try {
         const user = await User.findOne({ email: user.email });
         console.log(user, "user, user");
@@ -98,36 +64,38 @@ module.exports = {
         throw error;
       }
     }),
-    updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id, input }) => {
-      try {
-        const recipe = await Recipe.findByIdAndUpdate(id, { ...input }, { new: true });
-        return recipe;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    }),
-    deleteRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }, { loggedInUserId }) => {
-      try {
-        const recipe = await Recipe.findByIdAndDelete(id);
-        await User.updateOne({ _id: loggedInUserId }, { $pull: { recipes: recipe.id } });
-        return recipe;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    })
   },
-  // Recipe: {
-  //   user: async (parent, _, { loaders }) => {
+  //   updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id, input }) => {
   //     try {
-  //       /* const user = await User.findById(parent.user); */
-  //       const user = await loaders.user.load(parent.user.toString());
-  //       return user;
+  //       const recipe = await Recipe.findByIdAndUpdate(id, { ...input }, { new: true });
+  //       return recipe;
   //     } catch (error) {
   //       console.log(error);
   //       throw error;
   //     }
-  //   }
-  // }
+  //   }),
+  //   deleteRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }, { loggedInUserId }) => {
+  //     try {
+  //       const recipe = await Recipe.findByIdAndDelete(id);
+  //       await User.updateOne({ _id: loggedInUserId }, { $pull: { recipes: recipe.id } });
+  //       return recipe;
+  //     } catch (error) {
+  //       console.log(error);
+  //       throw error;
+  //     }
+  //   })
+  // },
+  Recipe: {
+    user: async (parent, _, { loaders }) => {
+      console.log(parent, "parent")
+      // try {
+      //   /* const user = await User.findById(parent.user); */
+      //   // const user = await loaders.user.load(parent.user.toString());
+      //   return user;
+      // } catch (error) {
+      //   console.log(error);
+      //   throw error;
+      // }
+    }
+  }
 }

@@ -19,13 +19,16 @@ class DataAPI extends RESTDataSource {
     }
     detailedRecipeReducer(recipe) {
         const detailedIngredients = recipe.extendedIngredients?.map(ingredient => ingredient.originalString);
+        console.log(recipes, "response")
 
         return {
             id: recipe.id,
+            servings: recipe.servings,
             title: recipe.title,
             image: recipe.image,
-            readyInMinutes: recipe.readyInMinutes,
             detailedIngredients,
+            readyInMinutes: recipe.readyInMinutes,
+            steps: recipe.instructions,
             author: recipe.sourceName,
             sourceUrl: recipe.sourceUrl
         };
@@ -39,6 +42,7 @@ class DataAPI extends RESTDataSource {
     }
     async getRecipeDetails(id) {
         const response = await this.get(`${id}/information?includeNutrition=false&apiKey=${app_key}`);
+        console.log(response, "response")
         return this.detailedRecipeReducer(response)
     }
 

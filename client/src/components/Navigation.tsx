@@ -15,7 +15,9 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
     </ul>);
     const loggedOut = (<ul>
         <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
-        <li> <Button className="text-white" to={AppRoutes.LoginSignUp}>Login/<br></br>Sign Up</Button></li>
+        <li><Button className="text-white" to={AppRoutes.Login}>Login</Button></li>
+        <li><Button className="text-white" to={AppRoutes.SignUp}>Sign up</Button></li>
+
     </ul>)
 
     return (

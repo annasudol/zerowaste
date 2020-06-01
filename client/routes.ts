@@ -3,6 +3,7 @@ export const AppRoutes = {
     RecipesList: '/recipes',
     Recipe: '/recipe/:recipeID',
     AddRecipe: '/addRecipe',
-    LoginSignUp: '/login',
+    Login: '/login',
+    SignUp: '/signUp',
     User: '/user',
 };

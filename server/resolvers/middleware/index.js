@@ -2,9 +2,8 @@ const { skip } = require('graphql-resolvers');
 const Recipe = require('../../database/models/recipe');
 const { isValidObjectId } = require('../../database/util');
 
-module.exports.isAuthenticated = (_, __, { email }) => {
-
-  if (!email) {
+module.exports.isAuthenticated = (_, __, { user }) => {
+  if (!user) {
     throw new Error('Access Denied! Please login to continue');
   }
   return skip;

@@ -1,4 +1,5 @@
 export * from './App';
+export * from './Auth';
 export * from './AutocompleteIngredients';
 export * from './Navigation';
 export * from './ListUI';

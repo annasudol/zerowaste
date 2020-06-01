@@ -17,7 +17,7 @@ const ADD_RECIPE = gql`
 export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState();
     const { steps, addStep, deleteStep } = useStepsState();
-    const { title, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState();
+    const { title, servings, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState();
     const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
     const [createRecipe, { data, error }] = useMutation(ADD_RECIPE);
     const history = useHistory();
@@ -30,7 +30,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
             setEmptyInput(true)
         } else {
             setEmptyInput(false)
-            createRecipe({ variables: { title, image: "https://spoonacular.com/recipeImages/543832-556x370.jpg", readyInMinutes, ingredients, detailedIngredients, steps } },
+            createRecipe({ variables: { title, servings, image: "https://spoonacular.com/recipeImages/543832-556x370.jpg", readyInMinutes, ingredients, detailedIngredients, steps, sourceUrl } },
             );
             history.push({ pathname: `/recipe/${data.createRecipe.id}` });
         }
@@ -50,6 +50,11 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
                     <form onSubmit={(e): any => handleSubmit(e)}>
                         {emptyInput && title === '' && <ErrorMessage validationMessage='Add title' />}
                         <input name="title" type="text" placeholder="Title" className="mt-2 mb-2" value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>): void => dispatch({ TYPE: 'ADD_TITLE', setTitle: e.target.value })} />
+                        <input name="servings" type="number" placeholder="Servings" className="mt-2 mb-2" value={servings}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                                const val = parseInt(e.target.value, 10);
+                                if (val > 0) dispatch({ TYPE: 'ADD_SERVINGS', setServings: val })
+                            }} />
                         {emptyInput && readyInMinutes === 0 && <ErrorMessage validationMessage='Add preparation time' />}
                         <input name="readyInMinutes" type="number" placeholder="Ready In Minutes" className="mt-2 mb-2" value={readyInMinutes}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {

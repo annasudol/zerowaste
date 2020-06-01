@@ -47,7 +47,7 @@ export const RecipesList: React.FunctionComponent = () => {
               variables: {
                 after: data.recipes.nextPageCursor,
               },
-              updateQuery: (prev, { fetchMoreResult, ...rest }) => {
+              updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult) return prev;
                 return {
                   ...fetchMoreResult,

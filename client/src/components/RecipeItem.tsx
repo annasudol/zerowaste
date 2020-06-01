@@ -2,7 +2,7 @@ import * as React from "react";
 import { Image, Button } from '../components';
 
 
-interface RecipeItemProps {
+export interface RecipeItemProps {
     id: string
     title: string
     image: string

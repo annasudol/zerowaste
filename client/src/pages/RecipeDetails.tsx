@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { AppRoutes } from "../../routes";
 
 const GET_RECIPE_DETAILS = gql`
-  query GetRecipesDetails($id: String!) {
+  query RecipeDetails($id: String!) {
     recipeDetails(id: $id) {
         id,
         title,
@@ -28,6 +28,7 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
     );
+    // console.log(data, "data", recipeID)
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
@@ -36,7 +37,6 @@ export const RecipeDetails: React.FunctionComponent = (): React.ReactElement => 
     const backRecipes = (): void => {
         return history.push({ pathname: AppRoutes.RecipesList });
     }
-
     return (
         <div className="content">
             <div className="max-w-md p-4">

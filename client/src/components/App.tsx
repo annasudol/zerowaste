@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Navigation } from "../components";
-import { Auth, Main, RecipesList, AddRecipeForm, RecipeDetails, UserInfo } from "../pages";
+import { Login, SignUp, Main, RecipesList, AddRecipeForm, RecipeDetails, UserInfo } from "../pages";
 
 import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
+import { ErrorMessage } from './ErrorMessage';
 
 
 export const App: React.FunctionComponent = () => {
     const token = window.localStorage.getItem('token');
-    console.log(token)
 
     return (
         <>
@@ -17,12 +17,21 @@ export const App: React.FunctionComponent = () => {
                 <Route path={AppRoutes.Home} component={Main} exact />
                 <Route path={AppRoutes.RecipesList} component={RecipesList} />
                 <Route path={AppRoutes.Recipe} component={RecipeDetails} />
-                {!token ? <Route path={AppRoutes.LoginSignUp} component={Auth} /> : (
+
+                {!token ? (
                     <>
-                        <Route path={AppRoutes.User} component={UserInfo} />
-                        <Route path={AppRoutes.AddRecipe} component={AddRecipeForm} />
+                        <Route path={AppRoutes.Login} component={Login} />
+                        <Route path={AppRoutes.SignUp} component={SignUp} />
                     </>
-                )}
+                ) : (
+                        <>
+                            <Route path={AppRoutes.User} component={UserInfo} />
+                            <Route path={AppRoutes.AddRecipe} component={AddRecipeForm} />
+                        </>
+                    )}
+                <Route path="*">
+                    <ErrorMessage message="page not found" />
+                </Route>
             </Switch>
         </>
     )
