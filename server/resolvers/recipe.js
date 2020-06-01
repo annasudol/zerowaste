@@ -7,7 +7,7 @@ const { dataToString, paginateResults } = require('../helper');
 
 module.exports = {
   Query: {
-    recipes: async (_, { ingredients, cursor, pageSize = 5 }, { dataSources }) => {
+    recipes: async (_, { ingredients }, { dataSources }) => {
       try {
         const recipesDB = await Recipe.find({});
         const filteredRecipesDB = await recipesDB.filter(recipe => {
@@ -18,18 +18,9 @@ module.exports = {
 
         const allRecipesREST = await dataSources.dataAPI.getAllRecipes(ingredients);
         let recipes = [...filteredRecipesDB, ...allRecipesREST];
-        const recipesSliced = await paginateResults({
-          cursor,
-          pageSize,
-          results: recipes,
-        });
-        const lastSlicedRecipeId = recipesSliced.length ? dataToString(recipesSliced[recipesSliced.length - 1].id) : null
+        console.log(recipes, "recipes")
 
-        return {
-          recipes: recipesSliced !== null ? recipesSliced : [],
-          nextPageCursor: lastSlicedRecipeId !== dataToString(recipes[recipes.length - 1].id) ? lastSlicedRecipeId : null,
-
-        };
+        return recipes;
       } catch (error) {
         console.log(error);
         throw error;

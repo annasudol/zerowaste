@@ -2,14 +2,11 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
   extend type Query {
-    recipes(ingredients: [String!]! cursor: String limit: Int): RecipeFeed!
+    recipes(ingredients: [String!]!): [Recipe]!
     recipeDetails(id: ID!): RecipeDetails!
   }
 
-  type RecipeFeed {
-    recipes: [Recipe]
-    nextPageCursor: String
-  }
+
 
 
   extend type Mutation {

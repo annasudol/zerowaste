@@ -7,15 +7,12 @@ import { useSelector } from 'react-redux';
 import { getProducts } from '../state/products/selectors';
 
 const GET_RECIPES = gql`
-  query GetRecipes($ingredients: [String!]! $cursor: String) {
-    recipes(ingredients: $ingredients cursor: $cursor) {
-     recipes {
+  query GetRecipes($ingredients: [String!]!) {
+    recipes(ingredients: $ingredients) {
         id
         title
         image
         ingredients
-     }
-     nextPageCursor
     }
   }
 `;
@@ -24,7 +21,7 @@ const GET_RECIPES = gql`
 export const RecipesList: React.FunctionComponent = () => {
 
   const ingredients = useSelector(getProducts);
-  const { data, loading, error, fetchMore } = useQuery(
+  const { data, loading, error } = useQuery(
     GET_RECIPES,
     { variables: { ingredients } }
   );
@@ -37,35 +34,7 @@ export const RecipesList: React.FunctionComponent = () => {
       <SearchRecipesForm btnText='Update Results' />
     </div>
     <div className="flex-col list">
-      {data.recipes.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
-      {data.recipes.nextPageCursor !== null && (
-        <Button
-          color="coral"
-          className="mb-4"
-          onClick={() =>
-            fetchMore({
-              variables: {
-                after: data.recipes.nextPageCursor,
-              },
-              updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
-                return {
-                  ...fetchMoreResult,
-                  recipes: {
-                    ...fetchMoreResult.recipes,
-                    recipes: [
-                      ...prev.recipes.recipes,
-                      ...fetchMoreResult.recipes.recipes,
-                    ],
-                  },
-                };
-              },
-            })
-          }
-        >
-          Load More
-        </Button>
-      )}
+      {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
     </div>
   </div>)
 

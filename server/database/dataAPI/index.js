@@ -19,7 +19,6 @@ class DataAPI extends RESTDataSource {
     }
     detailedRecipeReducer(recipe) {
         const detailedIngredients = recipe.extendedIngredients?.map(ingredient => ingredient.originalString);
-        console.log(recipes, "response")
 
         return {
             id: recipe.id,
