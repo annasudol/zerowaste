@@ -21,7 +21,6 @@ type Inputs = {
     password: string
 }
 
-
 export const Login: React.FunctionComponent = (): React.ReactElement => {
     const history = useHistory();
 
@@ -35,6 +34,8 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
             onCompleted({ login }) {
                 localStorage.setItem('token', login.token);
                 client.writeData({ data: { isLoggedIn: true } });
+                window.location.reload(false)
+                s
             }
         }
     );

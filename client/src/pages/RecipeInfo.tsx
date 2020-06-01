@@ -4,32 +4,27 @@ import { useParams, useHistory } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { AppRoutes } from "../../routes";
-
-// const GET_RECIPE_DETAILS = gql`
-//   query GetRecipe($id: String!) {
-//     recipe(id: $id) {
-//         id,
-//         title,
-//     }
-//   }
-// `;
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
     recipe(id: $id) {
-        id,
-        title,
-        servings,
-        image,
-        readyInMinutes,
-        detailedIngredients,
-        author,
-        sourceUrl,
+        title
+        servings
+        image
+        readyInMinutes
+        detailedIngredients
+        author
+        sourceUrl
+        instructions
+        user{
+            name
+        }
     }
   }
 `;
 
-export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
+export const RecipeInfo: React.FunctionComponent<> = (): React.ReactElement => {
     const { recipeID } = useParams();
     const history = useHistory();
 
@@ -45,12 +40,12 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const backRecipes = (): void => {
         return history.push({ pathname: AppRoutes.RecipesList });
     }
-    const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl } = data.recipe;
-    const headerInfo = [{ text: "Ready in: ", value: readyInMinutes }, { text: "author ", value: author }, { text: "Servings: ", value: servings }]
+    const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
+    const headerInfo = [{ text: "Ready in: ", value: readyInMinutes }, { text: "author ", value: author ? author : user?.name }, { text: "Servings: ", value: servings }]
     return (
         <div className="content">
             <div className="max-w-md p-4">
-                <Button onClick={backRecipes} color="coral">back to results</Button>
+                <Button onClick={backRecipes} color="coral"><BackspaceIcon /></Button>
                 <h2 className="font-bebas uppercase text-darkGray mb-0">{title}</h2>
                 {headerInfo.map((item, index) => {
                     if (item.value) {
@@ -59,7 +54,6 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                                 <p className="font-roboto text-darkGray inline">{item.text} </p>
                                 <p className="font-roboto text-green inline">{item.value}</p><br></br>
                             </React.Fragment>
-
                         )
                     }
                 })}
@@ -67,9 +61,15 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                 <div className="flex flex-col justify-center items-start md:flex-row-reverse md:justify-between">
                     <Image src={image} alt={`${title}'s image`} size="medium" />
                     <div>
-                        <h3 className="font-roboto text-darkGray mb-0">Ingredients:</h3>
-                        {detailedIngredients.map((ingredient: string, index: number) => <p key={index}>{ingredient}</p>)}
-                        <Button href={sourceUrl} >source link</Button>
+                        <h3 className="font-roboto text-darkGray mb-0 mt-4">Ingredients:</h3>
+                        <ol className="font-roboto text-darkGray ml-4">{detailedIngredients.map((ingredient: string, index: number) => <li key={index}>{ingredient}</li>)}</ol>
+                        {instructions && (
+                            <>
+                                <h3 className="font-roboto text-darkGray mb- mt-4">Instructions:</h3>
+                                <p className="font-roboto inline">{instructions}</p>
+                            </>
+                        )}
+                        {sourceUrl && <Button href={sourceUrl} >source link</Button>}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ export const App: React.FunctionComponent = () => {
 
     return (
         <>
-            <Navigation />
+            <Navigation token={token} />
             <Switch>
                 <Route path={AppRoutes.Home} component={Main} exact />
                 <Route path={AppRoutes.RecipesList} component={RecipesList} />

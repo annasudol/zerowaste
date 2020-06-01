@@ -69,17 +69,17 @@ module.exports = {
   //     }
   //   })
   // },
-  Recipe: {
+  RecipeDetails: {
     user: async (parent, _, { loaders }) => {
       console.log(parent, "parent")
-      // try {
-      //   /* const user = await User.findById(parent.user); */
-      //   // const user = await loaders.user.load(parent.user.toString());
-      //   return user;
-      // } catch (error) {
-      //   console.log(error);
-      //   throw error;
-      // }
+      try {
+        const user = await User.findById(parent.user);
+        // const user = await loaders.user.load(parent.user.toString());
+        return user;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
     }
   }
 }

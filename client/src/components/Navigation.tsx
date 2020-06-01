@@ -5,20 +5,31 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { Button } from '../components';
 import { AppRoutes } from '../../routes';
 
-export const Navigation: React.FunctionComponent = (): React.ReactElement => {
+export const Navigation: React.FunctionComponent<{ token: string | null }> = ({ token }): React.ReactElement => {
     const [open, toggleOpen] = React.useState(false);
-    const token = localStorage.getItem('token')
-    const loggedIn = (<ul>
-        <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
-        <li><Button className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</Button></li>
-        <li><Button className="text-white" to={AppRoutes.User}>Account</Button></li>
-    </ul>);
+    const logout = (): void => {
+        window.location.reload(false)
+        localStorage.removeItem('token')
+    }
+
+
+    const loggedIn = (<>
+        <ul>
+            <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
+            <li><Button className="text-white" to={AppRoutes.AddRecipe}>Add Recipe</Button></li>
+            <li><Button className="text-white" to={AppRoutes.User}>Account</Button></li>
+        </ul>
+    </>);
     const loggedOut = (<ul>
         <li><Button className="text-white" to={AppRoutes.Home}>Home</Button></li>
         <li><Button className="text-white" to={AppRoutes.Login}>Login</Button></li>
         <li><Button className="text-white" to={AppRoutes.SignUp}>Sign up</Button></li>
 
     </ul>)
+    const nav = React.useMemo(() => {
+        return token ? loggedIn : loggedOut
+
+    }, [token])
 
     return (
         <>
@@ -26,8 +37,9 @@ export const Navigation: React.FunctionComponent = (): React.ReactElement => {
             <div className={cx(open ? 'opened-nav' : 'closed-nav')}>
                 <nav className="nav">
                     <button onClick={(): any => toggleOpen(false)} className="outline-none border-none bg-transparent m-0 p-0 border-0 lg:hidden"><CancelIcon style={{ color: '#fff' }} /></button>
-                    {token && <button onClick={(): void => localStorage.removeItem('token')}>logout</button>}
-                    {token ? loggedIn : loggedOut}
+                    {nav}
+                    {token && <Button onClick={logout} color="coral">logout</Button>}
+
                 </nav>
             </div>
         </>
