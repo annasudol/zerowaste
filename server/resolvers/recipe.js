@@ -26,15 +26,11 @@ module.exports = {
       }
     },
     recipe: async (_, { id }, { dataSources }) => {
-      console.log(id, "id")
       try {
-
-        // const recipeFromDb = await Recipe.findById(id);
-        const recipeAPI = await dataSources.dataAPI.getRecipeDetails(id)
-        console.log(recipeAPI, "recipeApi")
-        return recipeAPI
+        const recipeDB = (await Recipe.find({})).filter(recipe => recipe.id === id);
+        return recipeDB.length ? recipeDB[0] : dataSources.dataAPI.getRecipeDetails(id)
       } catch (error) {
-        console.log(error);
+        console.error(error);
         throw error;
       }
     },
@@ -43,8 +39,6 @@ module.exports = {
     createRecipe: combineResolvers(isAuthenticated, async (_, input, { email }) => {
       try {
         const user = await User.findOne({ email });
-        console.log(user)
-
         const recipe = new Recipe({ ...input, user: user.id });
         const result = await recipe.save();
         user.recipes.push(result.id);

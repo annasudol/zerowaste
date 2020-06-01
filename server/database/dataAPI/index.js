@@ -41,6 +41,7 @@ class DataAPI extends RESTDataSource {
     }
     async getRecipeDetails(id) {
         const response = await this.get(`${id}/information?includeNutrition=false&apiKey=${app_key}`);
+
         return this.detailedRecipeReducer(response)
     }
 

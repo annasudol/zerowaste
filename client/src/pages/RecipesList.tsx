@@ -34,7 +34,7 @@ export const RecipesList: React.FunctionComponent = () => {
       <SearchRecipesForm btnText='Update Results' />
     </div>
     <div className="flex-col list">
-      {data.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
+      {data.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
     </div>
   </div>)
 
