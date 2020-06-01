@@ -6,10 +6,9 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 const ADD_RECIPE = gql`
-  mutation CreateRecipe($title: String! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $steps: [String!]! $sourceUrl: String) {
-    createRecipe(title: $title, image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, steps: $steps, sourceUrl: $sourceUrl) {
+  mutation CreateRecipe($title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $steps: [String!]! $sourceUrl: String) {
+    createRecipe(title: $title, servings: $servings image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, steps: $steps, sourceUrl: $sourceUrl) {
         id
-        title
     }
   }
 `;
@@ -50,6 +49,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
                     <form onSubmit={(e): any => handleSubmit(e)}>
                         {emptyInput && title === '' && <ErrorMessage validationMessage='Add title' />}
                         <input name="title" type="text" placeholder="Title" className="mt-2 mb-2" value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>): void => dispatch({ TYPE: 'ADD_TITLE', setTitle: e.target.value })} />
+                        <label>Servings</label>
                         <input name="servings" type="number" placeholder="Servings" className="mt-2 mb-2" value={servings}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                                 const val = parseInt(e.target.value, 10);

@@ -18,7 +18,6 @@ module.exports = {
 
         const allRecipesREST = await dataSources.dataAPI.getAllRecipes(ingredients);
         let recipes = [...filteredRecipesDB, ...allRecipesREST];
-        console.log(recipes, "recipes")
 
         return recipes;
       } catch (error) {
@@ -26,12 +25,14 @@ module.exports = {
         throw error;
       }
     },
-    recipeDetails: async (_, { id }, { dataSources }) => {
+    recipe: async (_, { id }, { dataSources }) => {
       console.log(id, "id")
       try {
 
-        const recipeFromDb = await Recipe.findById(id);
-        return recipeFromDb ? recipeFromDb : dataSources.dataAPI.getRecipeDetails(id)
+        // const recipeFromDb = await Recipe.findById(id);
+        const recipeAPI = await dataSources.dataAPI.getRecipeDetails(id)
+        console.log(recipeAPI, "recipeApi")
+        return recipeAPI
       } catch (error) {
         console.log(error);
         throw error;
@@ -39,14 +40,13 @@ module.exports = {
     },
   },
   Mutation: {
-    createRecipe: combineResolvers(isAuthenticated, async (_, input, { user }) => {
+    createRecipe: combineResolvers(isAuthenticated, async (_, input, { email }) => {
       try {
-        const user = await User.findOne({ email: user.email });
-        console.log(user, "user, user");
+        const user = await User.findOne({ email });
+        console.log(user)
 
         const recipe = new Recipe({ ...input, user: user.id });
         const result = await recipe.save();
-        console.log(result);
         user.recipes.push(result.id);
         await recipe.save();
         return result;

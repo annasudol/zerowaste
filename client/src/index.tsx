@@ -24,7 +24,8 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
     headers: {
       authorization: token ? `Bearer ${token}` : ''
     },
-  })
+  }),
+  connectToDevTools: true
 });
 
 cache.writeData({

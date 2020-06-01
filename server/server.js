@@ -43,7 +43,7 @@ const apolloServer = new ApolloServer({
         contextObj.loaders = {
           user: new Dataloader(keys => loaders.user.batchUsers(keys))
         };
-        return { user }
+        return { user, email: user.email, userId: user.id }
       }
     } catch (error) {
       if (error instanceof jwt.JsonWebTokenError) {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navigation } from "../components";
-import { Login, SignUp, Main, RecipesList, AddRecipeForm, RecipeDetails, UserInfo } from "../pages";
+import { Login, SignUp, Main, RecipesList, AddRecipeForm, RecipeInfo, UserInfo } from "../pages";
 
 import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
@@ -16,7 +16,7 @@ export const App: React.FunctionComponent = () => {
             <Switch>
                 <Route path={AppRoutes.Home} component={Main} exact />
                 <Route path={AppRoutes.RecipesList} component={RecipesList} />
-                <Route path={AppRoutes.Recipe} component={RecipeDetails} />
+                <Route path={AppRoutes.Recipe} component={RecipeInfo} />
 
                 {!token ? (
                     <>
