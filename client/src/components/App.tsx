@@ -27,6 +27,7 @@ export const App: React.FunctionComponent = () => {
                         <>
                             <Route path={AppRoutes.User} component={UserInfo} />
                             <Route path={AppRoutes.AddRecipe} component={AddRecipeForm} />
+                            <Route path={AppRoutes.EditRecipe} component={EditRecipeForm} />
                         </>
                     )}
                 <Route path="*">

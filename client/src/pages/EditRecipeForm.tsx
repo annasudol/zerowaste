@@ -1,13 +1,14 @@
 import * as React from "react";
 import { List, ErrorMessage, ListAddForm, AutocompleteIngredients, LoadingBar, Button } from '../components'
 import { useDetailedIngredientState, useRecipeFormState } from "../hooks";
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { isUrlValid } from "../utils/validUrl";
 import { Redirect } from "react-router";
 import cx from 'classnames';
-import { LocationTypes } from "../utils/types";
+import BackspaceIcon from '@material-ui/icons/Backspace';
+import { AppRoutes } from "../../routes";
 
 const UPDATE_RECIPE = gql`
   mutation UpdateRecipe($id: ID! $title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $instructions: String! $sourceUrl: String) {
@@ -16,6 +17,15 @@ const UPDATE_RECIPE = gql`
     }
   }
 `;
+
+export interface LocationTypes {
+    hash?: string
+    pathname: string
+    search?: string
+    state: RecipeProps
+    key?: string
+}
+
 interface RecipeProps {
     id: string
     title: string
@@ -31,14 +41,18 @@ interface EditRecipeFormProps {
     initialState: RecipeProps
 }
 
-export const EditRecipeForm: React.FunctionComponent<EditRecipeFormProps> = ({ initialState }): React.ReactElement | any => {
+export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | any => {
+    const location: LocationTypes = useLocation();
+    const initialState = location.state
     const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState(initialState.detailedIngredients);
     const { title, instructions, servings, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState({ title: initialState.title, servings: initialState.servings, ingredients: initialState.ingredients, readyInMinutes: initialState.readyInMinutes, sourceUrl: initialState.sourceUrl, instructions: initialState.instructions });
     const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
     const [updateRecipe, { data, error, loading }] = useMutation(UPDATE_RECIPE);
 
+    const history = useHistory();
 
-    const handleSubmit = (event): any => {
+
+    const handleSubmit = (event: any): any => {
         event.preventDefault();
         if (title === "" || readyInMinutes === 0 || ingredients.length === 0 || detailedIngredients.length === 0 || instructions.length === 0) {
             setEmptyInput(true)
@@ -58,7 +72,10 @@ export const EditRecipeForm: React.FunctionComponent<EditRecipeFormProps> = ({ i
     }
     return (
         <div className="content">
+            <Button className="mt-4" color="coral" onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon /></Button>
+
             <div className="flex justify-center items-center">
+
                 <div className="w-1/2 recipe-form pb-4 pt-4">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Edit Recipe</h1>
                     <form onSubmit={(e): any => handleSubmit(e)}>
@@ -116,6 +133,6 @@ export const EditRecipeForm: React.FunctionComponent<EditRecipeFormProps> = ({ i
                     </form>
                 </div>
             </div>
-        </div>
+        </div >
     )
 };
