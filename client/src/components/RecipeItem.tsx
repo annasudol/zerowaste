@@ -3,9 +3,7 @@ import { Image, Button, ErrorMessage, DialogDeleteRecipe } from '../components';
 
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { AppRoutes } from '../../routes';
 import { Redirect, useHistory } from "react-router";
-import { EditRecipeForm } from '../pages/EditRecipeForm';
 
 
 const GET_RECIPE_DETAILS = gql`
@@ -36,19 +34,14 @@ export interface RecipeItemProps {
 }
 
 export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
-
     const [open, setOpen] = React.useState(false);
     const [getRecipeData, { data, loading, error }] = useLazyQuery(GET_RECIPE_DETAILS);
     const editRecipe = () => getRecipeData({ variables: { id } })
-    const history = useHistory();
-    // React.useEffect(() => {
-    //     if (data) window.location.reload(false)
-    // }, [data]);
+
 
     if (data) {
         const { servings, instructions, readyInMinutes, detailedIngredients, sourceUrl } = data.recipe
         return <Redirect to={{ pathname: `/editRecipe/${id}`, state: { id, title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl } }} />
-        // return (<EditRecipeForm initialState={{ id, title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl }} />)
     }
 
     if (open) {

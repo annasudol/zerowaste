@@ -14,7 +14,6 @@ const DELETE_RECIPE = gql`
   mutation DeleteRecipe($id: ID!) {
     deleteRecipe(id: $id) {
         id
-        title
     }
   }
 `;
@@ -33,13 +32,13 @@ interface DialogDeleteRecipeProps {
 }
 export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
     const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
-    const handleDeleteRecipe = () => {
-        deleteRecipe({ variables: { id: recipeId } })
-        window.location.reload(false)
-    }
+
+    const handleDeleteRecipe = () => deleteRecipe({ variables: { id: recipeId } })
+
     if (error) {
         return (<ErrorMessage message={error.message} />)
     }
+    React.useEffect(() => data && window.location.reload(false), [data])
 
     return (
         <Dialog
@@ -53,18 +52,17 @@ export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps
             {!data && <DialogTitle id="alert-dialog-slide-title">Are you sure do you want to delete recipe</DialogTitle>}
             <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
-                    {data ? "You've successfully deleted recipe" : "The recipe will be deleted immediately. You can't undo this action"}
+                    The recipe will be deleted immediately. You can't undo this action
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={(): void => toggleOpen(false)}>
-                    {data ? "close" : 'Keep the recipe'}
+                    Keep the recipe
                 </Button>
-                {!data && (
-                    <Button onClick={handleDeleteRecipe} color="coral">
-                        Delete recipe
-                    </Button>
-                )}
+
+                <Button onClick={handleDeleteRecipe} color="coral">
+                    Delete recipe
+                </Button>
             </DialogActions>
         </Dialog>
     );

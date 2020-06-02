@@ -41,7 +41,7 @@ export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
             </div>
 
             <div className="flex-row mt-4 mb-4">
-                {data.user.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
+                {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
             </div>
         </div>
     )
