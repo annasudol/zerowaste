@@ -1,14 +1,15 @@
 import * as React from "react";
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
+import { LocationTypes } from "../utils/types";
 
 export interface ButtonProps {
     href?: string
     onClick?: VoidFunction
     color?: 'green' | 'coral' | 'gray' | 'red'
-    to?: string
-    className?: string;
-    type?: "submit" | "button";
+    to?: string | LocationTypes
+    className?: string
+    type?: "submit" | "button"
     disabled?: boolean
 }
 

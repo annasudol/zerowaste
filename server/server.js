@@ -2,13 +2,11 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
-const Dataloader = require('dataloader');
 const jwt = require('jsonwebtoken');
 
 const resolvers = require('./resolvers');
 const typeDefs = require('./typeDefs');
 const connection = require('./database/util');
-const loaders = require('./loaders');
 const User = require('./database/models/user');
 const DataAPI = require('./database/dataAPI');
 
@@ -34,15 +32,13 @@ const apolloServer = new ApolloServer({
     try {
       const header = await req.headers;
       const bearerHeader = await header.authorization;
-      const contextObj = {};
+ 
       if (bearerHeader) {
         const token = bearerHeader.split(' ')[1];
         const payload = jwt.verify(token, 'mysecretkey');
 
         const user = await User.findOne({ email: payload.email });
-        contextObj.loaders = {
-          user: new Dataloader(keys => loaders.user.batchUsers(keys))
-        };
+
         return { user, email: user.email, userId: user.id }
       }
     } catch (error) {

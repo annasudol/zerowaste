@@ -69,7 +69,6 @@ module.exports = {
   },
   User: {
     recipes: async ({ id }) => {
-      console.log(id, "id hello")
       try {
         const recipes = await Recipe.find({ user: id });
         return recipes;

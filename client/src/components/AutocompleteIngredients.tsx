@@ -9,8 +9,6 @@ const productsTitles = products.reduce((accumulator: any, currentValue: ListType
     return [...accumulator, currentValue.title]
 }, []);
 
-
-
 export interface AutocompleteIngredientsProps {
     dispatch: React.Dispatch<Action>
     ingredients: string[] | []

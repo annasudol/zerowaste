@@ -3,6 +3,7 @@ import { Image, Button, ErrorMessage } from '../components';
 
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import { AppRoutes } from '../../routes';
 
 
 const DELETE_RECIPE = gql`
@@ -23,7 +24,7 @@ export interface RecipeItemProps {
 }
 
 export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
-    const [deleteRecipe, { data, error, loading }] = useMutation(DELETE_RECIPE);
+    const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
     const handleDeleteRecipe = () => deleteRecipe({ variables: { id } })
 
 
@@ -42,7 +43,7 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
                 <h3 className="font-bebas text-lightGreen mb-1">{title}</h3>
                 <span className="font-roboto uppercase text-xs font-semibold text-darkGray">ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
-                <Button to={`/recipe/${id}`}>see more</Button>
+                <Button to={{ pathname: `/recipe/${id}`, state: { backPath: deleteEditBtn ? AppRoutes.User : undefined } }}>see more</Button>
                 {deleteEditBtn && (<div className="">
                     <Button color="coral" onClick={handleDeleteRecipe}>Delete Recipe</Button>
                     <Button onClick={editRecipe}>Edit Recipe</Button>

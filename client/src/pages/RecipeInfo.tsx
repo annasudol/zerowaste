@@ -1,10 +1,11 @@
 import * as React from "react";
 import { LoadingBar, ErrorMessage, Button, Image } from '../components';
-import { useParams, useHistory } from 'react-router';
+import { useParams, useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { AppRoutes } from "../../routes";
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import { LocationTypes } from "../utils/types";
 
 const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
@@ -27,7 +28,9 @@ const GET_RECIPE_DETAILS = gql`
 export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const { recipeID } = useParams();
     const history = useHistory();
-
+    const location: LocationTypes = useLocation();
+    const backPath: string | undefined = location?.state.backPath;
+    console.log(backPath, "hello")
     const { data, loading, error } = useQuery(
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
@@ -38,7 +41,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;
 
     const backRecipes = (): void => {
-        return history.push({ pathname: AppRoutes.RecipesList });
+        return history.push({ pathname: backPath ? backPath : AppRoutes.RecipesList });
     }
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
     const headerInfo = [{ text: "Ready in: ", value: readyInMinutes }, { text: "author ", value: author ? author : user?.name }, { text: "Servings: ", value: servings }]
