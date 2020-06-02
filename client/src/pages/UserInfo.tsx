@@ -29,13 +29,12 @@ export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
     );
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
-    console.log(data)
 
 
     return (
-        <div className="main">
+        <div className="overflow-hidden">
 
-            <div className="ml-2  search-form text-right">
+            <div className="mt-2 text-left">
                 <h1 className="form-header font-bebas uppercase text-darkGray pb-0 m-0">{`Hello ${data.user.name}`}</h1>
                 <p className="font-bebas text-darkGray inline">Email: </p>
                 <p className="font-bebas text-lightGreen mb-1 inline">{data.user.email}</p>

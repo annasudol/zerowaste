@@ -1,4 +1,5 @@
 export * from './AddRecipeForm';
+export * from './EditRecipeForm';
 export * from './Login';
 export * from './Main';
 export * from './RecipeInfo';

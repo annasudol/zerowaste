@@ -48,15 +48,18 @@ module.exports = {
         throw error;
       }
     }),
-    //   updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id, input }) => {
-    //     try {
-    //       const recipe = await Recipe.findByIdAndUpdate(id, { ...input }, { new: true });
-    //       return recipe;
-    //     } catch (error) {
-    //       console.log(error);
-    //       throw error;
-    //     }
-    //   }),
+    updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, input) => {
+      try {
+        const id = await input.id
+        const recipe = await Recipe.findByIdAndUpdate(id, input);
+        return recipe;
+
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }),
+
     deleteRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }, { userId }) => {
       try {
         const recipe = await Recipe.findByIdAndDelete(id);

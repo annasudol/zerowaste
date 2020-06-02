@@ -1,19 +1,31 @@
 import * as React from "react";
-import { Image, Button, ErrorMessage } from '../components';
+import { Image, Button, ErrorMessage, DialogDeleteRecipe } from '../components';
 
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { AppRoutes } from '../../routes';
+import { Redirect, useHistory } from "react-router";
+import { EditRecipeForm } from '../pages/EditRecipeForm';
 
 
-const DELETE_RECIPE = gql`
-  mutation DeleteRecipe($id: ID!) {
-    deleteRecipe(id: $id) {
-        id
+const GET_RECIPE_DETAILS = gql`
+  query GetRecipeDetails($id: ID!) {
+    recipe(id: $id) {
         title
+        servings
+        image
+        readyInMinutes
+        detailedIngredients
+        author
+        sourceUrl
+        instructions
+        user{
+            name
+        }
     }
   }
 `;
+
 
 export interface RecipeItemProps {
     id: string
@@ -24,17 +36,23 @@ export interface RecipeItemProps {
 }
 
 export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
-    const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
-    const handleDeleteRecipe = () => deleteRecipe({ variables: { id } })
 
+    const [open, setOpen] = React.useState(false);
+    const [getRecipeData, { data, loading, error }] = useLazyQuery(GET_RECIPE_DETAILS);
+    const editRecipe = () => getRecipeData({ variables: { id } })
+    const history = useHistory();
+    // React.useEffect(() => {
+    //     if (data) window.location.reload(false)
+    // }, [data]);
 
-    const editRecipe = () => { };
-    React.useEffect(() => {
-        if (data) window.location.reload(false)
-    }, [data]);
+    if (data) {
+        const { servings, instructions, readyInMinutes, detailedIngredients, sourceUrl } = data.recipe
 
-    if (error) {
-        return (<ErrorMessage message={error.message} />)
+        return (<EditRecipeForm initialState={{ id, title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl }} />)
+    }
+
+    if (open) {
+        return <DialogDeleteRecipe open={open} toggleOpen={(value): void => setOpen(value)} recipeId={id} />
     }
     return (
         <div className="flex bg-milk bo mb-4 mr-4 max-w-sm lg:max-w-xl mb-3 list--item relative" key={id}>
@@ -43,9 +61,12 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
                 <h3 className="font-bebas text-lightGreen mb-1">{title}</h3>
                 <span className="font-roboto uppercase text-xs font-semibold text-darkGray">ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
-                <Button to={{ pathname: `/recipe/${id}`, state: { backPath: deleteEditBtn ? AppRoutes.User : undefined } }}>see more</Button>
+                {deleteEditBtn ? <Button
+                    to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}
+                >see more
+                </Button> : <Button to={`/recipe/${id}`}>see more</Button>}
                 {deleteEditBtn && (<div className="">
-                    <Button color="coral" onClick={handleDeleteRecipe}>Delete Recipe</Button>
+                    <Button color="coral" onClick={(): void => setOpen(true)}>Delete Recipe</Button>
                     <Button onClick={editRecipe}>Edit Recipe</Button>
 
                 </div>)}

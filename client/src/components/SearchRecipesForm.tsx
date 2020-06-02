@@ -6,8 +6,7 @@ import { createProductsList } from '../state/products/actions'
 import { AutocompleteIngredients, Button } from '../components'
 import { useRecipeFormState } from "../hooks";
 import { getProducts } from "../state/products/selectors";
-
-
+import { initialState } from '../hooks/useRecipeFormState';
 
 export interface ListType {
     title: string
@@ -18,7 +17,7 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
     const ingredientsState = useSelector(getProducts);
     const history = useHistory();
     const dispatchReduxAction = useDispatch();
-    const { ingredients, dispatch } = useRecipeFormState(ingredientsState);
+    const { ingredients, dispatch } = useRecipeFormState({ title: '', servings: 0, ingredients: ingredientsState, readyInMinutes: 0, sourceUrl: undefined, instructions: '' });
 
     const searchRecipes = (): void => {
         dispatchReduxAction(createProductsList(ingredients))

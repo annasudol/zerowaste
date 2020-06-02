@@ -30,8 +30,9 @@ function reducer(state: StateType, action: Action): StateType {
             return { ...state, instructions: action.setInstructions };
     }
 }
-
-export function useRecipeFormState(ingredientsState?: string[]): {
+// type ingredientsState string[]
+// tslint:disable-next-line: no-shadowed-variable
+export function useRecipeFormState(startState?: StateType): {
     dispatch: Dispatch<Action>;
     title: string
     servings: number
@@ -42,7 +43,7 @@ export function useRecipeFormState(ingredientsState?: string[]): {
 } {
 
     const [{ title, servings, ingredients, instructions, readyInMinutes, sourceUrl }, dispatch] =
-        useReducer(reducer, ingredientsState ? { title: '', servings: 0, ingredients: ingredientsState, readyInMinutes: 0, sourceUrl: undefined, instructions: '' } : initialState);
+        useReducer(reducer, startState ? startState : initialState);
 
     return { dispatch, title, servings, ingredients, readyInMinutes, sourceUrl, instructions };
 }

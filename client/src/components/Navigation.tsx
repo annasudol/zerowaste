@@ -4,12 +4,16 @@ import cx from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Button } from '../components';
 import { AppRoutes } from '../../routes';
+import { useHistory } from 'react-router';
 
 export const Navigation: React.FunctionComponent<{ token: string | null }> = ({ token }): React.ReactElement => {
     const [open, toggleOpen] = React.useState(false);
+    const history = useHistory();
+
     const logout = (): void => {
-        window.location.reload(false)
         localStorage.removeItem('token')
+        history.push({ pathname: `${AppRoutes.Home}` })
+        window.location.reload(false)
     }
 
 

@@ -17,7 +17,17 @@ module.exports = gql`
       instructions: String!
       sourceUrl: String
     ): RecipeDetails!
-    # updateRecipe(id: ID!, input: updateRecipeInput!): Recipe
+    updateRecipe(
+      id: ID!
+      title: String!
+      servings: Int!
+      image: String!
+      readyInMinutes: Int!
+      ingredients: [String!]!
+      detailedIngredients: [String!]!
+      instructions: String!
+      sourceUrl: String
+      ): Recipe!
     deleteRecipe(id: ID!): Recipe!
   }
 

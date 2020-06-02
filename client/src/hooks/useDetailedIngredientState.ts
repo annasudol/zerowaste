@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export const useDetailedIngredientState = () => {
-    const [detailedIngredients, setDetailedIngredients] = useState<string[] | []>([]);
+export const useDetailedIngredientState = (initialState?: string[]) => {
+    const [detailedIngredients, setDetailedIngredients] = useState<string[] | []>(initialState ? initialState : []);
 
     return {
         detailedIngredients,

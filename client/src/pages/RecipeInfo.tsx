@@ -29,8 +29,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const { recipeID } = useParams();
     const history = useHistory();
     const location: LocationTypes = useLocation();
-    const backPath: string | undefined = location?.state.backPath;
-    console.log(backPath, "hello")
+    const backPath = location?.state?.backPath;
     const { data, loading, error } = useQuery(
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
