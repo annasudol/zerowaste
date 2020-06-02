@@ -48,27 +48,27 @@ module.exports = {
         throw error;
       }
     }),
+    //   updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id, input }) => {
+    //     try {
+    //       const recipe = await Recipe.findByIdAndUpdate(id, { ...input }, { new: true });
+    //       return recipe;
+    //     } catch (error) {
+    //       console.log(error);
+    //       throw error;
+    //     }
+    //   }),
+    deleteRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }, { userId }) => {
+      try {
+        const recipe = await Recipe.findByIdAndDelete(id);
+        await User.updateOne({ _id: userId }, { $pull: { recipes: recipe.id } });
+        return recipe;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }),
   },
-  //   updateRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id, input }) => {
-  //     try {
-  //       const recipe = await Recipe.findByIdAndUpdate(id, { ...input }, { new: true });
-  //       return recipe;
-  //     } catch (error) {
-  //       console.log(error);
-  //       throw error;
-  //     }
-  //   }),
-  //   deleteRecipe: combineResolvers(isAuthenticated, isRecipeOwner, async (_, { id }, { loggedInUserId }) => {
-  //     try {
-  //       const recipe = await Recipe.findByIdAndDelete(id);
-  //       await User.updateOne({ _id: loggedInUserId }, { $pull: { recipes: recipe.id } });
-  //       return recipe;
-  //     } catch (error) {
-  //       console.log(error);
-  //       throw error;
-  //     }
-  //   })
-  // },
+
   RecipeDetails: {
     user: async (parent, _, { loaders }) => {
       console.log(parent, "parent")

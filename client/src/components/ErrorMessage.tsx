@@ -1,6 +1,5 @@
 import * as React from "react";
 
-
 interface ErrorMessageProps {
     message?: string
     validationMessage?: string

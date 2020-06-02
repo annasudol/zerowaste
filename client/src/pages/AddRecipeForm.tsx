@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ListUI, ErrorMessage, ListAddForm, AutocompleteIngredients, LoadingBar } from '../components'
-import { useStepsState, useDetailedIngredientState, useRecipeFormState, initialState } from "../hooks";
+import { useDetailedIngredientState, useRecipeFormState, initialState } from "../hooks";
 import { useHistory } from 'react-router';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -20,7 +20,6 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
     const { title, instructions, servings, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState();
     const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
     const [createRecipe, { data, error, loading }] = useMutation(ADD_RECIPE);
-    const history = useHistory();
 
     const handleSubmit = (event): any => {
 

@@ -9,15 +9,12 @@ module.exports.isAuthenticated = (_, __, { user }) => {
   return skip;
 }
 
-module.exports.isTaskOwner = async (_, { id }, { loggedInUserId }) => {
+module.exports.isRecipeOwner = async (_, { id }, { userId }) => {
   try {
-    if (!isValidObjectId(id)) {
-      throw new Error('Invalid Recipe id');
-    }
     const recipe = await Recipe.findById(id);
     if (!recipe) {
       throw new Error('Recipe not found');
-    } else if (recipe.user.toString() !== loggedInUserId) {
+    } else if (recipe.user.toString() !== userId) {
       throw new Error('Not authorized as recipe owner');
     }
     return skip;

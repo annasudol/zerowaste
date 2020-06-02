@@ -35,7 +35,6 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
                 localStorage.setItem('token', login.token);
                 client.writeData({ data: { isLoggedIn: true } });
                 window.location.reload(false)
-                s
             }
         }
     );

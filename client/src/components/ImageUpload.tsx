@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { Button } from '.';
-// import './ImageUpload.css';
 
 interface ImageUploadProps {
     onInput?(id: string, pickedFile: string, fileIsValid: boolean): VoidFunction

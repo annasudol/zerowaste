@@ -24,7 +24,7 @@ const GET_RECIPE_DETAILS = gql`
   }
 `;
 
-export const RecipeInfo: React.FunctionComponent<> = (): React.ReactElement => {
+export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const { recipeID } = useParams();
     const history = useHistory();
 

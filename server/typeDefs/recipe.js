@@ -18,7 +18,7 @@ module.exports = gql`
       sourceUrl: String
     ): RecipeDetails!
     # updateRecipe(id: ID!, input: updateRecipeInput!): Recipe
-    # deleteRecipe(id: ID!): Recipe
+    deleteRecipe(id: ID!): Recipe!
   }
 
 
