@@ -129,7 +129,7 @@ button:disabled {
   position: fixed;
   right: 20px;
   top: 20px;
-  z-index: 100;
+  z-index: 1100;
 }
 
 
@@ -158,7 +158,26 @@ button:disabled {
   }
 }
 
+.search-form {
+  position: fixed;
+  top: 0;
+  left: 0px;
+  background-color: #fff;
+  width: 100%;
+  padding-right: 120px;
+  z-index: 1000;
+}
 
+@media (min-width: 768px) {
+  .search-form {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    width: 260px;
+    width: 350px;
+    background-color: transparent;
+  }
+}
 
 input, textarea {
   padding: 15px;

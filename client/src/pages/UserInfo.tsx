@@ -14,8 +14,8 @@ const GET_USER_INFO = gql`
         title
         image
         ingredients
+        }
     }
-  }
   }
 `;
 
@@ -24,22 +24,20 @@ const GET_USER_INFO = gql`
 
 export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
 
-    const { data, loading, error } = useQuery(
-        GET_USER_INFO,
-    );
+    const { data, loading, error } = useQuery(GET_USER_INFO);
+    // const [recipes, setRecipes] = React.useState(null);
+    // React.useEffect((): any => data.user.recipes.length > 0 && setRecipes(data.user.recipes))
+    // console.log(recipes, "recipes")
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
 
-
     return (
         <div className="overflow-hidden">
-
             <div className="mt-2 text-left">
                 <h1 className="form-header font-bebas uppercase text-darkGray pb-0 m-0">{`Hello ${data.user.name}`}</h1>
                 <p className="font-bebas text-darkGray inline">Email: </p>
                 <p className="font-bebas text-lightGreen mb-1 inline">{data.user.email}</p>
             </div>
-
             <div className="flex-row mt-4 mb-4">
                 {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
             </div>
