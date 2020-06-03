@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { Button, LoadingBar, ErrorMessage, Auth } from "../components";
+import { LoadingBar, Auth } from "../components";
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 import ApolloClient from 'apollo-client';
 import { AppRoutes } from "../../routes";
 
@@ -22,12 +22,11 @@ type Inputs = {
 }
 
 export const Login: React.FunctionComponent = (): React.ReactElement => {
-    const history = useHistory();
 
     const client: ApolloClient<any> = useApolloClient();
     const { register, handleSubmit, watch, errors } = useForm<Inputs>();
 
-    const [login, { loading, error }] = useMutation(
+    const [login, { data, loading, error }] = useMutation(
         LOGIN_USER,
         {
             // tslint:disable-next-line: no-shadowed-variable
@@ -41,12 +40,17 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
 
 
 
-    const submit = (data: any) => {
-        login({ variables: { email: data.email, password: data.password } });
-        return history.push({ pathname: `${AppRoutes.Home}` });
+    const submit = (inputs: any) => {
+        login({ variables: { email: inputs.email, password: inputs.password } });
     }
 
+    if (loading) {
+        return <LoadingBar />
+    }
+    if (data) {
+        return <Redirect to={AppRoutes.Home} />
+    }
     return (
-        <Auth loading={loading} errorMessage={error && error.message} register={register} handleSubmit={handleSubmit} submit={submit} loginPage={true} />
+        <Auth errorMessage={error && error.message} register={register} handleSubmit={handleSubmit} submit={submit} loginPage={true} />
     )
 }

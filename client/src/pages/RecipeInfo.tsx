@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LoadingBar, ErrorMessage, Button, Image } from '../components';
+import { LoadingBar, ErrorMessage, Button, Image, List } from '../components';
 import { useParams, useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -64,7 +64,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                     <Image src={image} alt={`${title}'s image`} size="medium" />
                     <div>
                         <h3 className="font-roboto text-darkGray mb-0 mt-4">Ingredients:</h3>
-                        <ol className="font-roboto text-darkGray ml-4">{detailedIngredients.map((ingredient: string, index: number) => <li key={index}>{ingredient}</li>)}</ol>
+                        <List list={detailedIngredients} />
                         {instructions && (
                             <>
                                 <h3 className="font-roboto text-darkGray mb- mt-4">Instructions:</h3>
