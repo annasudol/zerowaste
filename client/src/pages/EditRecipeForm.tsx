@@ -1,13 +1,12 @@
 import * as React from "react";
-import { List, ErrorMessage, ListAddForm, AutocompleteIngredients, LoadingBar, Button } from '../components'
-import { useDetailedIngredientState, useRecipeFormState } from "../hooks";
-import { useHistory, useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { isUrlValid } from "../utils/validUrl";
 import { Redirect } from "react-router";
-import cx from 'classnames';
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import { Button, Input, ListFormInput, List } from "../components";
+import { VALIDATOR_MINLENGTH, VALIDATOR_MIN, VALIDATOR_URL } from "../utils/validators";
+import { useForm } from "../hooks/useForm";
 import { AppRoutes } from "../../routes";
 
 const UPDATE_RECIPE = gql`
@@ -43,96 +42,57 @@ interface EditRecipeFormProps {
 
 export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | any => {
     const location: LocationTypes = useLocation();
-    const initialState = location.state
-    const { detailedIngredients, addDetailedIngredient, deleteDetailedIngredient } = useDetailedIngredientState(initialState.detailedIngredients);
-    const { title, instructions, servings, ingredients, readyInMinutes, sourceUrl, dispatch } = useRecipeFormState({ title: initialState.title, servings: initialState.servings, ingredients: initialState.ingredients, readyInMinutes: initialState.readyInMinutes, sourceUrl: initialState.sourceUrl, instructions: initialState.instructions });
-    const [emptyInput, setEmptyInput] = React.useState<boolean>(false);
+    const initialState = location.state;
+    const [validation, setValidation] = React.useState<boolean>(true);
+    const { formState,
+        inputHandler,
+        setServings,
+        setImage,
+        setIngredients,
+        setDetailedIngredients,
+        deleteDetailedIngredients,
+        setReadyInMinutes,
+        setInstructions,
+        setSourceUrl } = useForm({ ...initialState });
+    const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions } = formState;
+    const emptyState = title === "" || servings === 0 || image === "" || readyInMinutes === 0 || ingredients === [] || detailedIngredients === [] || instructions === ""
     const [updateRecipe, { data, error, loading }] = useMutation(UPDATE_RECIPE);
-
-    const history = useHistory();
-
 
     const handleSubmit = (event: any): any => {
         event.preventDefault();
-        if (title === "" || readyInMinutes === 0 || ingredients.length === 0 || detailedIngredients.length === 0 || instructions.length === 0) {
-            setEmptyInput(true)
+        if (emptyState) {
+            setValidation(false)
         } else {
-            setEmptyInput(false)
+            setValidation(true)
+            console.log(title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, "title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions")
             updateRecipe({ variables: { id: initialState.id, title, servings, image: "https://spoonacular.com/recipeImages/543832-556x370.jpg", readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
-
         }
+
     }
 
-    if (loading) return <LoadingBar />
-    if (error) {
-        return (<ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>)
-    }
+
+    const history = useHistory();
     if (data) {
         return <Redirect to={{ pathname: `/recipe/${data.updateRecipe.id}`, state: { backPath: '/user' } }} />
     }
     return (
         <div className="content">
             <Button className="mt-4" color="coral" onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon /></Button>
-
             <div className="flex justify-center items-center">
-
                 <div className="w-1/2 recipe-form pb-4 pt-4">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Edit Recipe</h1>
                     <form onSubmit={(e): any => handleSubmit(e)}>
-                        {emptyInput && title === '' && <ErrorMessage validationMessage='Add title' />}
-                        <label className="text-sm text-lightGreen uppercase">Title
-                    <input className={cx(emptyInput && title === '' && "inputError")} name="title" type="text" value={title} onChange={(e: React.ChangeEvent<HTMLInputElement>): void => dispatch({ TYPE: 'ADD_TITLE', setTitle: e.target.value })} />
-                        </label>
-                        {emptyInput && servings === 0 && <ErrorMessage validationMessage='Add servings' />}
-                        <label className="text-sm text-lightGreen uppercase">Servings
-                    <input className={cx(emptyInput && title === '' ? "inputError mt-2 mb-2" : "mt-2 mb-2")} name="servings" type="number" placeholder="Servings" value={servings}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                                    const val = parseInt(e.target.value, 10);
-                                    if (val > 0) dispatch({ TYPE: 'ADD_SERVINGS', setServings: val })
-                                }} />
-                        </label>
-                        {emptyInput && readyInMinutes === 0 && <ErrorMessage validationMessage='Add preparation time' />}
-                        <label className="text-sm text-lightGreen uppercase">Ready In Minutes
-                    <input className={cx(emptyInput && readyInMinutes === 0 ? "inputError mt-2 mb-2" : "mt-2 mb-2")} name="readyInMinutes" type="number" value={readyInMinutes}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                                    const val = parseInt(e.target.value, 10);
-                                    if (val > 0) dispatch({ TYPE: 'ADD_READY_IN_MINUTES', setMinutes: val })
-                                }} />
-                        </label>
-                        {emptyInput && ingredients.length === 0 && <ErrorMessage validationMessage='Add ingredients to make the recipe searchable' />}
-                        <AutocompleteIngredients dispatch={dispatch} ingredients={ingredients} emptyInput={emptyInput && ingredients.length === 0} />
-
-                        {emptyInput && detailedIngredients.length === 0 && <ErrorMessage validationMessage='Add detailed ingredients eg: 1 tbsp olive oil' />}
-                        <label className="text-sm text-lightGreen uppercase">Detailed ingredient
-                    <ListAddForm saveItem={(text: string) => {
-                                const trimmedText = text.trim();
-                                if (trimmedText.length > 0) {
-                                    addDetailedIngredient(trimmedText);
-                                }
-                            }}
-                                emptyInput={emptyInput && detailedIngredients.length === 0}
-
-                            />
-                        </label>
-                        <List list={detailedIngredients} deleteItem={(index: number): any => deleteDetailedIngredient(index)} />
-                        {emptyInput && instructions.length === 0 && <ErrorMessage validationMessage='Add detailed instructions' />}
-
-                        <label className="text-sm text-lightGreen uppercase">Instructions
-                    <textarea className={cx(emptyInput && instructions.length === 0 && "inputError")} name="instructions" value={instructions} onChange={(e: any): void => {
-                                const text = e.target.value
-                                if (text.length > 0) dispatch({ TYPE: 'ADD_INSTRUCTIONS', setInstructions: text })
-                            }}></textarea>
-                        </label>
-
-                        <label className="text-sm text-lightGreen uppercase">Source Url
-                    <input name="sourceUrl" type="text" placeholder="Source Url" value={sourceUrl} onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                                isUrlValid(e.target.value) ? dispatch({ TYPE: 'ADD_SOURCE_URL', setUrl: e.target.value }) : dispatch({ TYPE: 'ADD_SOURCE_URL', setUrl: undefined })
-                            }} />
-                        </label>
+                        <Input id="title" onInput={inputHandler} type="text" initialValue={initialState.title} validation={validation} validators={[VALIDATOR_MINLENGTH(3)]} errorText="Title input is required" label="Title" />
+                        <Input id="servings" onInput={setServings} type="number" initialValue={initialState.servings} validation={validation} validators={[VALIDATOR_MIN(1)]} errorText="Add servings value min. 1" label="Servings" />
+                        <Input id="readyInMinutes" onInput={setReadyInMinutes} type="number" initialValue={initialState.readyInMinutes} validation={validation} validators={[VALIDATOR_MIN(5)]} errorText="Add preparation time, min. 5 min" label="Ready In Minutes" />
+                        <ListFormInput id="ingredients" onInput={setIngredients} list={initialState.ingredients || formState.ingredients} validation={validation} type="autocomplete" errorText="Add ingredients to make the recipe searchable" />
+                        <ListFormInput id="detailedIngredients" onInput={setDetailedIngredients} list={initialState.detailedIngredients || formState.detailedIngredients} validation={validation} validators={[VALIDATOR_MINLENGTH(3)]} type="form" errorText="Add detailed ingredients eg: 1 tbsp olive oil" label="Detailed Ingridient" />
+                        <List list={initialState.detailedIngredients || formState.detailedIngredients} deleteItem={(index: number): any => deleteDetailedIngredients(index)} />
+                        <Input id="instructions" onInput={setInstructions} type="text" initialValue={initialState.instructions} validation={validation} validators={[VALIDATOR_MINLENGTH(10)]} errorText="Add detailed instructions, min. 10 characters" label="Instructions" />
                         <Button type="submit">Send Recipe</Button>
                     </form>
                 </div>
             </div>
-        </div >
+        </div>
     )
 };
