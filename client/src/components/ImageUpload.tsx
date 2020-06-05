@@ -1,68 +1,74 @@
 import * as React from "react";
+import { Upload, message } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
-import { Button } from '.';
 
 interface ImageUploadProps {
-    onInput?(id: string, pickedFile: string, fileIsValid: boolean): VoidFunction
-    id?: string
+    image: string | undefined
+    setImage(value: string): void
+    form?(image: string): void
 }
-export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ onInput, id }): React.ReactElement => {
-    const [file, setFile] = React.useState();
-    const [previewUrl, setPreviewUrl] = React.useState();
-    const [isValid, setIsValid] = React.useState(false);
 
-    const filePickerRef: any = React.useRef();
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
 
-    React.useEffect(() => {
-        if (file) {
-            return;
+function beforeUpload(file) {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+        message.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+}
+
+export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, setImage, form }): React.ReactElement => {
+    const [loading, setLoading] = React.useState<boolean>(false);
+    // const [image, setImage] = React.useState<string | undefined>(undefined);
+
+    const handleChange = info => {
+        if (info.file.status === "uploading") {
+            setLoading(true);
         }
-        const fileReader: any = new FileReader();
-        fileReader.onload = () => {
-            setPreviewUrl(fileReader.result);
-        };
-        fileReader.readAsDataURL(file);
-    }, [file]);
-
-    const pickedHandler = event => {
-        let pickedFile;
-        let fileIsValid = isValid;
-        if (event.target.files && event.target.files.length === 1) {
-            pickedFile = event.target.files[0];
-            setFile(pickedFile);
-            setIsValid(true);
-            fileIsValid = true;
-        } else {
-            setIsValid(false);
-            fileIsValid = false;
+        if (info.file.status === "done") {
+            // Get this url from response in real world.
+            getBase64(info.file.originFileObj, imageUrl => {
+                setImage(imageUrl)
+                if (form) {
+                    form(imageUrl)
+                }
+            });
+            setLoading(false);
         }
-        // onInput(id, pickedFile, fileIsValid);
     };
 
-    const pickImageHandler = () => {
-        filePickerRef.current.click();
-    };
-
-    return (
-        <div className="form-control">
-            <input
-                id={id}
-                ref={filePickerRef}
-                style={{ display: 'none' }}
-                type="file"
-                accept=".jpg,.png,.jpeg"
-                onChange={pickedHandler}
-            />
-            <div className="image-upload center">
-                <div className="image-upload__preview">
-                    {previewUrl && <img src={previewUrl} alt="Preview" />}
-                    {!previewUrl && <p>Please pick an image.</p>}
-                </div>
-                <Button onClick={pickImageHandler}>
-                    PICK IMAGE
-                </Button>
-            </div>
-            {!isValid && <p>Error with uploading image</p>}
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div className="ant-upload-text">Upload</div>
         </div>
     );
+
+    return (
+        <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+        >
+            {image ? (
+                <img src={image} alt="avatar" style={{ width: "100%" }} />
+            ) : (
+                    uploadButton
+                )}
+        </Upload>
+    )
 };

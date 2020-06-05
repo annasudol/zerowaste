@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { LoadingBar, Auth } from "../components";
+import { LoadingBar, Auth, LoginInputs } from "../components";
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
@@ -24,7 +24,6 @@ type Inputs = {
 export const Login: React.FunctionComponent = (): React.ReactElement => {
 
     const client: ApolloClient<any> = useApolloClient();
-    const { register, handleSubmit, watch, errors } = useForm<Inputs>();
 
     const [login, { data, loading, error }] = useMutation(
         LOGIN_USER,
@@ -40,7 +39,7 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
 
 
 
-    const submit = (inputs: any) => {
+    const handleSubmit = (inputs: LoginInputs) => {
         login({ variables: { email: inputs.email, password: inputs.password } });
     }
 
@@ -51,6 +50,6 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
         return <Redirect to={AppRoutes.Home} />
     }
     return (
-        <Auth errorMessage={error && error.message} register={register} handleSubmit={handleSubmit} submit={submit} loginPage={true} />
+        <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
     )
 }

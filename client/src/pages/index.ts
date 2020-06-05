@@ -6,3 +6,4 @@ export * from './RecipeInfo';
 export * from './RecipesList';
 export * from './SingUp';
 export * from './UserInfo';
+export * from '../components/RecipeForm';

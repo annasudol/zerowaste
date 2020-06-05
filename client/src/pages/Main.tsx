@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Image, SearchRecipesForm } from '../components';
-
 const fridge = require("./../assets/images/svg/technology.svg");
 
 export const Main: React.FunctionComponent = () => (

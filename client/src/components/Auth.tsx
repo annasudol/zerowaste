@@ -1,51 +1,86 @@
 import * as React from "react";
-import { OnSubmit } from "react-hook-form";
+import { Form, Input, Button, Checkbox } from 'antd';
+const { TextArea } = Input;
+import { FormInstance } from 'antd/lib/form';
 import { LoadingBar, ErrorMessage } from "../components";
 import { useHistory } from 'react-router';
 import { AppRoutes } from "../../routes";
-type Inputs = {
-    name?: string
+
+
+export interface LoginInputs {
     email: string
     password: string
 }
 
+export interface RegisterInputs extends LoginInputs {
+    name: string
+}
+
 interface AuthProps {
-    //    loading: boolea n
     errorMessage?: string
-    register: any
-    handleSubmit: (callback: OnSubmit<Inputs>) => (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
-    submit: any
+    handleSubmit(inputValues: LoginInputs): void
     loginPage?: boolean
 }
 
-export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleSubmit, register, submit, loginPage = true }): React.ReactElement => {
-    const history = useHistory();
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
 
-    // if (data) {
-    //     return history.push({ pathname: `${AppRoutes.Home}` });
-    // }
+export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleSubmit, loginPage = true }): React.ReactElement => {
+    const history = useHistory();
+    const onFinish = (inputValues) => {
+        handleSubmit(inputValues)
+    };
+
+    const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+    };
     return (
         <div className="content overflow-hidden flex justify-center items-center">
             <div className="form  flex flex-col">
                 <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">{loginPage ? 'Log in' : 'Sign Up'}</h1>
                 {errorMessage && <p className="text-coral text-sm text-center mb-3">{errorMessage}</p>}
-                <form onSubmit={handleSubmit(submit)}>
-                    {!loginPage && <input name="name" type="text" placeholder="Name" ref={register({ required: true, maxLength: 30 })} />}
-                    <input
+                <Form
+                    {...layout}
+                    name="basic"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                >
+                    {!loginPage && (
+                        <Form.Item
+                            label="Username"
+                            name="name"
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                    )}
+                    <Form.Item
+                        label="Email"
                         name="email"
-                        placeholder="Email"
-                        type="email"
-                        ref={register({
-                            required: true,
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: "invalid email address"
-                            }
-                        })}
-                    />
-                    <input name="password" type="password" placeholder="Set a password" ref={register({ required: true })} />
-                    <input type="submit" title="Submit" className="bg-green hover:bg-green text-white font-bold py-2 px-4 rounded outline-none m-1 border-0" />
-                </form>
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[{ required: true, message: 'Please input your email!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+
+
+                    <Form.Item {...tailLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                    </Button>
+                    </Form.Item>
+                </Form>
             </div>
-        </div >)
+        </div>)
 }
