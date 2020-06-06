@@ -41,7 +41,7 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
 
     if (data) {
         const { servings, instructions, readyInMinutes, detailedIngredients, sourceUrl } = data.recipe
-        return <Redirect to={{ pathname: `/editRecipe/${id}`, state: { id, title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl } }} />
+        return <Redirect to={{ pathname: `/editRecipe/${id}`, state: { title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl } }} />
     }
 
     if (open) {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { Auth, LoadingBar } from "../components";
+import { Auth, LoadingBar, RegisterInputs } from "../components";
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router';
 import { AppRoutes } from "../../routes";
@@ -28,11 +28,14 @@ type Inputs = {
 export const SignUp: React.FunctionComponent = (): React.ReactElement => {
   const history = useHistory();
 
-  const { register, handleSubmit, watch, errors } = useForm<Inputs>();
   const [signUpUser, { data, loading, error }] = useMutation(SIGNUP_USER);
 
   const submit = (user: { name: string, email: string, password: string }) => {
     signUpUser({ variables: { name: user.name, email: user.email, password: user.password } });
+  }
+
+  const handleSubmit = (inputs: RegisterInputs) => {
+    signUpUser({ variables: { name: inputs.name, email: inputs.email, password: inputs.password } });
   }
 
   if (loading) {
@@ -42,6 +45,6 @@ export const SignUp: React.FunctionComponent = (): React.ReactElement => {
     return <Redirect to={AppRoutes.Login} />
   }
 
-  return <Auth errorMessage={error && error.message} register={register} handleSubmit={handleSubmit} submit={submit} loginPage={false} />
+  return <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={false} />
 
 }

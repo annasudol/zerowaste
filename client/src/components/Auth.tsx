@@ -1,10 +1,5 @@
 import * as React from "react";
-import { Form, Input, Button, Checkbox } from 'antd';
-const { TextArea } = Input;
-import { FormInstance } from 'antd/lib/form';
-import { LoadingBar, ErrorMessage } from "../components";
-import { useHistory } from 'react-router';
-import { AppRoutes } from "../../routes";
+import { Form, Input, Button } from 'antd';
 
 
 export interface LoginInputs {
@@ -31,13 +26,8 @@ const tailLayout = {
 };
 
 export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleSubmit, loginPage = true }): React.ReactElement => {
-    const history = useHistory();
     const onFinish = (inputValues) => {
         handleSubmit(inputValues)
-    };
-
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
     };
     return (
         <div className="content overflow-hidden flex justify-center items-center">
@@ -60,8 +50,8 @@ export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleS
                         </Form.Item>
                     )}
                     <Form.Item
-                        label="Email"
-                        name="email"
+                        label="Password"
+                        name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password />
@@ -73,8 +63,6 @@ export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleS
                     >
                         <Input />
                     </Form.Item>
-
-
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
                             Submit

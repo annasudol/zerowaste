@@ -21,7 +21,7 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
 
     return (<>
         <AutoComplete list={ingredients} saveList={(value: string[]): void => setIngredients(value)} />
-        {ingredients.length > 0 && <Button onClick={searchRecipes}>{btnText}</Button>}
+        {ingredients.length > 0 && <Button type="primary" onClick={searchRecipes}>{btnText}</Button>}
     </>
     )
 }

@@ -12,16 +12,6 @@ const ADD_RECIPE = gql`
     }
   }
 `;
-const initialState = {
-    title: "",
-    servings: 0,
-    image: "",
-    readyInMinutes: 0,
-    ingredients: [],
-    detailedIngredients: [],
-    instructions: "",
-    sourceUrl: undefined
-}
 
 export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
 

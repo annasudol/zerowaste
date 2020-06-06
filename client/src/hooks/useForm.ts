@@ -1,60 +1,53 @@
 import { Dispatch, useReducer } from 'react';
 import { RecipeStateProps } from "../utils/types";
 
+
+// const initialInputsState = {
+//     initialState: {
+//         title: "",
+//         servings: 0,
+//         image: "",
+//         readyInMinutes: 0,
+//         ingredients: [],
+//         detailedIngredients: [],
+//         instructions: "",
+//         sourceUrl: undefined
+//     }
+// }
+
+
 type StateType = {
     inputsState: RecipeStateProps
 };
 
-export type Action = { TYPE: 'FILL_INPUTS', setInputs: StateType }
-export const initialState = { inputsState: { title: '', servings: 0, ingredients: [], readyInMinutes: 0, sourceUrl: undefined, instructions: '' } };
+export type Action = { TYPE: 'FILL_INPUTS', inputs: RecipeStateProps }
 
-function reducer(state: StateType, action: Action): RecipeStateProps {
+
+function reducer(state: StateType, action: Action): StateType {
     switch (action.TYPE) {
         case 'FILL_INPUTS':
-            return { ...state, inputsState: { ...action.setInputs } };
-
+            return { ...state, inputsState: { ...action.inputs } };
     }
 }
-// type ingredientsState string[]
-// tslint:disable-next-line: no-shadowed-variable
-export function useRecipeFormState(startState?: StateType): {
-    dispatch: Dispatch<Action>;
-    inp
+
+export function useRecipeFormState(initialInputsState?: StateType): {
+    dispatch: Dispatch<Action>
+    inputsState: RecipeStateProps
 } {
 
-    const [{ title, servings, ingredients, instructions, readyInMinutes, sourceUrl }, dispatch] = useReducer(reducer, initialState);
+    // tslint:disable-next-line: no-shadowed-variable
+    const [{ inputsState }, dispatch] = useReducer(reducer, {
+        inputsState: {
+            title: "",
+            servings: 0,
+            image: "",
+            readyInMinutes: 0,
+            ingredients: [],
+            detailedIngredients: [],
+            instructions: "",
+            sourceUrl: undefined
+        } || initialInputsState
+    });
 
-    return { dispatch, title, servings, ingredients, readyInMinutes, sourceUrl, instructions };
+    return { dispatch, inputsState };
 }
-
-// import { useCallback, useReducer } from 'react';
-// import { RecipeStateProps } from "../utils/types";
-
-
-// export type Action = { type: 'FILL_INPUTS', inputs: RecipeStateProps };
-
-// const formReducer = (state: RecipeStateProps, action: Action) => {
-//    if(action.type === 'FILL_INPUTS') {
-//     return { ...state, action.inputs };
-//    }
-// };
-
-// export function useForm(initialInputs: RecipeStateProps): {
-//     formState: any
-//     inputHandler: any
-// } {
-//     const [formState, dispatch] = useReducer(formReducer, initialInputs);
-
-//     const inputHandler = useCallback((value: { values: RecipeStateProps}) => {
-//         dispatch({
-//             type: 'FILL_INPUTS',
-//             inputs: value.values,
-//         });
-//     }, []);
-
-
-//     return {
-//         formState,
-//         inputHandler,
-//     }
-// };

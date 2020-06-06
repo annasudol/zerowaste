@@ -22,8 +22,8 @@ export interface RecipeStateProps {
     servings: number
     image: string
     readyInMinutes: number
-    ingredients: [],
-    detailedIngredients: [],
-    instructions: "",
-    sourceUrl: undefined
+    ingredients: string[] | []
+    detailedIngredients: string[] | []
+    instructions: string
+    sourceUrl: undefined | string
 }

@@ -1,11 +1,8 @@
 import * as React from "react";
-import { Select } from 'antd';
-const { Option } = Select;
-
 import { products } from "../assets/data/products";
 import { ListType } from "../utils/types";
-
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 const productsTitles = products.reduce((accumulator: any, currentValue: ListType) => {
     return [...accumulator, currentValue.title]
 }, []);
@@ -14,17 +11,11 @@ interface AutoCompleteProps {
     placeholder?: string
     saveList(value: string[]): void
     form?(ingredients: string[]): void
-    list?: string[]
+    list?: string[] | []
+    error?: boolean
 }
 
-export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ placeholder, form, saveList, list }) => {
-    const [defaultValues, setDefaultValues] = React.useState<string[] | []>([]);
-
-    // React.useEffect(() => {
-    if (list !== defaultValues && list) {
-        setDefaultValues(list);
-    }
-    // }, [list, defaultValues]);
+export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ placeholder, form, saveList, list, error }) => {
 
     const handleChange = (value: string[]) => {
         if (form) {
@@ -33,26 +24,30 @@ export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ place
         saveList(value);
     }
 
-
     return (
-        React.useMemo(() => {
-            return (
-                <Select
-                    mode="multiple"
-                    style={{ width: '100%' }}
-                    placeholder={placeholder || "Select at least one product"}
-                    onChange={handleChange}
-                    optionLabelProp="label"
-                    defaultValue={list}
-                >
-                    {productsTitles.map((title: string, index: number) => (
-                        <Option key={index} value={title} label={title}>
-                            {title}
-                        </Option>
-                    ))}
-                </Select>
-            )
-        }, [list?.length])
+        <Autocomplete
+            multiple
+            className="mt-4 mb-4"
+            style={{
+                border: error ? '1px solid red' : ''
+            }}
+            options={productsTitles}
+            getOptionLabel={option => option}
+            renderOption={option => (
+                <span>
+                    {option}
+                </span>
+            )}
+            renderInput={params => (
+                <TextField
+                    {...params}
+                    label={placeholder}
+                    variant="outlined"
+                />
+            )}
+            onChange={(event, value: string[], reason): void => handleChange(value)}
+            value={list}
+        />
     )
 
 }
