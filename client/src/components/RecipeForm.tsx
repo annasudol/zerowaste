@@ -4,10 +4,8 @@ import { FormInstance } from 'antd/lib/form';
 import { AutoComplete, List, ListInput, ImageUpload } from "../components"
 import * as React from "react";
 import { RecipeStateProps } from "../utils/types";
-import { useDispatch, } from 'react-redux';
-import { actionFillInputs } from '../state/inputs/actions'
 
-const tailLayout = { wrapperCol: { offset: 12, span: 12 } };
+const tailLayout = { wrapperCol: { offset: 10, span: 12 } };
 const formRef = React.createRef<FormInstance>();
 
 
@@ -111,13 +109,13 @@ export const RecipeForm: React.FunctionComponent<RecipeFormProps> = ({ handleSub
                 <Input addonBefore="http://" defaultValue="myblog" />
             </Form.Item>
             <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" className="mr-2">
                     Submit
                 </Button>
-                <Button htmlType="button" onClick={onReset}>
+                <Button htmlType="button" onClick={onReset} className="mr-2">
                     Reset
                 </Button>
-                {fillForm && (<Button type="link" htmlType="button" onClick={onFill}>
+                {fillForm && (<Button type="dashed" htmlType="button" onClick={onFill}>
                     Fill form
                 </Button>)}
             </Form.Item>

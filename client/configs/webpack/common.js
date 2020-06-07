@@ -1,6 +1,6 @@
 // shared config (dev and prod)
-const {resolve} = require('path');
-const {CheckerPlugin} = require('awesome-typescript-loader');
+const { resolve } = require('path');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -21,7 +21,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }],
+        use: ['style-loader', {
+          loader: 'css-loader', options: {
+            importLoaders: 1, lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
+              modifyVars: {
+                'primary-color': '#38C172',
+                'link-color': '#339B60',
+                'border-radius-base': '2px',
+                'btn-primary-bg': '#339B60',
+                'processing-color': '#30A763',
+                'heading-color': '#F28379',
+                'highlight-color': '#F25757'
+              },
+              javascriptEnabled: true,
+            },
+          }
+        }],
       },
       {
         test: /\.(scss|sass)$/,
@@ -38,11 +53,32 @@ module.exports = {
           'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',
         ],
       },
+      {
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader',
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'less-loader', // compiles Less to CSS
+          options: {
+            lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
+              modifyVars: {
+                'primary-color': '#38C172',
+                'link-color': '#FFF',
+                'border-radius-base': '2px',
+                'btn-primary-bg': '#339B60'
+              },
+              javascriptEnabled: true,
+            },
+          },
+        }],
+      }
     ],
   },
   plugins: [
     new CheckerPlugin(),
-    new HtmlWebpackPlugin({template: 'index.html.ejs',}),
+    new HtmlWebpackPlugin({ template: 'index.html.ejs', }),
   ],
   externals: {
     'react': 'React',

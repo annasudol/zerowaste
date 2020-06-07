@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Image, Button, ErrorMessage, DialogDeleteRecipe } from '../components';
+import { Image, DialogDeleteRecipe } from '../components';
 
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { Redirect, useHistory } from "react-router";
-
+import { Redirect } from "react-router";
+import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
@@ -54,14 +55,14 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
                 <h3 className="font-bebas text-lightGreen mb-1">{title}</h3>
                 <span className="font-roboto uppercase text-xs font-semibold text-darkGray">ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
-                {deleteEditBtn ? <Button
+                <br></br>
+                {deleteEditBtn ? <Link className="coral-link"
                     to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}
                 >see more
-                </Button> : <Button to={`/recipe/${id}`}>see more</Button>}
+                </Link> : <Link to={`/recipe/${id}`} className="coral-link">see more</Link>}
                 {deleteEditBtn && (<div className="">
-                    <Button color="coral" onClick={(): void => setOpen(true)}>Delete Recipe</Button>
-                    <Button onClick={editRecipe}>Edit Recipe</Button>
-
+                    <Button danger onClick={(): void => setOpen(true)} className="mr-2">Delete Recipe</Button>
+                    <Button type="primary" onClick={editRecipe}>Edit Recipe</Button>
                 </div>)}
             </div>
         </div>

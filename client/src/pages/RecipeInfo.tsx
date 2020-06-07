@@ -1,11 +1,13 @@
 import * as React from "react";
-import { LoadingBar, ErrorMessage, Button, Image, List } from '../components';
+import { LoadingBar, ErrorMessage, Image, List } from '../components';
 import { useParams, useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { AppRoutes } from "../../routes";
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import { LocationTypes } from "../utils/types";
+import { Button } from 'antd';
+
 
 const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
@@ -47,7 +49,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     return (
         <div className="content">
             <div className="max-w-md p-4">
-                <Button onClick={backRecipes} color="coral"><BackspaceIcon /></Button>
+                <Button onClick={backRecipes} type="link" className="coral-link -ml-3 p-4"><BackspaceIcon /></Button>
                 <h2 className="font-bebas uppercase text-darkGray mb-0">{title}</h2>
                 {headerInfo.map((item, index) => {
                     if (item.value) {
@@ -71,7 +73,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                                 <p className="font-roboto inline">{instructions}</p>
                             </>
                         )}
-                        {sourceUrl && <Button href={sourceUrl} >source link</Button>}
+                        {sourceUrl && <Button type="primary" ghost href={sourceUrl} >source link</Button>}
                     </div>
                 </div>
             </div>

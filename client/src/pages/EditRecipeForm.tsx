@@ -44,8 +44,6 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
         updateRecipe({ variables: { id: recipeID, title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
     }
 
-
-
     if (data) {
         return <Redirect to={{ pathname: `/recipe/${data.updateRecipe.id}`, state: { backPath: '/user' } }} />
     }

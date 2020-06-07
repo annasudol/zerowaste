@@ -17,8 +17,6 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
         dispatchReduxAction(createProductsList(ingredients))
         return history.push({ pathname: AppRoutes.RecipesList });
     }
-
-
     return (<>
         <AutoComplete list={ingredients} saveList={(value: string[]): void => setIngredients(value)} />
         {ingredients.length > 0 && <Button type="primary" onClick={searchRecipes}>{btnText}</Button>}
@@ -26,5 +24,4 @@ export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = 
     )
 }
 
-// RecipeForm
 

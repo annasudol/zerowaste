@@ -3,6 +3,7 @@ import { products } from "../assets/data/products";
 import { ListType } from "../utils/types";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+
 const productsTitles = products.reduce((accumulator: any, currentValue: ListType) => {
     return [...accumulator, currentValue.title]
 }, []);
@@ -41,8 +42,7 @@ export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ place
             renderInput={params => (
                 <TextField
                     {...params}
-                    label={placeholder}
-                    variant="outlined"
+                    label={placeholder || "Add at least one product"}
                 />
             )}
             onChange={(event, value: string[], reason): void => handleChange(value)}

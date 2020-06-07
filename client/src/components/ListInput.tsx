@@ -26,13 +26,6 @@ interface ListInputProps {
 export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailedIngredients, detailedIngredients, form }): any => {
     const [input, setInput] = React.useState<string>("")
 
-    // const onFinish = values => {
-    //     console.log(input);
-    // };
-
-
-
-
     const handleIngredientChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
 
@@ -43,7 +36,6 @@ export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailed
     const handleIngredientsChange = () => {
         setDetailedIngredients([...detailedIngredients, input]);
         formRef.current?.resetFields();
-        // detailedIngredients(detailedIngredients)
         setInput("");
     };
 
@@ -60,4 +52,3 @@ export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailed
 
     );
 }
-// deleteItem={(text: string): any => deleteDetailedIngredients(text)}

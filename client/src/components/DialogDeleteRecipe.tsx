@@ -8,7 +8,8 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { ErrorMessage, Button } from "../components";
+import { ErrorMessage } from "../components";
+import { Button } from 'antd';
 
 const DELETE_RECIPE = gql`
   mutation DeleteRecipe($id: ID!) {
@@ -60,7 +61,7 @@ export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps
                     Keep the recipe
                 </Button>
 
-                <Button onClick={handleDeleteRecipe} color="coral">
+                <Button onClick={handleDeleteRecipe} type="default" danger>
                     Delete recipe
                 </Button>
             </DialogActions>

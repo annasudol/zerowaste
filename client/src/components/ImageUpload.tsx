@@ -60,7 +60,7 @@ export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, 
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            action="https://spoonacular.com/recipeImages/48191-312x231.jpg"
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
