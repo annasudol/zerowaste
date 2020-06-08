@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { combineResolvers } = require('graphql-resolvers');
-
 const User = require('../database/models/user');
 const Recipe = require('../database/models/recipe');
 const { isAuthenticated } = require('./middleware');

@@ -1,6 +1,33 @@
 import * as React from "react";
 import { Form, Input, Button } from 'antd';
+import { AlertNewUser } from "./AlertNewUser";
 
+import { useSubscription } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
+
+// const NEW_USER_SUBSCRIPTION = gql`
+//   subscription userCreated {
+//     userCreated {
+//         name
+//         email
+//     }
+//   }
+// `;
+
+// const messagesAddedSubscription = gql`
+//   subscription {
+//     messageAdded {
+//     id
+//     text
+//   }
+//   }
+// `;
+
+// export function onMessageAdded(handleMessage) {
+//   const observable = subscribe({ query: messagesAddedSubscription });
+//   observable.subscribe(({ data }) => handleMessage(data.messageAdded));
+// }
 
 export interface LoginInputs {
     email: string
@@ -29,9 +56,11 @@ export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleS
     const onFinish = (inputValues) => {
         handleSubmit(inputValues)
     };
+    // const { data, error } = useSubscription(NEW_USER_SUBSCRIPTION);
     return (
         <div className="content overflow-hidden flex justify-center items-center">
             <div className="form  flex flex-col">
+
                 <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">{loginPage ? 'Log in' : 'Sign Up'}</h1>
                 {errorMessage && <p className="text-coral text-sm text-center mb-3">{errorMessage}</p>}
                 <Form

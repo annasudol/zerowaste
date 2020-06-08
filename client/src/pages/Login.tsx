@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
 import ApolloClient from 'apollo-client';
 import { AppRoutes } from "../../routes";
+import { AlertNewUser } from "../components/AlertNewUser";
 
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
@@ -52,7 +53,7 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
     }
     return (
         <>
-
+            <AlertNewUser />
             <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
         </>
     )

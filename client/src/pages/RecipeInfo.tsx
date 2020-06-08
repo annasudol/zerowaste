@@ -32,15 +32,15 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const history = useHistory();
     const location: LocationTypes = useLocation();
     const backPath = location?.state?.backPath;
-    const { data, loading, error, refetch } = useQuery(
+    const { data, loading, error } = useQuery(
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
     );
-    React.useEffect(() => {
-        if (location.state.callRefetch) {
-            refetch()
-        }
-    }, [location.state.callRefetch])
+    // React.useEffect(() => {
+    //     if (location.state.callRefetch) {
+    //         refetch()
+    //     }
+    // }, [location.state])
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
@@ -77,6 +77,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
                                 <p className="font-roboto inline">{instructions}</p>
                             </>
                         )}
+                        <br></br>
                         {sourceUrl && <Button type="primary" ghost href={sourceUrl} >source link</Button>}
                     </div>
                 </div>

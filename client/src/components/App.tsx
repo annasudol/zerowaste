@@ -4,14 +4,15 @@ import { Login, SignUp, Main, RecipesList, AddRecipeForm, RecipeInfo, UserInfo, 
 import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
 import { ErrorMessage } from './ErrorMessage';
+import { getAccessToken } from "../utils/userAuth";
+import { AlertNewUser } from "./AlertNewUser";
 
 
 export const App: React.FunctionComponent = () => {
-    const token = window.localStorage.getItem('token');
-
+    const token = getAccessToken()
     return (
         <>
-            <Navigation token={token} />
+            <Navigation />
             <Switch>
                 <Route path={AppRoutes.Home} component={Main} exact />
                 <Route path={AppRoutes.RecipesList} component={RecipesList} />

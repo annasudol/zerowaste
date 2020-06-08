@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { AppRoutes } from "../../routes";
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
+import { onUserAdded } from "../graphql";
 
 
 export const SIGNUP_USER = gql`
@@ -25,6 +26,9 @@ export const SignUp: React.FunctionComponent = (): React.ReactElement => {
   const handleSubmit = (inputs: RegisterInputs) => {
     signUpUser({ variables: { name: inputs.name, email: inputs.email, password: inputs.password } });
   }
+  React.useEffect(() => {
+    onUserAdded(data);
+  }, [data, onUserAdded])
 
   if (loading) {
     return <LoadingBar />
