@@ -36,7 +36,7 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
     const location: LocationTypes = useLocation();
     const initialState: RecipeStateProps = location.state;
     const { recipeID } = useParams();
-    const [updateRecipe, { data, error, loading }] = useMutation(UPDATE_RECIPE);
+    const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
     const history = useHistory();
 
     const handleSubmit = (inputValues: RecipeStateProps): any => {
@@ -45,7 +45,7 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
     }
 
     if (data) {
-        return <Redirect to={{ pathname: `/recipe/${data.updateRecipe.id}`, state: { backPath: '/user' } }} />
+        return <Redirect to={{ pathname: `/recipe/${data.updateRecipe.id}`, state: { backPath: '/user', callRefetch: true } }} />
     }
     return (
         <div className="content">

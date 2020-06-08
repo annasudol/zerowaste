@@ -5,6 +5,7 @@ export interface LocationTypes {
     state: {
         ingredients?: string[]
         backPath?: string
+        callRefetch?: boolean
     };
     key?: string
 }

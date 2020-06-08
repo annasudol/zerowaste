@@ -3,18 +3,8 @@ import { FormInstance } from 'antd/lib/form';
 import { AutoComplete, List } from "../components"
 import * as React from "react";
 
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
 const formRef = React.createRef<FormInstance>();
 
-
-const validateMessages = {
-    required: '${label} is required!',
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
-};
 
 // tslint:disable-next-line: no-empty-interface
 interface ListInputProps {
@@ -28,7 +18,6 @@ export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailed
 
     const handleIngredientChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
-
         setInput(event.target.value)
 
     };

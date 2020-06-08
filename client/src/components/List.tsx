@@ -17,7 +17,6 @@ export const List: React.FunctionComponent<IngredientsListProps> = ({ list = [],
                         onClick={() => deleteItem(item)}>
                         <DeleteIcon fontSize="small" />
                     </IconButton>}</div>
-
             </li>
         ))}
     </ol>

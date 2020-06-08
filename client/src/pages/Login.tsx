@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
 import { LoadingBar, Auth, LoginInputs } from "../components";
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -15,11 +14,13 @@ export const LOGIN_USER = gql`
   }
 `;
 
+const USER_CREATED_SUBSCRIPTION = gql`
+  subscription userCreated {
+    name
+    email
+  }
+`;
 
-type Inputs = {
-    email: string
-    password: string
-}
 
 export const Login: React.FunctionComponent = (): React.ReactElement => {
 
@@ -50,6 +51,9 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
         return <Redirect to={AppRoutes.Home} />
     }
     return (
-        <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
+        <>
+
+            <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
+        </>
     )
 }

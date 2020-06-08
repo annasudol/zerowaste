@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
-import { Button, LoadingBar, ErrorMessage, RecipeItem } from "../components";
+import { LoadingBar, ErrorMessage, RecipeItem } from "../components";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -21,13 +20,9 @@ const GET_USER_INFO = gql`
 
 
 
-
 export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
 
     const { data, loading, error } = useQuery(GET_USER_INFO);
-    // const [recipes, setRecipes] = React.useState(null);
-    // React.useEffect((): any => data.user.recipes.length > 0 && setRecipes(data.user.recipes))
-    // console.log(recipes, "recipes")
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
 

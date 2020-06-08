@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Image, DialogDeleteRecipe } from '../components';
-
-import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Redirect } from "react-router";
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+import gql from 'graphql-tag';
 
 const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
@@ -36,7 +35,7 @@ export interface RecipeItemProps {
 
 export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
     const [open, setOpen] = React.useState(false);
-    const [getRecipeData, { data, loading, error }] = useLazyQuery(GET_RECIPE_DETAILS);
+    const [getRecipeData, { data }] = useLazyQuery(GET_RECIPE_DETAILS);
     const editRecipe = () => getRecipeData({ variables: { id } })
 
 

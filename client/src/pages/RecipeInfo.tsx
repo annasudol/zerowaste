@@ -32,17 +32,21 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
     const history = useHistory();
     const location: LocationTypes = useLocation();
     const backPath = location?.state?.backPath;
-    const { data, loading, error } = useQuery(
+    const { data, loading, error, refetch } = useQuery(
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
     );
+    React.useEffect(() => {
+        if (location.state.callRefetch) {
+            refetch()
+        }
+    }, [location.state.callRefetch])
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
     if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;
-
     const backRecipes = (): void => {
-        return history.push({ pathname: backPath ? backPath : AppRoutes.RecipesList });
+        return history.push({ pathname: backPath ? backPath : AppRoutes.RecipesList, state: { callRefetch: true } });
     }
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
     const headerInfo = [{ text: "Ready in: ", value: readyInMinutes }, { text: "author ", value: author ? author : user?.name }, { text: "Servings: ", value: servings }]

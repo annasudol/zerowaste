@@ -28,18 +28,20 @@ app.use(express.json());
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
+  context: async ({ req, connection }) => {
     try {
-      const header = await req.headers;
-      const bearerHeader = await header.authorization;
- 
-      if (bearerHeader) {
-        const token = bearerHeader.split(' ')[1];
-        const payload = jwt.verify(token, 'mysecretkey');
+      if (req) {
+        const header = await req.headers;
+        const bearerHeader = await header.authorization;
 
-        const user = await User.findOne({ email: payload.email });
+        if (bearerHeader) {
+          const token = bearerHeader.split(' ')[1];
+          const payload = jwt.verify(token, 'mysecretkey');
 
-        return { user, email: user.email, userId: user.id }
+          const user = await User.findOne({ email: payload.email });
+
+          return { user, email: user.email, userId: user.id }
+        }
       }
     } catch (error) {
       if (error instanceof jwt.JsonWebTokenError) {
@@ -49,7 +51,6 @@ const apolloServer = new ApolloServer({
       console.log(error);
       throw error;
     }
-
   },
   dataSources: () => ({
     dataAPI: new DataAPI()
@@ -58,11 +59,16 @@ const apolloServer = new ApolloServer({
     return {
       message: error.message
     };
+  },
+  subscriptions: {
+    path: "/subscriptions",
+    onConnect: async (connectionParams, webSocket, context) => {
+      console.log(`Subscription client connected using Apollo server's built-in SubscriptionServer.`)
+    },
+    onDisconnect: async (webSocket, context) => {
+      console.log(`Subscription client disconnected.`)
+    }
   }
-
-
-
-
 });
 
 apolloServer.applyMiddleware({ app, path: '/graphql' });
