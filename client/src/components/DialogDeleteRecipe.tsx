@@ -20,7 +20,6 @@ const DELETE_RECIPE = gql`
   }
 `;
 
-// tslint:disable-next-line: no-shadowed-variable
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement<unknown, string> },
     ref: React.Ref<unknown>,
@@ -40,7 +39,7 @@ export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps
     if (error) {
         return (<ErrorMessage message={error.message} />)
     }
-    React.useEffect(() => data && window.location.reload(false), [data])
+    // React.useEffect(() => data && window.location.reload(false), [data])
 
     return (
         <Dialog
