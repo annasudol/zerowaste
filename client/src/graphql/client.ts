@@ -1,11 +1,12 @@
 import {
     ApolloClient, ApolloLink, HttpLink, InMemoryCache, split
 } from 'apollo-boost';
-import { getAccessToken } from './utils/userAuth';
+import { getAccessToken } from '../userAuth';
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities'
-const httpUrl = 'http://localhost:3005/graphql';
-const uri = 'ws://localhost:3005/graphql';
+
+const httpUrl = 'http://localhost:9000/graphql';
+const uri = 'ws://localhost:9000/graphql';
 
 const wslink = new WebSocketLink({
     uri, options: {
@@ -13,7 +14,7 @@ const wslink = new WebSocketLink({
             accessToken: getAccessToken()
         },
         lazy: true,
-        reconnect: true,
+        reconnect: true
     }
 })
 const httpLink = ApolloLink.from([

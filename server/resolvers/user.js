@@ -33,9 +33,8 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(input.password, 12);
         const newUser = new User({ ...input, password: hashedPassword });
         const result = await newUser.save();
-        PubSub.publish(userEvents.USER_CREATED, {
-          userCreated: result
-        });
+        PubSub.publish('USER_CREATED', { userCreated: newUser });
+        // pubSub.publish('MESSAGE_ADDED', { messageAdded: message });
         return result;
       } catch (error) {
         console.log(error);
@@ -63,7 +62,7 @@ module.exports = {
   },
   Subscription: {
     userCreated: {
-      subscribe: () => PubSub.asyncIterator(userEvents.USER_CREATED)
+      subscribe: () => PubSub.asyncIterator('USER_CREATED')
     }
   },
   User: {

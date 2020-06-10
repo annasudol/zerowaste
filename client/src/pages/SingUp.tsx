@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Auth, LoadingBar, RegisterInputs } from "../components";
 import { useMutation } from '@apollo/react-hooks';
-import { useHistory } from 'react-router';
 import { AppRoutes } from "../../routes";
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
-import { onUserAdded } from "../graphql";
+// import { onUserAdded } from "../graphql/graphql";
 
 
 export const SIGNUP_USER = gql`
@@ -27,8 +26,10 @@ export const SignUp: React.FunctionComponent = (): React.ReactElement => {
     signUpUser({ variables: { name: inputs.name, email: inputs.email, password: inputs.password } });
   }
   React.useEffect(() => {
-    onUserAdded(data);
-  }, [data, onUserAdded])
+    if (data) {
+      // onUserAdded(data);
+    }
+  }, [data])
 
   if (loading) {
     return <LoadingBar />

@@ -1,33 +1,5 @@
 import * as React from "react";
 import { Form, Input, Button } from 'antd';
-import { AlertNewUser } from "./AlertNewUser";
-
-import { useSubscription } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
-
-// const NEW_USER_SUBSCRIPTION = gql`
-//   subscription userCreated {
-//     userCreated {
-//         name
-//         email
-//     }
-//   }
-// `;
-
-// const messagesAddedSubscription = gql`
-//   subscription {
-//     messageAdded {
-//     id
-//     text
-//   }
-//   }
-// `;
-
-// export function onMessageAdded(handleMessage) {
-//   const observable = subscribe({ query: messagesAddedSubscription });
-//   observable.subscribe(({ data }) => handleMessage(data.messageAdded));
-// }
 
 export interface LoginInputs {
     email: string

@@ -15,12 +15,6 @@ export const LOGIN_USER = gql`
   }
 `;
 
-const USER_CREATED_SUBSCRIPTION = gql`
-  subscription userCreated {
-    name
-    email
-  }
-`;
 
 
 export const Login: React.FunctionComponent = (): React.ReactElement => {
@@ -52,8 +46,7 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
         return <Redirect to={AppRoutes.Home} />
     }
     return (
-        <>
-            <AlertNewUser />
+        <><AlertNewUser />
             <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
         </>
     )

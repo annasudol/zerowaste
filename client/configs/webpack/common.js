@@ -20,25 +20,6 @@ module.exports = {
         use: ['babel-loader', 'awesome-typescript-loader'],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', {
-          loader: 'css-loader', options: {
-            importLoaders: 1, lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
-              modifyVars: {
-                'primary-color': '#38C172',
-                'link-color': '#339B60',
-                'border-radius-base': '2px',
-                'btn-primary-bg': '#339B60',
-                'processing-color': '#30A763',
-                'heading-color': '#F28379',
-                'highlight-color': '#F25757'
-              },
-              javascriptEnabled: true,
-            },
-          }
-        }],
-      },
-      {
         test: /\.(scss|sass)$/,
         loaders: [
           'style-loader',

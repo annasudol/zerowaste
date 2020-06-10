@@ -34,7 +34,7 @@ export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
                 <p className="font-bebas text-lightGreen mb-1 inline">{data.user.email}</p>
             </div>
             <div className="flex-row mt-4 mb-4">
-                {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
+                {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
             </div>
         </div>
     )
