@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 import { LoadingBar, ErrorMessage, Image, List } from '../components';
 import { useParams, useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { AppRoutes } from "../../routes";
+import { AppRoutes } from '../../routes';
 import BackspaceIcon from '@material-ui/icons/Backspace';
-import { LocationTypes } from "../utils/types";
+import { LocationTypes } from '../utils/types';
 import { Button } from 'antd';
 
 
@@ -44,41 +44,41 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
-    if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;
+    if (!data) return <ErrorMessage message='Not found'></ErrorMessage>;
     const backRecipes = (): void => {
         return history.push({ pathname: backPath ? backPath : AppRoutes.RecipesList, state: { callRefetch: true } });
     }
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
-    const headerInfo = [{ text: "Ready in: ", value: readyInMinutes }, { text: "author ", value: author ? author : user?.name }, { text: "Servings: ", value: servings }]
+    const headerInfo = [{ text: 'Ready in: ', value: readyInMinutes }, { text: 'author ', value: author ? author : user?.name }, { text: 'Servings: ', value: servings }]
     return (
-        <div className="content">
-            <div className="max-w-md p-4">
-                <Button onClick={backRecipes} type="link" className="coral-link -ml-3 p-4"><BackspaceIcon /></Button>
-                <h2 className="font-bebas uppercase text-darkGray mb-0">{title}</h2>
+        <div className='content'>
+            <div className='max-w-md p-4'>
+                <Button onClick={backRecipes} type='link' className='coral-link -ml-3 p-4'><BackspaceIcon /></Button>
+                <h2 className='font-bebas uppercase text-darkGray mb-0'>{title}</h2>
                 {headerInfo.map((item, index) => {
                     if (item.value) {
                         return (
                             <React.Fragment key={index}>
-                                <p className="font-roboto text-darkGray inline">{item.text} </p>
-                                <p className="font-roboto text-green inline">{item.value}</p><br></br>
+                                <p className='font-roboto text-darkGray inline'>{item.text} </p>
+                                <p className='font-roboto text-green inline'>{item.value}</p><br></br>
                             </React.Fragment>
                         )
                     }
                 })}
 
-                <div className="flex flex-col justify-center items-start md:flex-row-reverse md:justify-between">
-                    <Image src={image} alt={`${title}'s image`} size="medium" />
+                <div className='flex flex-col justify-center items-start md:flex-row-reverse md:justify-between'>
+                    <Image src={image} alt={`${title}'s image`} size='medium' />
                     <div>
-                        <h3 className="font-roboto text-darkGray mb-0 mt-4">Ingredients:</h3>
+                        <h3 className='font-roboto text-darkGray mb-0 mt-4'>Ingredients:</h3>
                         <List list={detailedIngredients} />
                         {instructions && (
                             <>
-                                <h3 className="font-roboto text-darkGray mb- mt-4">Instructions:</h3>
-                                <p className="font-roboto inline">{instructions}</p>
+                                <h3 className='font-roboto text-darkGray mb- mt-4'>Instructions:</h3>
+                                <p className='font-roboto inline'>{instructions}</p>
                             </>
                         )}
                         <br></br>
-                        {sourceUrl && <Button type="primary" ghost href={sourceUrl} >source link</Button>}
+                        {sourceUrl && <Button type='primary' ghost href={sourceUrl} >source link</Button>}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import cx from 'classnames';
 
 export interface ImageProps {
@@ -8,7 +8,7 @@ export interface ImageProps {
     className?: string;
 }
 
-export const Image: React.FunctionComponent<ImageProps> = ({ alt, size = "medium", src, className }): React.ReactElement => {
+export const Image: React.FunctionComponent<ImageProps> = ({ alt, size = 'medium', src, className }): React.ReactElement => {
     const sizeOptions = size === 'small' ? 'w-32' : size === 'medium' ? 'w-64' : '300';
     return <img src={src} alt={alt} className={cx(sizeOptions, className)} />;
 };

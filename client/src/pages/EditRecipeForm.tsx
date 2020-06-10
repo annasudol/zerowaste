@@ -8,6 +8,7 @@ import { RecipeForm } from "../components";
 import { RecipeStateProps } from "../utils/types";
 import { Button } from 'antd';
 import { AppRoutes } from "../../routes";
+import { Store } from 'antd/lib/form/interface';
 
 const UPDATE_RECIPE = gql`
   mutation UpdateRecipe($id: ID! $title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $instructions: String! $sourceUrl: String) {
@@ -25,9 +26,7 @@ export interface LocationTypes {
     key?: string
 }
 
-// interface RecipeProps extends RecipeStateProps {
-//     id: string
-// }
+
 interface EditRecipeFormProps {
     initialState: RecipeStateProps
 }
@@ -39,7 +38,7 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
     const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
     const history = useHistory();
 
-    const handleSubmit = (inputValues: RecipeStateProps): any => {
+    const handleSubmit = (inputValues: Store): any => {
         const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
         updateRecipe({ variables: { id: recipeID, title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
     }
@@ -53,7 +52,7 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
             <div className="flex justify-center items-center">
                 <div className="w-1/2 recipe-form pb-4 pt-4">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Edit Recipe</h1>
-                    <RecipeForm handleSubmit={(inputValues: RecipeStateProps): void => handleSubmit(inputValues)} defaultValues={initialState} />
+                    <RecipeForm handleSubmit={(inputValues: Store): void => handleSubmit(inputValues)} defaultValues={initialState} />
                 </div>
             </div>
         </div>

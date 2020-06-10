@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Navigation, PublicRoute, PrivateRoute, ErrorMessage } from "../components";
-import { Login, SignUp, Home, RecipesList, AddRecipeForm, RecipeInfo, UserInfo, EditRecipeForm } from "../pages";
+import * as React from 'react';
+import { Navigation, PublicRoute, PrivateRoute, ErrorMessage } from '../components';
+import { Login, SignUp, Home, RecipesList, AddRecipeForm, RecipeInfo, UserInfo, EditRecipeForm } from '../pages';
 import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
 

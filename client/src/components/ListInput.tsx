@@ -1,7 +1,7 @@
 import { Form, Input, Button, Select, InputNumber } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { AutoComplete, List } from "../components"
-import * as React from "react";
+import { AutoComplete, List } from '../components'
+import * as React from 'react';
 
 const formRef = React.createRef<FormInstance>();
 
@@ -14,7 +14,7 @@ interface ListInputProps {
     detailedIngredients: string[] | []
 }
 export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailedIngredients, detailedIngredients, form }): any => {
-    const [input, setInput] = React.useState<string>("")
+    const [input, setInput] = React.useState<string>('')
 
     const handleIngredientChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -25,7 +25,7 @@ export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailed
     const handleIngredientsChange = () => {
         setDetailedIngredients([...detailedIngredients, input]);
         formRef.current?.resetFields();
-        setInput("");
+        setInput('');
     };
 
     React.useEffect(() => {
@@ -35,7 +35,7 @@ export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailed
     return (
         <>
             <Input onChange={handleIngredientChange} value={input} />
-            <Button type="dashed" onClick={handleIngredientsChange} disabled={input.length < 4}>Add Ingredient</Button>
+            <Button type='dashed' onClick={handleIngredientsChange} disabled={input.length < 4}>Add Ingredient</Button>
         </>
 
 

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { RecipeItem } from '../components';
@@ -28,12 +28,12 @@ export const RecipesList: React.FunctionComponent = () => {
 
   if (loading) return <LoadingBar />
   if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
-  if (!data) return <ErrorMessage message="Not found"></ErrorMessage>;
-  return (<div className="main">
-    <div className="ml-2  search-form">
+  if (!data) return <ErrorMessage message='Not found'></ErrorMessage>;
+  return (<div className='main'>
+    <div className='ml-2  search-form'>
       <SearchRecipesForm btnText='Update Results' />
     </div>
-    <div className="flex-col list">
+    <div className='flex-col list'>
       {data.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
     </div>
   </div>)

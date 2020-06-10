@@ -10,6 +10,7 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { ErrorMessage } from "../components";
 import { Button } from 'antd';
+import { ExecutionResult } from "graphql";
 
 const DELETE_RECIPE = gql`
   mutation DeleteRecipe($id: ID!) {
@@ -21,7 +22,7 @@ const DELETE_RECIPE = gql`
 
 // tslint:disable-next-line: no-shadowed-variable
 const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    props: TransitionProps & { children?: React.ReactElement<unknown, string> },
     ref: React.Ref<unknown>,
 ) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +35,7 @@ interface DialogDeleteRecipeProps {
 export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
     const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
 
-    const handleDeleteRecipe = () => deleteRecipe({ variables: { id: recipeId } })
+    const handleDeleteRecipe = (): Promise<ExecutionResult<unknown>> => deleteRecipe({ variables: { id: recipeId } })
 
     if (error) {
         return (<ErrorMessage message={error.message} />)
@@ -53,7 +54,7 @@ export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps
             {!data && <DialogTitle id="alert-dialog-slide-title">Are you sure do you want to delete recipe</DialogTitle>}
             <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
-                    The recipe will be deleted immediately. You can't undo this action
+                    The recipe will be deleted immediately. You can&apos;t undo this action
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

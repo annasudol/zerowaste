@@ -1,69 +1,74 @@
 // shared config (dev and prod)
-const { resolve } = require('path');
-const { CheckerPlugin } = require('awesome-typescript-loader');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require("path");
+const { CheckerPlugin } = require("awesome-typescript-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
-  context: resolve(__dirname, '../../src'),
+  context: resolve(__dirname, "../../src"),
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader', 'source-map-loader'],
+        use: ["babel-loader", "source-map-loader"],
         exclude: /node_modules/,
       },
       {
         test: /\.tsx?$/,
-        use: ['babel-loader', 'awesome-typescript-loader'],
+        use: ["babel-loader", "awesome-typescript-loader"],
       },
       {
         test: /\.(scss|sass)$/,
         loaders: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'sass-loader',
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          "sass-loader",
         ],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file-loader?hash=sha512&digest=hex&name=img/[hash].[ext]',
-          'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',
+          "file-loader?hash=sha512&digest=hex&name=img/[hash].[ext]",
+          "image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false",
         ],
       },
       {
         test: /\.less$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS
-        }, {
-          loader: 'less-loader', // compiles Less to CSS
-          options: {
-            lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
-              modifyVars: {
-                'primary-color': '#38C172',
-                'link-color': '#FFF',
-                'border-radius-base': '2px',
-                'btn-primary-bg': '#339B60'
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader", // translates CSS into CommonJS
+          },
+          {
+            loader: "less-loader", // compiles Less to CSS
+            options: {
+              lessOptions: {
+                // If you are using less-loader@5 please spread the lessOptions to options directly
+                modifyVars: {
+                  "primary-color": "#38C172",
+                  "link-color": "#FFF",
+                  "border-radius-base": "2px",
+                  "btn-primary-bg": "#339B60",
+                },
+                javascriptEnabled: true,
               },
-              javascriptEnabled: true,
             },
           },
-        }],
-      }
+        ],
+      },
     ],
   },
   plugins: [
     new CheckerPlugin(),
-    new HtmlWebpackPlugin({ template: 'index.html.ejs', }),
+    new HtmlWebpackPlugin({ template: "index.html.ejs" }),
   ],
   externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
+    react: "React",
+    "react-dom": "ReactDOM",
   },
   performance: {
     hints: false,

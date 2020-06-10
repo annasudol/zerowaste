@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 import { ErrorMessage, LoadingBar, RecipeForm } from '../components'
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { Redirect } from "react-router";
-import { RecipeStateProps } from "../utils/types";
+import { Redirect } from 'react-router';
+import { Store } from 'antd/lib/form/interface';
 
 const ADD_RECIPE = gql`
   mutation CreateRecipe($title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $instructions: String! $sourceUrl: String) {
@@ -17,7 +17,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
 
     const [createRecipe, { data, error, loading }] = useMutation(ADD_RECIPE);
 
-    const handleSubmit = (inputValues: RecipeStateProps): any => {
+    const handleSubmit = (inputValues: Store): any => {
         const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
         createRecipe({ variables: { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
     }
@@ -31,11 +31,11 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
     }
 
     return (
-        <div className="content p-10">
-            <div className="flex justify-center items-center">
-                <div className="flex flex-col w-2/3 recipe-form">
-                    <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Add Recipe</h1>
-                    <RecipeForm handleSubmit={(inputValues: RecipeStateProps): void => handleSubmit(inputValues)} fillForm={true} />
+        <div className='content p-10'>
+            <div className='flex justify-center items-center'>
+                <div className='flex flex-col w-2/3 recipe-form'>
+                    <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Add Recipe</h1>
+                    <RecipeForm handleSubmit={(inputValues: Store): void => handleSubmit(inputValues)} fillForm={true} />
                 </div>
             </div>
         </div>
