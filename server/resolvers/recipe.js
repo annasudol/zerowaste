@@ -3,6 +3,7 @@ const { combineResolvers } = require('graphql-resolvers');
 const Recipe = require('../database/models/recipe');
 const User = require('../database/models/user');
 const { isAuthenticated, isRecipeOwner } = require('./middleware');
+const fileUpload = require('../middleware/file-upload');
 
 module.exports = {
   Query: {
@@ -38,6 +39,8 @@ module.exports = {
     createRecipe: combineResolvers(isAuthenticated, async (_, input, { email }) => {
       try {
         const user = await User.findOne({ email });
+        console.log(input, "input")
+        fileUpload.single('image');
         const recipe = new Recipe({ ...input, user: user.id });
         const result = await recipe.save();
         user.recipes.push(result.id);

@@ -9,7 +9,7 @@ interface ImageUploadProps {
     form?(image: string): void
 }
 
-function getBase64(img: Blob, callback: { (imageUrl: any): void; (arg0: string | ArrayBuffer | null): any; }) {
+function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
@@ -29,7 +29,7 @@ function beforeUpload(file) {
 
 export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, setImage, form }): React.ReactElement => {
     const [loading, setLoading] = React.useState<boolean>(false);
-    // const [image, setImage] = React.useState<string | undefined>(undefined);
+    const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
 
     const handleChange = info => {
         if (info.file.status === 'uploading') {
@@ -37,7 +37,8 @@ export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, 
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl => {
+            getBase64(info.file.originFileObj, (imageUrl: string) => {
+                console.log(imageUrl, "imageUrl")
                 setImage(imageUrl)
                 if (form) {
                     form(imageUrl)
@@ -56,19 +57,15 @@ export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, 
 
     return (
         <Upload
-            name='avatar'
-            listType='picture-card'
-            className='avatar-uploader'
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
             showUploadList={false}
-            action='https://spoonacular.com/recipeImages/48191-312x231.jpg'
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
-            {image ? (
-                <img src={image} alt='avatar' style={{ width: '100%' }} />
-            ) : (
-                    uploadButton
-                )}
+            {image ? <img src={image} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
     )
 };

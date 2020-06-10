@@ -40,6 +40,7 @@ export const RecipeForm: React.FunctionComponent<RecipeFormProps> = ({ handleSub
     }, [defaultValues]);
 
     const onFinish = (values: Store) => {
+        console.log(values, "values")
         handleSubmit(values);
     };
 

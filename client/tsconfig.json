@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "tests/App.test.tsx"],
   "awesomeTypescriptLoaderOptions": {
     "reportFiles": ["./src/**/*"]
   }
