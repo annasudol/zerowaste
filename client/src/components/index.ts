@@ -1,4 +1,5 @@
 export * from './App';
+export * from './AuthContext';
 export * from './Auth';
 export * from './AutoComplete';
 export * from './DialogDeleteRecipe';

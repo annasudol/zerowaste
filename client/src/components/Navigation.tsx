@@ -6,17 +6,16 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { logoutUser, isLoggedIn } from '../userAuth';
+import { useAuth } from "../components";
 
 export const Navigation: React.FunctionComponent = (): React.ReactElement => {
-    const [open, toggleOpen] = React.useState<boolean>(false);
-    const userLogged = isLoggedIn();
+    const [open, toggleOpen] = React.useState<boolean>(true);
+    const { userLogged, logoutUser } = useAuth();
     const history = useHistory();
 
     const logout = (): void => {
         logoutUser()
         history.push(`${AppRoutes.Home}`)
-        // window.location.reload(false)
     }
 
 

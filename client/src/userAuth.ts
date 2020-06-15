@@ -1,4 +1,4 @@
-const isLogged = 'token'
+export const isLogged = 'token'
 
 export const rememberLogin = (token: string) => localStorage.setItem(isLogged, token)
 

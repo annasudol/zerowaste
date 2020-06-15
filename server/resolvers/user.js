@@ -34,7 +34,6 @@ module.exports = {
         const newUser = new User({ ...input, password: hashedPassword });
         const result = await newUser.save();
         PubSub.publish('USER_CREATED', { userCreated: newUser });
-        // pubSub.publish('MESSAGE_ADDED', { messageAdded: message });
         return result;
       } catch (error) {
         console.log(error);

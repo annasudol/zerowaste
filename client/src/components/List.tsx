@@ -8,8 +8,8 @@ interface IngredientsListProps {
 }
 export const List: React.FunctionComponent<IngredientsListProps> = ({ list = [], deleteItem }): React.ReactElement => (
     <ol>
-        {list.map((item, index) => (
-            <li key={index} className='ml-6'>
+        {list.map((item) => (
+            <li key={item} className='ml-6'>
                 <div className='w-full flex justify-between'>
                     <span className='mt-4'>{item}</span>
                     {deleteItem && <IconButton

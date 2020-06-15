@@ -27,9 +27,9 @@ function beforeUpload(file) {
     return isJpgOrPng && isLt2M;
 }
 
-export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, setImage, form }): React.ReactElement => {
+export const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, form }): React.ReactElement => {
     const [loading, setLoading] = React.useState<boolean>(false);
-    const [imageUrl, setImageUrl] = React.useState<string | undefined>(undefined);
+    const [imageUrl, setImageUrl] = React.useState<string>();
 
     const handleChange = info => {
         if (info.file.status === 'uploading') {
@@ -37,6 +37,7 @@ export const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({ image, 
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
+            // tslint:disable-next-line: no-shadowed-variable
             getBase64(info.file.originFileObj, (imageUrl: string) => {
                 console.log(imageUrl, "imageUrl")
                 setImage(imageUrl)

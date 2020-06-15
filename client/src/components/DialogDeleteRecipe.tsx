@@ -35,12 +35,14 @@ interface DialogDeleteRecipeProps {
 export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
     const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
 
-    const handleDeleteRecipe = (): Promise<ExecutionResult<unknown>> => deleteRecipe({ variables: { id: recipeId } })
+    const handleDeleteRecipe = (): void => {
+        deleteRecipe({ variables: { id: recipeId } })
+        toggleOpen(false)
+    }
 
     if (error) {
         return (<ErrorMessage message={error.message} />)
     }
-    // React.useEffect(() => data && window.location.reload(false), [data])
 
     return (
         <Dialog
@@ -52,11 +54,6 @@ export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps
             aria-describedby="alert-dialog-slide-description"
         >
             {!data && <DialogTitle id="alert-dialog-slide-title">Are you sure do you want to delete recipe</DialogTitle>}
-            <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    The recipe will be deleted immediately. You can&apos;t undo this action
-                </DialogContentText>
-            </DialogContent>
             <DialogActions>
                 <Button onClick={(): void => toggleOpen(false)}>
                     Keep the recipe

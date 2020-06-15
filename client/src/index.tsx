@@ -8,15 +8,18 @@ import { store } from './state';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { HashRouter } from 'react-router-dom'
 import client from './graphql/client';
+import { AuthProvider } from "./components"
 
 const rootEl = document.getElementById('root');
 
 render(
   <HashRouter>
     <ApolloProvider client={client}>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <AuthProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </AuthProvider>
     </ApolloProvider>
   </HashRouter>,
   rootEl,

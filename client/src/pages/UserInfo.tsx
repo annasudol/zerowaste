@@ -2,6 +2,7 @@ import * as React from 'react';
 import { LoadingBar, ErrorMessage, RecipeItem } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { AlertNewUser } from "../components/AlertNewUser";
 
 const GET_USER_INFO = gql`
   query user {

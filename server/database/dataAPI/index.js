@@ -1,5 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
-const app_key = 'd7b7dba12474485bac9f370e6f1e378a';
+const app_key = process.env.SPOONACULAR_API_KEY;
 
 class DataAPI extends RESTDataSource {
     constructor() {

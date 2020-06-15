@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom'
 import { isLoggedIn } from '../userAuth'
 import { AppRoutes } from '../../routes';
-import { SignUp } from '../pages/SingUp';
 
 interface Props extends RouteProps {
     allowed: boolean
@@ -39,7 +38,7 @@ const ProtectedRoute: React.FunctionComponent<Props> = ({
                     }
                 }
 
-                // return <Redirect to={redirectTo} />;
+                return <Redirect to={redirectTo} />;
             }} />
     )
 
@@ -48,5 +47,5 @@ export const PrivateRoute: React.FunctionComponent<RouteProps> = props => (
 )
 
 export const PublicRoute: React.FunctionComponent<RouteProps> = props => (
-    <ProtectedRoute {...props} allowed={true} redirectTo={AppRoutes.Home} />
+    <ProtectedRoute {...props} allowed redirectTo={AppRoutes.Home} />
 )

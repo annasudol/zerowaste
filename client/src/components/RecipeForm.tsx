@@ -32,15 +32,14 @@ export const RecipeForm: React.FunctionComponent<RecipeFormProps> = ({ handleSub
     const [error, setError] = React.useState<boolean>(false)
 
     React.useEffect(() => {
-        if (defaultValues) {
-            formRef.current?.setFieldsValue({ ...defaultValues });
+        if (defaultValues && formRef.current) {
+            formRef.current.setFieldsValue({ ...defaultValues });
             setIngredients(defaultValues.ingredients)
             setDetailedIngredients(defaultValues.detailedIngredients)
         }
-    }, [defaultValues]);
+    }, [defaultValues, formRef.current]);
 
     const onFinish = (values: Store) => {
-        console.log(values, "values")
         handleSubmit(values);
     };
 

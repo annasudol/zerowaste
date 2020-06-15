@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { AppRoutes } from '../../routes';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
-// import { onUserAdded } from '../graphql/graphql';
 import { Store } from 'antd/lib/form/interface';
 
 
@@ -26,11 +25,7 @@ export const SignUp: React.FunctionComponent = (): React.ReactElement => {
   const handleSubmit = (inputs: Store) => {
     signUpUser({ variables: { name: inputs.name, email: inputs.email, password: inputs.password } });
   }
-  React.useEffect(() => {
-    if (data) {
-      // onUserAdded(data);
-    }
-  }, [data])
+
 
   if (loading) {
     return <LoadingBar />

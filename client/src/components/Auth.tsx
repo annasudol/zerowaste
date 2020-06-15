@@ -20,7 +20,6 @@ export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleS
   const onFinish = (inputValues: Store) => {
     handleSubmit(inputValues)
   };
-  // const { data, error } = useSubscription(NEW_USER_SUBSCRIPTION);
   return (
     <div className='content overflow-hidden flex justify-center items-center'>
       <div className='form  flex flex-col'>

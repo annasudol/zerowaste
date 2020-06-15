@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const connection = () => {
-  // eslint-disable-next-line no-undef
-  mongoose.connect(`mongodb+srv://anna:Anulka12@cluster0-ghyqs.mongodb.net/test?retryWrites=true&w=majority`, {
+  mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER_NAME}:${process.env.MONGO_DB_USER_PASSWORD}@cluster0-ghyqs.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
-  }).then(conn => console.log(`MangoDB connected: ${conn.connection.host}`).catch(error => console.warn(error))
-  )
+  }).then(conn => console.log(`MangoDB connected: ${conn.connection.host}`))
+    .catch(error => console.warn(error))
 };
 
 // eslint-disable-next-line no-undef

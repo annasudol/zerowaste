@@ -36,11 +36,7 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
     );
-    // React.useEffect(() => {
-    //     if (location.state.callRefetch) {
-    //         refetch()
-    //     }
-    // }, [location.state])
+
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
@@ -55,10 +51,10 @@ export const RecipeInfo: React.FunctionComponent = (): React.ReactElement => {
             <div className='max-w-md p-4'>
                 <Button onClick={backRecipes} type='link' className='coral-link -ml-3 p-4'><BackspaceIcon /></Button>
                 <h2 className='font-bebas uppercase text-darkGray mb-0'>{title}</h2>
-                {headerInfo.map((item, index) => {
+                {headerInfo.map((item) => {
                     if (item.value) {
                         return (
-                            <React.Fragment key={index}>
+                            <React.Fragment key={item.text}>
                                 <p className='font-roboto text-darkGray inline'>{item.text} </p>
                                 <p className='font-roboto text-green inline'>{item.value}</p><br></br>
                             </React.Fragment>

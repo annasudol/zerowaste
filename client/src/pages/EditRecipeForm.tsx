@@ -33,7 +33,7 @@ export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | 
     const { recipeID } = useParams();
     const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
     const history = useHistory();
-    console.log(initialState, "initialState")
+    // console.log(initialState, "initialState")
     const handleSubmit = (inputValues: Store): any => {
         const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
         updateRecipe({ variables: { id: recipeID, title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });

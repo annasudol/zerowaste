@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { LoadingBar, Auth } from '../components';
+import { LoadingBar, Auth, useAuth } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
 import { AppRoutes } from '../../routes';
-import { AlertNewUser } from '../components/AlertNewUser';
-import { rememberLogin } from '../userAuth';
 import { Store } from 'antd/lib/form/interface';
 
 export const LOGIN_USER = gql`
@@ -16,15 +14,15 @@ export const LOGIN_USER = gql`
   }
 `;
 
+
 export const Login: React.FunctionComponent = (): React.ReactElement => {
-
-
+  const { rememberLogin } = useAuth();
   const [login, { data, loading, error }] = useMutation(
     LOGIN_USER,
     {
+      // tslint:disable-next-line: no-shadowed-variable
       onCompleted({ login }) {
-        rememberLogin(login.token)
-        window.location.reload(false)
+        rememberLogin(login.token);
       }
     }
   );
@@ -42,7 +40,7 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
     return <Redirect to={AppRoutes.Home} />
   }
   return (
-    <><AlertNewUser />
+    <>
       <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
     </>
   )

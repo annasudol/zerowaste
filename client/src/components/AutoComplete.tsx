@@ -16,7 +16,7 @@ interface AutoCompleteProps {
     error?: boolean
 }
 
-export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ placeholder, form, saveList, list, error }) => {
+export const AutoComplete: React.FunctionComponent<AutoCompleteProps> = ({ placeholder, form, saveList, list, error = false }) => {
 
     const handleChange = (value: string[]) => {
         if (form) {
