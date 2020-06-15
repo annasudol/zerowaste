@@ -45,7 +45,7 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
     }
 
     if (open) {
-        return <DialogDeleteRecipe open={open} toggleOpen={(value): void => setOpen(value)} recipeId={id} />
+        return <DialogDeleteRecipe open toggleOpen={(value): void => setOpen(value)} recipeId={id} />
     }
     return (
         <div className='flex bg-milk bo mb-4 mr-4 max-w-sm lg:max-w-xl mb-3 list--item relative' key={id}>

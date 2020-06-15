@@ -2,8 +2,10 @@ const { combineResolvers } = require('graphql-resolvers');
 
 const Recipe = require('../database/models/recipe');
 const User = require('../database/models/user');
-const { isAuthenticated, isRecipeOwner, fileUpload } = require('./middleware');
-
+const { isAuthenticated, isRecipeOwner } = require('./middleware');
+const { PubSub } = require('graphql-subscriptions');
+const pubSub = new PubSub();
+const CHANGES_IN_RECIPE = 'CHANGES_IN_RECIPE';
 module.exports = {
   Query: {
     recipes: async (_, { ingredients }, { dataSources }) => {
@@ -38,12 +40,13 @@ module.exports = {
     createRecipe: combineResolvers(isAuthenticated, async (_, input, { email }) => {
       try {
         const user = await User.findOne({ email });
-        console.log(input.image, "input")
-        fileUpload.single('image');
+        // console.log(input.image, "input")
+        // fileUpload.single('image');
         const recipe = new Recipe({ ...input, user: user.id });
         const result = await recipe.save();
         user.recipes.push(result.id);
         await recipe.save();
+        pubSub.publish(CHANGES_IN_RECIPE, { changesInRecipe: result });
         return result;
       } catch (error) {
         console.log(error);
@@ -73,17 +76,20 @@ module.exports = {
       }
     }),
   },
-
   RecipeDetails: {
-    user: async (parent, _, { loaders }) => {
+    user: async (parent, _,) => {
       try {
         const user = await User.findById(parent.user);
-        // const user = await loaders.user.load(parent.user.toString());
         return user;
       } catch (error) {
         console.log(error);
         throw error;
       }
+    }
+  },
+  Subscription: {
+    changesInRecipe: {
+      subscribe: () => pubSub.asyncIterator('CHANGES_IN_RECIPE')
     }
   }
 }

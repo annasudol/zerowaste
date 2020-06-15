@@ -17,7 +17,7 @@ module.exports = gql`
   type Token {
     token: String!
   }
-  
+
   type User {
     id: ID!
     name: String!
@@ -27,8 +27,7 @@ module.exports = gql`
     updatedAt: Date!
   }
 
-  extend type Subscription {
-    userCreated: User
+  type UserUpdated {
+    user: User 
   }
-
 `;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { LoadingBar, ErrorMessage, RecipeItem } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { AlertNewUser } from "../components/AlertNewUser";
+import { Recipes } from '../components/Recipes';
 
 const GET_USER_INFO = gql`
   query user {
@@ -21,9 +21,9 @@ const GET_USER_INFO = gql`
 
 
 
-export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
+export const UserInfo: React.FunctionComponent = (): React.ReactElement | any => {
 
-    const { data, loading, error } = useQuery(GET_USER_INFO);
+    const { data, loading, error, subscribeToMore } = useQuery(GET_USER_INFO);
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
 
@@ -35,9 +35,12 @@ export const UserInfo: React.FunctionComponent = (): React.ReactElement => {
                 <p className='font-bebas text-lightGreen mb-1 inline'>{data.user.email}</p>
             </div>
             <div className='flex-row mt-4 mb-4'>
-                {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
+                <Recipes recipes={data.user.recipes} subscribeToMore={subscribeToMore} />
             </div>
         </div>
     )
+
+    // {data.user.recipes.length === 0 ? <p>Don't have recipes yet</p> : data.user.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} deleteEditBtn={true} />)}
+
 
 }

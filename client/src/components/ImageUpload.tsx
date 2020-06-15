@@ -39,7 +39,6 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, form 
             // Get this url from response in real world.
             // tslint:disable-next-line: no-shadowed-variable
             getBase64(info.file.originFileObj, (imageUrl: string) => {
-                console.log(imageUrl, "imageUrl")
                 setImage(imageUrl)
                 if (form) {
                     form(imageUrl)

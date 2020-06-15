@@ -4,8 +4,8 @@ const { combineResolvers } = require('graphql-resolvers');
 const User = require('../database/models/user');
 const Recipe = require('../database/models/recipe');
 const { isAuthenticated } = require('./middleware');
-const PubSub = require('../subscription');
-const { userEvents } = require('../subscription/events');
+// const PubSub = require('../subscription');
+// const { userEvents } = require('../subscription/events');
 
 module.exports = {
   Query: {
@@ -33,7 +33,6 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(input.password, 12);
         const newUser = new User({ ...input, password: hashedPassword });
         const result = await newUser.save();
-        PubSub.publish('USER_CREATED', { userCreated: newUser });
         return result;
       } catch (error) {
         console.log(error);
@@ -59,11 +58,16 @@ module.exports = {
       }
     }
   },
-  Subscription: {
-    userCreated: {
-      subscribe: () => PubSub.asyncIterator('USER_CREATED')
-    }
-  },
+  // Subscription: {
+  //   userCreated: {
+  //     subscribe: () => PubSub.asyncIterator('USER_CREATED')
+  //   },
+  //   addedRecipe: {
+  //     subscribe: () => PubSub.asyncIterator('USER_CREATED')
+  //   }
+  // },
+  // PubSub.publish('USER_CREATED', { userCreated: newUser });
+
   User: {
     recipes: async ({ id }) => {
       try {

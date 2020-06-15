@@ -18,7 +18,7 @@ const GET_RECIPES = gql`
 `;
 
 
-export const RecipesList: React.FunctionComponent = () => {
+export const RecipesList: React.FunctionComponent<{ more?: any }> = ({ more }) => {
 
   const ingredients = useSelector(getProducts);
   const { data, loading, error } = useQuery(
@@ -37,5 +37,4 @@ export const RecipesList: React.FunctionComponent = () => {
       {data.recipes.map(recipe => <RecipeItem key={recipe.id} id={recipe.id} title={recipe.title} image={recipe.image} ingredients={recipe.ingredients} />)}
     </div>
   </div>)
-
 }
