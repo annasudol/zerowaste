@@ -27,13 +27,13 @@ export interface LocationTypes {
 }
 
 
-export const EditRecipeForm: React.FunctionComponent = (): React.ReactElement | any => {
+export const EditRecipeForm: React.FC = (): React.ReactElement => {
     const location: LocationTypes = useLocation();
     const initialState: RecipeStateProps = location.state;
     const { recipeID } = useParams();
     const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
     const history = useHistory();
-    // console.log(initialState, "initialState")
+
     const handleSubmit = (inputValues: Store): any => {
         const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
         updateRecipe({ variables: { id: recipeID, title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });

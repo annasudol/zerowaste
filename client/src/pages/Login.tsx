@@ -15,7 +15,7 @@ export const LOGIN_USER = gql`
 `;
 
 
-export const Login: React.FunctionComponent = (): React.ReactElement => {
+export const Login: React.FC = (): React.ReactElement => {
   const { rememberLogin } = useAuth();
   const [login, { data, loading, error }] = useMutation(
     LOGIN_USER,
@@ -39,9 +39,5 @@ export const Login: React.FunctionComponent = (): React.ReactElement => {
   if (data) {
     return <Redirect to={AppRoutes.Home} />
   }
-  return (
-    <>
-      <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
-    </>
-  )
+  return <Auth errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
 }

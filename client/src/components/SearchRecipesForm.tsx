@@ -8,7 +8,7 @@ import { getProducts } from '../state/products/selectors';
 import { Button } from 'antd';
 
 
-export const SearchRecipesForm: React.FunctionComponent<{ btnText?: string }> = ({ btnText = 'Search Recipes' }): React.ReactElement => {
+export const SearchRecipesForm: React.FC<{ btnText?: string }> = ({ btnText = 'Search Recipes' }): React.ReactElement => {
     const ingredientsState = useSelector(getProducts);
     const [ingredients, setIngredients] = React.useState<string[] | []>(ingredientsState)
     const history = useHistory();

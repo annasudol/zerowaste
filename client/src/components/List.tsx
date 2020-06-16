@@ -6,7 +6,7 @@ interface IngredientsListProps {
     list: string[] | []
     deleteItem?(item: string): VoidFunction
 }
-export const List: React.FunctionComponent<IngredientsListProps> = ({ list = [], deleteItem }): React.ReactElement => (
+export const List: React.FC<IngredientsListProps> = ({ list = [], deleteItem }): React.ReactElement => (
     <ol>
         {list.map((item) => (
             <li key={item} className='ml-6'>

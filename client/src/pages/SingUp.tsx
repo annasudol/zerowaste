@@ -18,7 +18,7 @@ export const SIGNUP_USER = gql`
 
 
 
-export const SignUp: React.FunctionComponent = (): React.ReactElement => {
+export const SignUp: React.FC = (): React.ReactElement => {
 
   const [signUpUser, { data, loading, error }] = useMutation(SIGNUP_USER);
 

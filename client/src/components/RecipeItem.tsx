@@ -33,7 +33,7 @@ export interface RecipeItemProps {
     deleteEditBtn?: boolean
 }
 
-export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
+export const RecipeItem: React.FC<RecipeItemProps> = ({ id, title, image, ingredients, deleteEditBtn = false }): React.ReactElement => {
     const [open, setOpen] = React.useState<boolean>(false);
     const [getRecipeData, { data }] = useLazyQuery(GET_RECIPE_DETAILS);
     const editRecipe = () => getRecipeData({ variables: { id } })
@@ -55,10 +55,8 @@ export const RecipeItem: React.FunctionComponent<RecipeItemProps> = ({ id, title
                 <span className='font-roboto uppercase text-xs font-semibold text-darkGray'>ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
                 <br></br>
-                {deleteEditBtn ? <Link className='coral-link'
-                    to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}
-                >see more
-                </Link> : <Link to={`/recipe/${id}`} className='coral-link'>see more</Link>}
+                {deleteEditBtn ? <Link className='coral-link' to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}>see more</Link>
+                    : <Link to={`/recipe/${id}`} className='coral-link'>see more</Link>}
                 {deleteEditBtn && (<div className=''>
                     <Button danger onClick={(): void => setOpen(true)} className='mr-2'>Delete Recipe</Button>
                     <Button type='primary' onClick={editRecipe}>Edit Recipe</Button>

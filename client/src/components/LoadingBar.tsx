@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const LoadingBar: React.FunctionComponent = (): React.ReactElement => {
+export const LoadingBar: React.FC = (): React.ReactElement => {
     const classes = useStyles();
     return (
         <div className='flex flex justify-center items-center h-screen'>

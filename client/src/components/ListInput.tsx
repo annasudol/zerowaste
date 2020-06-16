@@ -13,7 +13,7 @@ interface ListInputProps {
     form(detailedIngredients: string[]): void
     detailedIngredients: string[] | []
 }
-export const ListInput: React.FunctionComponent<ListInputProps> = ({ setDetailedIngredients, detailedIngredients, form }): any => {
+export const ListInput: React.FC<ListInputProps> = ({ setDetailedIngredients, detailedIngredients, form }): any => {
     const [input, setInput] = React.useState<string>('')
 
     const handleIngredientChange = (event: React.ChangeEvent<HTMLInputElement>) => {

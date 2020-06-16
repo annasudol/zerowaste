@@ -5,7 +5,7 @@ import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
 
 
-export const App: React.FunctionComponent = () => {
+export const App: React.FC = () => {
     return (
         <>
             <Navigation />

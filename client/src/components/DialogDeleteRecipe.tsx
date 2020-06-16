@@ -32,7 +32,7 @@ interface DialogDeleteRecipeProps {
     toggleOpen(val: boolean): void
     recipeId: string
 }
-export const DialogDeleteRecipe: React.FunctionComponent<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
+export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
     const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
 
     const handleDeleteRecipe = (): void => {

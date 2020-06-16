@@ -18,7 +18,7 @@ const GET_RECIPES = gql`
 `;
 
 
-export const RecipesList: React.FunctionComponent<{ more?: any }> = ({ more }) => {
+export const RecipesList: React.FC = () => {
 
   const ingredients = useSelector(getProducts);
   const { data, loading, error } = useQuery(

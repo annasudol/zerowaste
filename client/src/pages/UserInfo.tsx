@@ -21,7 +21,7 @@ const GET_USER_INFO = gql`
 
 
 
-export const UserInfo: React.FunctionComponent = (): React.ReactElement | any => {
+export const UserInfo: React.FC = (): React.ReactElement | any => {
 
     const { data, loading, error, subscribeToMore } = useQuery(GET_USER_INFO);
     if (loading) return <LoadingBar />
@@ -44,3 +44,5 @@ export const UserInfo: React.FunctionComponent = (): React.ReactElement | any =>
 
 
 }
+
+

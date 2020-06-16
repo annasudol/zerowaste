@@ -25,7 +25,7 @@ interface RecipeFormProps {
     defaultValues?: RecipeStateProps
 }
 
-export const RecipeForm: React.FunctionComponent<RecipeFormProps> = ({ handleSubmit, fillForm = false, defaultValues }): React.ReactElement => {
+export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm = false, defaultValues }): React.ReactElement => {
     const [ingredients, setIngredients] = React.useState<string[] | []>([])
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
     const [image, setImage] = React.useState<string | undefined>(undefined);

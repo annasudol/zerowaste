@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { HashRouter } from 'react-router-dom'
 import client from './graphql/client';
 import { AuthProvider } from "./components"
+// import { AlertRecipeChanges } from "./components/AlertRecipeChanges";
 
 const rootEl = document.getElementById('root');
 

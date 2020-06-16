@@ -15,7 +15,7 @@ interface Props extends RouteProps {
     render: any
 }
 
-const ProtectedRoute: React.FunctionComponent<Props> = ({
+const ProtectedRoute: React.FC<Props> = ({
     allowed,
     redirectTo,
     component: Component,
@@ -42,10 +42,10 @@ const ProtectedRoute: React.FunctionComponent<Props> = ({
             }} />
     )
 
-export const PrivateRoute: React.FunctionComponent<RouteProps> = props => (
+export const PrivateRoute: React.FC<RouteProps> = props => (
     <ProtectedRoute {...props} allowed={isLoggedIn()} redirectTo={AppRoutes.SignUp} />
 )
 
-export const PublicRoute: React.FunctionComponent<RouteProps> = props => (
+export const PublicRoute: React.FC<RouteProps> = props => (
     <ProtectedRoute {...props} allowed redirectTo={AppRoutes.Home} />
 )

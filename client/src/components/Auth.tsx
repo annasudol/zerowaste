@@ -16,7 +16,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-export const Auth: React.FunctionComponent<AuthProps> = ({ errorMessage, handleSubmit, loginPage = true }): React.ReactElement => {
+export const Auth: React.FC<AuthProps> = ({ errorMessage, handleSubmit, loginPage = true }): React.ReactElement => {
   const onFinish = (inputValues: Store) => {
     handleSubmit(inputValues)
   };

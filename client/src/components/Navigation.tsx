@@ -8,7 +8,7 @@ import { MenuUnfoldOutlined } from '@ant-design/icons';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useAuth } from "../components";
 
-export const Navigation: React.FunctionComponent = (): React.ReactElement => {
+export const Navigation: React.FC = (): React.ReactElement => {
     const [open, toggleOpen] = React.useState<boolean>(true);
     const { userLogged, logoutUser } = useAuth();
     const history = useHistory();
