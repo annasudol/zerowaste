@@ -19,7 +19,7 @@ interface Props {
 
 export const Recipes: React.FC<Props> = ({ subscribeToMore, recipes }) => {
 
-    const subscribeToMoreMessage = () => {
+    const subscribeToMoreRecipes = React.useCallback(() => {
 
         subscribeToMore({
             document: GET_USER_SUBSCRIPTION,
@@ -31,7 +31,7 @@ export const Recipes: React.FC<Props> = ({ subscribeToMore, recipes }) => {
                 }
                 console.log(subscriptionData, "subscriptionData")
 
-                const { messageCreated } = subscriptionData.data;
+                // const { messageCreated } = subscriptionData.data;
 
                 return {
                     ...previousResult,
@@ -45,11 +45,11 @@ export const Recipes: React.FC<Props> = ({ subscribeToMore, recipes }) => {
                 };
             },
         });
-    };
+    }, [subscribeToMore]);
 
     React.useEffect(() => {
 
-        subscribeToMoreMessage();
+        subscribeToMoreRecipes();
     }, [subscribeToMore]);
 
     return (<div className='main'>
