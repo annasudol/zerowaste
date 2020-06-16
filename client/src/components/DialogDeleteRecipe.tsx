@@ -31,10 +31,10 @@ interface DialogDeleteRecipeProps {
     open: boolean
     toggleOpen(val: boolean): void
     recipeId: string
+    title: string
 }
-export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId }): React.ReactElement => {
-    const [deleteRecipe, { data, error }] = useMutation(DELETE_RECIPE);
-
+export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId, title }): React.ReactElement => {
+    const [deleteRecipe, { error }] = useMutation(DELETE_RECIPE);
     const handleDeleteRecipe = (): void => {
         deleteRecipe({ variables: { id: recipeId } })
         toggleOpen(false)
@@ -43,6 +43,7 @@ export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, to
     if (error) {
         return (<ErrorMessage message={error.message} />)
     }
+    const alert = `Are you sure do you want to delete ${title} recipe`
 
     return (
         <Dialog
@@ -53,7 +54,7 @@ export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, to
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
         >
-            {!data && <DialogTitle id="alert-dialog-slide-title">Are you sure do you want to delete recipe</DialogTitle>}
+            <DialogTitle id="alert-dialog-slide-title">{alert}</DialogTitle>
             <DialogActions>
                 <Button onClick={(): void => toggleOpen(false)}>
                     Keep the recipe

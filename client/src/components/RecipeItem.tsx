@@ -45,8 +45,18 @@ export const RecipeItem: React.FC<RecipeItemProps> = ({ id, title, image, ingred
     }
 
     if (open) {
-        return <DialogDeleteRecipe open toggleOpen={(value): void => setOpen(value)} recipeId={id} />
+        return <DialogDeleteRecipe open toggleOpen={(value): void => setOpen(value)} recipeId={id} title={title} />
     }
+    const buttons = (
+        deleteEditBtn ? (
+            <>
+                <Link className='coral-link' to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}>see more</Link>
+                <br></br>
+                <Button danger onClick={(): void => setOpen(true)} className='mr-2'>Delete Recipe</Button>
+                <Button type='primary' onClick={editRecipe}>Edit Recipe</Button>
+            </>
+        ) : <Link to={`/recipe/${id}`} className='coral-link'>see more</Link>
+    )
     return (
         <div className='flex bg-milk bo mb-4 mr-4 max-w-sm lg:max-w-xl mb-3 list--item relative' key={id}>
             <div className='w-42'><Image src={image} className='rounded-m m-4' size='small' alt={title} /></div>
@@ -55,12 +65,7 @@ export const RecipeItem: React.FC<RecipeItemProps> = ({ id, title, image, ingred
                 <span className='font-roboto uppercase text-xs font-semibold text-darkGray'>ingredients: </span>
                 <span className='font-roboto text-xs'>{ingredients.join(', ')}</span>
                 <br></br>
-                {deleteEditBtn ? <Link className='coral-link' to={{ pathname: `/recipe/${id}`, state: { backPath: '/user' } }}>see more</Link>
-                    : <Link to={`/recipe/${id}`} className='coral-link'>see more</Link>}
-                {deleteEditBtn && (<div className=''>
-                    <Button danger onClick={(): void => setOpen(true)} className='mr-2'>Delete Recipe</Button>
-                    <Button type='primary' onClick={editRecipe}>Edit Recipe</Button>
-                </div>)}
+                {buttons}
             </div>
         </div>
     );

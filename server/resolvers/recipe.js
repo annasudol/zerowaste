@@ -57,10 +57,11 @@ module.exports = {
       try {
         const id = await input.id
         const recipe = await Recipe.findByIdAndUpdate(id, input);
+        pubSub.publish(CHANGES_IN_RECIPE, { changesInRecipe: recipe });
+
         return recipe;
 
       } catch (error) {
-        console.log(error);
         throw error;
       }
     }),
@@ -69,9 +70,9 @@ module.exports = {
       try {
         const recipe = await Recipe.findByIdAndDelete(id);
         await User.updateOne({ _id: userId }, { $pull: { recipes: recipe.id } });
+        pubSub.publish(CHANGES_IN_RECIPE, { changesInRecipe: recipe });
         return recipe;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     }),
