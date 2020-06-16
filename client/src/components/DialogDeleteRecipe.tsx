@@ -1,8 +1,6 @@
 import * as React from "react";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
@@ -10,7 +8,6 @@ import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { ErrorMessage } from "../components";
 import { Button } from 'antd';
-import { ExecutionResult } from "graphql";
 
 const DELETE_RECIPE = gql`
   mutation DeleteRecipe($id: ID!) {
