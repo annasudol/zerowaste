@@ -32,10 +32,14 @@ export const RecipeInfo: React.FC = (): React.ReactElement => {
     const history = useHistory();
     const location: LocationTypes = useLocation();
     const backPath = location?.state?.backPath;
-    const { data, loading, error } = useQuery(
+    const { data, loading, error, refetch } = useQuery(
         GET_RECIPE_DETAILS,
         { variables: { id: recipeID } }
     );
+
+    React.useEffect(() => {
+        refetch()
+    }, []);
 
 
     if (loading) return <LoadingBar />

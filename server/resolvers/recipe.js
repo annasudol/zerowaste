@@ -6,6 +6,8 @@ const { isAuthenticated, isRecipeOwner } = require('./middleware');
 const { PubSub } = require('graphql-subscriptions');
 const pubSub = new PubSub();
 const CHANGES_IN_RECIPE = 'CHANGES_IN_RECIPE';
+const DELETE_RECIPE = 'CHANGES_IN_RECIPE';
+
 module.exports = {
   Query: {
     recipes: async (_, { ingredients }, { dataSources }) => {
@@ -40,8 +42,6 @@ module.exports = {
     createRecipe: combineResolvers(isAuthenticated, async (_, input, { email }) => {
       try {
         const user = await User.findOne({ email });
-        // console.log(input.image, "input")
-        // fileUpload.single('image');
         const recipe = new Recipe({ ...input, user: user.id });
         const result = await recipe.save();
         user.recipes.push(result.id);
@@ -70,7 +70,9 @@ module.exports = {
       try {
         const recipe = await Recipe.findByIdAndDelete(id);
         await User.updateOne({ _id: userId }, { $pull: { recipes: recipe.id } });
-        pubSub.publish(CHANGES_IN_RECIPE, { changesInRecipe: recipe });
+        const updatedUser = await User.findOne({ _id: userId });
+
+        pubSub.publish(DELETE_RECIPE, { deleteRecipe: { user: updatedUser } });
         return recipe;
       } catch (error) {
         throw error;
@@ -90,7 +92,10 @@ module.exports = {
   },
   Subscription: {
     changesInRecipe: {
-      subscribe: () => pubSub.asyncIterator('CHANGES_IN_RECIPE')
+      subscribe: () => pubSub.asyncIterator(CHANGES_IN_RECIPE)
+    },
+    deleteRecipe: {
+      subscribe: () => pubSub.asyncIterator(DELETE_RECIPE)
     }
   }
 }

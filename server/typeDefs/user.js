@@ -30,4 +30,9 @@ module.exports = gql`
   type UserUpdated {
     user: User 
   }
+
+  extend type Subscription {
+    deleteRecipe: UserUpdated
+  }
+
 `;
