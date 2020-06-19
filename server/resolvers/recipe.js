@@ -24,7 +24,6 @@ module.exports = {
 
         return recipes;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     },
@@ -49,7 +48,6 @@ module.exports = {
         pubSub.publish(CHANGES_IN_RECIPE, { changesInRecipe: result });
         return result;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     }),
@@ -71,7 +69,6 @@ module.exports = {
         const recipe = await Recipe.findByIdAndDelete(id);
         await User.updateOne({ _id: userId }, { $pull: { recipes: recipe.id } });
         const updatedUser = await User.findOne({ _id: userId });
-
         pubSub.publish(DELETE_RECIPE, { deleteRecipe: { user: updatedUser } });
         return recipe;
       } catch (error) {
@@ -85,7 +82,6 @@ module.exports = {
         const user = await User.findById(parent.user);
         return user;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     }

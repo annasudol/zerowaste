@@ -45,7 +45,7 @@ export const RecipeItem: React.FC<RecipeItemProps> = ({ id, title, image, ingred
     }
 
     if (open) {
-        return <DialogDeleteRecipe open toggleOpen={(value): void => setOpen(value)} recipeId={id} title={title} />
+        return <DialogDeleteRecipe open toggleOpen={(value): void => setOpen(value)} recipeId={id} title={title} image={image} />
     }
     const buttons = (
         deleteEditBtn ? (

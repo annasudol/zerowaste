@@ -3,12 +3,23 @@ const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
 const jwt = require('jsonwebtoken');
-
 const resolvers = require('./resolvers');
 const typeDefs = require('./typeDefs');
 const connection = require('./database/util');
 const User = require('./database/models/user');
 const DataAPI = require('./database/dataAPI');
+const cloudinary = require('cloudinary');
+
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET
+});
+console.log("Cloudinary connected")
+
+
 
 
 // set env variables
@@ -24,6 +35,18 @@ app.use(cors());
 
 // body parser middleware
 app.use(express.json());
+
+
+app.post('/delete/', function (req, res) {
+  cloudinary.v2.api.delete_resources(req.body.public_id,
+    function (error, result) {
+      if (error) {
+        console.log("Error Occured", error);
+      } else {
+        console.log("Image will has been deleted", result)
+      }
+    });
+});
 
 const apolloServer = new ApolloServer({
   typeDefs,

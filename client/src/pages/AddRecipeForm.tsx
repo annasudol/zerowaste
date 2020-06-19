@@ -13,13 +13,14 @@ const ADD_RECIPE = gql`
   }
 `;
 
+
 export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => {
 
     const [createRecipe, { data, error, loading }] = useMutation(ADD_RECIPE);
 
-    const handleSubmit = (inputValues: Store): any => {
-        const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
-        createRecipe({ variables: { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
+    const handleSubmit = (inputValues: Store, imageUrl: string) => {
+        const { title, servings, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
+        createRecipe({ variables: { title, servings, image: imageUrl, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
     }
 
     if (loading) return <LoadingBar />
@@ -35,7 +36,7 @@ export const AddRecipeForm: React.FunctionComponent = (): React.ReactElement => 
             <div className='flex justify-center items-center'>
                 <div className='flex flex-col w-2/3 recipe-form'>
                     <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Add Recipe</h1>
-                    <RecipeForm handleSubmit={(inputValues: Store): void => handleSubmit(inputValues)} fillForm={true} />
+                    <RecipeForm handleSubmit={(inputValues: Store, imageUrl: string): void => handleSubmit(inputValues, imageUrl)} fillForm={true} />
                 </div>
             </div>
         </div>

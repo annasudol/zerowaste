@@ -1,7 +1,7 @@
 import { Form, Input, Button, InputNumber } from 'antd';
 const { TextArea } = Input;
 import { FormInstance } from 'antd/lib/form';
-import { AutoComplete, List, ListInput, ImageUpload } from '../components'
+import { AutoComplete, List, ListInput, ImageUpload, FileType } from '../components'
 import * as React from 'react';
 import { RecipeStateProps } from '../utils/types';
 import { Store } from 'antd/lib/form/interface';
@@ -9,6 +9,11 @@ import { sampleRecipe } from '../assets/data/sampleRecipe'
 const tailLayout = { wrapperCol: { offset: 10, span: 12 } };
 const formRef = React.createRef<FormInstance>();
 
+import * as request from 'superagent';
+import { handlePhotoDelete } from "../utils/handlePhotoDelete";
+
+const cloudName = "drgb4slzt";
+const uploadPreset = "iiiutyfi";
 
 const validateMessages = {
     required: '${label} is required!',
@@ -19,7 +24,7 @@ const validateMessages = {
 
 
 interface RecipeFormProps {
-    handleSubmit(inputValues: Store): void
+    handleSubmit(inputValues: Store, imageUrl: string): void
     fillForm?: boolean
     defaultValues?: RecipeStateProps
 }
@@ -27,9 +32,8 @@ interface RecipeFormProps {
 export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm = false, defaultValues }): React.ReactElement => {
     const [ingredients, setIngredients] = React.useState<string[] | []>([])
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
-    const [image, setImage] = React.useState<string | undefined>(undefined);
+    const [imageUrl, setImageUrl] = React.useState<string | undefined>(defaultValues?.image);
     const [error, setError] = React.useState<boolean>(false)
-
     React.useEffect(() => {
         if (defaultValues && formRef.current) {
             formRef.current.setFieldsValue({ ...defaultValues });
@@ -38,8 +42,24 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm =
         }
     }, [defaultValues, formRef.current]);
 
-    const onFinish = (values: Store) => {
-        handleSubmit(values);
+
+
+
+    const onFinish = async (values: Store) => {
+        const url = `https://api.cloudinary.com/v1_1/drgb4slzt/upload`;
+        await request.post(url)
+            .field('upload_preset', uploadPreset)
+            .field('file', values.image)
+            .field('multiple', false)
+            .end((error, response) => {
+                if (response.ok) {
+                    if (imageUrl && response.body.url !== imageUrl) {
+                        handlePhotoDelete(imageUrl)
+                    }
+                    handleSubmit(values, response.body.url)
+                }
+            });
+
     };
 
     const onReset = () => {
@@ -51,7 +71,6 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm =
     };
 
     const onFill = () => {
-
         formRef.current?.setFieldsValue({ ...sampleRecipe });
         setError(false);
         setIngredients(sampleRecipe.ingredients)
@@ -94,10 +113,10 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm =
             <Form.Item name='instructions' label='Instructions' rules={[{ required: true, min: 10 }]}>
                 <TextArea />
             </Form.Item>
-            <Form.Item name='image' label='Image' rules={[{ required: true }]}>
-                <ImageUpload image={image} setImage={(value: string): void => setImage(value)} form={(value: string): void => formRef.current?.setFieldsValue({ image: value })} />
+            <Form.Item name='image' label='Image' rules={[{ required: false }]}>
+                <ImageUpload imageUrl={imageUrl} form={(value: FileType): void => formRef.current?.setFieldsValue({ image: value })} />
             </Form.Item>
-            <Form.Item name='sourceUrl' label='Source Url' rules={[{ required: false }]}>
+            <Form.Item name='sourceUrl' label='Source Url' rules={[{ required: true }]}>
                 <Input addonBefore='http://' defaultValue='myblog' />
             </Form.Item>
             <Form.Item {...tailLayout}>

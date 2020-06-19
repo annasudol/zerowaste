@@ -8,6 +8,7 @@ import { useMutation, useSubscription } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { ErrorMessage } from "../components";
 import { Button } from 'antd';
+import { handlePhotoDelete } from '../utils/handlePhotoDelete';
 
 const DELETE_RECIPE = gql`
   mutation DeleteRecipe($id: ID!) {
@@ -47,12 +48,14 @@ interface DialogDeleteRecipeProps {
     toggleOpen(val: boolean): void
     recipeId: string
     title: string
+    image: string;
 }
-export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId, title }): React.ReactElement => {
+export const DialogDeleteRecipe: React.FC<DialogDeleteRecipeProps> = ({ open, toggleOpen, recipeId, title, image }): React.ReactElement => {
     const [deleteRecipe, { error }] = useMutation(DELETE_RECIPE);
     useSubscription(DELETE_RECIPE_SUBSCRIPTION);
 
     const handleDeleteRecipe = () => {
+        handlePhotoDelete(image)
         deleteRecipe({ variables: { id: recipeId } });
         toggleOpen(false);
     }

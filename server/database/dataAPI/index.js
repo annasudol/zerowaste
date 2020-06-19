@@ -1,5 +1,4 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
-const app_key = process.env.API_KEY || "d7b7dba12474485bac9f370e6f1e378a";
 
 class DataAPI extends RESTDataSource {
     constructor() {
@@ -33,13 +32,13 @@ class DataAPI extends RESTDataSource {
     }
 
     async getAllRecipes(query) {
-        const responses = await this.get('findByIngredients', { ingredients: query.join(',+'), apiKey: app_key });
+        const responses = await this.get('findByIngredients', { ingredients: query.join(',+'), apiKey: process.env.API_KEY });
         return Array.isArray(responses)
             ? responses.map(response => this.basicRecipeReducer(response))
             : [];
     }
     async getRecipeDetails(id) {
-        const response = await this.get(`${id}/information?includeNutrition=false&apiKey=${app_key}`);
+        const response = await this.get(`${id}/information?includeNutrition=false&apiKey=${process.env.API_KEY}`);
 
         return this.detailedRecipeReducer(response)
     }

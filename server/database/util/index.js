@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const connection = () => {
-  mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER_NAME}:${process.env.MONGO_DB_USER_PASSWORD}@cluster0-ghyqs.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`, {
+  mongoose.connect(`${process.env.MONGO_DB}`, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,

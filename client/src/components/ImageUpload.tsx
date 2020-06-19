@@ -1,15 +1,20 @@
 import * as React from 'react';
 import { Upload, message } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 
-
+export interface FileType {
+    lastModified: number
+    name: string
+    size: number
+    type: "image/jpeg"
+    uid: string
+}
 interface ImageUploadProps {
-    image: string | undefined
-    setImage(value: string): void
-    form?(image: string): void
+    imageUrl: string | undefined
+    form?(file: FileType): void
 }
 
-function getBase64(img, callback) {
+function getBase64(img: any, callback: any) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
@@ -27,45 +32,47 @@ function beforeUpload(file) {
     return isJpgOrPng && isLt2M;
 }
 
-export const ImageUpload: React.FC<ImageUploadProps> = ({ image, setImage, form }): React.ReactElement => {
-    const [loading, setLoading] = React.useState<boolean>(false);
-    const [imageUrl, setImageUrl] = React.useState<string>();
+export const ImageUpload: React.FC<ImageUploadProps> = ({ imageUrl, form }): React.ReactElement => {
+    const [img, setImg] = React.useState<string | undefined>()
+    const [file, setFile] = React.useState<any>()
 
-    const handleChange = info => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
+
+    const handleChange = (info) => {
+        if (info.file.originFileObj) {
             // tslint:disable-next-line: no-shadowed-variable
             getBase64(info.file.originFileObj, (imageUrl: string) => {
-                setImage(imageUrl)
+                setImg(imageUrl);
                 if (form) {
-                    form(imageUrl)
+                    setFile(info.file.originFileObj);
+                    form(info.file.originFileObj);
                 }
-            });
-            setLoading(false);
+            })
         }
-    };
+    }
+
+
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <PlusOutlined />
             <div className='ant-upload-text'>Upload</div>
         </div>
     );
-
     return (
-        <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
-        >
-            {image ? <img src={image} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-        </Upload>
+        <>
+            <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action={file}
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+
+            >
+                {img || imageUrl ? <img src={img || imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+            </Upload>
+
+        </>
     )
 };

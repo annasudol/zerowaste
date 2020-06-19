@@ -34,9 +34,9 @@ export const EditRecipeForm: React.FC = (): React.ReactElement => {
     const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
     const history = useHistory();
 
-    const handleSubmit = (inputValues: Store): any => {
-        const { title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
-        updateRecipe({ variables: { id: recipeID, title, servings, image, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
+    const handleSubmit = (inputValues: Store, imageUrl: string): any => {
+        const { title, servings, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } = inputValues;
+        updateRecipe({ variables: { id: recipeID, title, servings, image: imageUrl, readyInMinutes, ingredients, detailedIngredients, instructions, sourceUrl } });
     }
 
     if (data) {
@@ -48,7 +48,7 @@ export const EditRecipeForm: React.FC = (): React.ReactElement => {
             <div className="flex justify-center items-center">
                 <div className="w-1/2 recipe-form pb-4 pt-4">
                     <h1 className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0">Edit Recipe</h1>
-                    <RecipeForm handleSubmit={(inputValues: Store): void => handleSubmit(inputValues)} defaultValues={initialState} />
+                    <RecipeForm handleSubmit={(inputValues: Store, imageUrl: string): void => handleSubmit(inputValues, imageUrl)} defaultValues={initialState} />
                 </div>
             </div>
         </div>

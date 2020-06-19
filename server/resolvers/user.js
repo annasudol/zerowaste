@@ -4,8 +4,6 @@ const { combineResolvers } = require('graphql-resolvers');
 const User = require('../database/models/user');
 const Recipe = require('../database/models/recipe');
 const { isAuthenticated } = require('./middleware');
-// const PubSub = require('../subscription');
-// const { userEvents } = require('../subscription/events');
 
 module.exports = {
   Query: {
@@ -18,7 +16,6 @@ module.exports = {
         }
         return user;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     })
