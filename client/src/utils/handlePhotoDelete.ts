@@ -9,7 +9,6 @@ export const handlePhotoDelete = async (url: string) => {
                 },
                 body: JSON.stringify({ public_id: publicId[0] })
             });
-            console.log(response, "response")
             return response.json();
 
         } catch { }

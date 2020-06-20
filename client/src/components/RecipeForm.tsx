@@ -12,9 +12,6 @@ const formRef = React.createRef<FormInstance>();
 import * as request from 'superagent';
 import { handlePhotoDelete } from "../utils/handlePhotoDelete";
 
-const cloudName = "drgb4slzt";
-const uploadPreset = "iiiutyfi";
-
 const validateMessages = {
     required: '${label} is required!',
     number: {
@@ -46,9 +43,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ handleSubmit, fillForm =
 
 
     const onFinish = async (values: Store) => {
-        const url = `https://api.cloudinary.com/v1_1/drgb4slzt/upload`;
+        const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/upload`;
         await request.post(url)
-            .field('upload_preset', uploadPreset)
+            .field('upload_preset', process.env.UPLOAD_PRESET)
             .field('file', values.image)
             .field('multiple', false)
             .end((error, response) => {

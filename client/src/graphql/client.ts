@@ -5,8 +5,8 @@ import { getAccessToken } from '../userAuth';
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities'
 
-const httpUrl = `http://localhost:9000/graphql`;
-const uri = 'ws://localhost:9000/subscriptions';
+const httpUrl = `http://localhost:${process.env.PORT || 9000}/graphql`;
+const uri = `ws://localhost:${process.env.PORT || 9000}/subscriptions`;
 
 const wslink = new WebSocketLink({
     uri, options: {

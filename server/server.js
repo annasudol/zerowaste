@@ -85,10 +85,10 @@ const apolloServer = new ApolloServer({
   },
   subscriptions: {
     path: "/subscriptions",
-    onConnect: async (connectionParams, webSocket, context) => {
+    onConnect: async (_connectionParams, _webSocket, _context) => {
       console.log(`Subscription client connected using Apollo server's built-in SubscriptionServer.`)
     },
-    onDisconnect: async (webSocket, context) => {
+    onDisconnect: async (_webSocket, _context) => {
       console.log(`Subscription client disconnected.`)
     }
   }
