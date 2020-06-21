@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component Image match snapshot with large size and rounded image 1`] = `
+<Image
+  alt="test"
+  size="large"
+  src={
+    Object {
+      "URL": [Function],
+      "URLSearchParams": [Function],
+      "Url": [Function],
+      "domainToASCII": [Function],
+      "domainToUnicode": [Function],
+      "fileURLToPath": [Function],
+      "format": [Function],
+      "parse": [Function],
+      "pathToFileURL": [Function],
+      "resolve": [Function],
+      "resolveObject": [Function],
+    }
+  }
+>
+  <img
+    alt="test"
+    className="300"
+    src={
+      Object {
+        "URL": [Function],
+        "URLSearchParams": [Function],
+        "Url": [Function],
+        "domainToASCII": [Function],
+        "domainToUnicode": [Function],
+        "fileURLToPath": [Function],
+        "format": [Function],
+        "parse": [Function],
+        "pathToFileURL": [Function],
+        "resolve": [Function],
+        "resolveObject": [Function],
+      }
+    }
+  />
+</Image>
+`;
+
+exports[`component Image match snapshot with medium size image 1`] = `
+<Image
+  alt="test"
+  size="medium"
+  src={
+    Object {
+      "URL": [Function],
+      "URLSearchParams": [Function],
+      "Url": [Function],
+      "domainToASCII": [Function],
+      "domainToUnicode": [Function],
+      "fileURLToPath": [Function],
+      "format": [Function],
+      "parse": [Function],
+      "pathToFileURL": [Function],
+      "resolve": [Function],
+      "resolveObject": [Function],
+    }
+  }
+>
+  <img
+    alt="test"
+    className="w-64"
+    src={
+      Object {
+        "URL": [Function],
+        "URLSearchParams": [Function],
+        "Url": [Function],
+        "domainToASCII": [Function],
+        "domainToUnicode": [Function],
+        "fileURLToPath": [Function],
+        "format": [Function],
+        "parse": [Function],
+        "pathToFileURL": [Function],
+        "resolve": [Function],
+        "resolveObject": [Function],
+      }
+    }
+  />
+</Image>
+`;
+
+exports[`component Image match snapshot with small size image 1`] = `
+<Image
+  alt="test"
+  size="small"
+  src={
+    Object {
+      "URL": [Function],
+      "URLSearchParams": [Function],
+      "Url": [Function],
+      "domainToASCII": [Function],
+      "domainToUnicode": [Function],
+      "fileURLToPath": [Function],
+      "format": [Function],
+      "parse": [Function],
+      "pathToFileURL": [Function],
+      "resolve": [Function],
+      "resolveObject": [Function],
+    }
+  }
+>
+  <img
+    alt="test"
+    className="w-32"
+    src={
+      Object {
+        "URL": [Function],
+        "URLSearchParams": [Function],
+        "Url": [Function],
+        "domainToASCII": [Function],
+        "domainToUnicode": [Function],
+        "fileURLToPath": [Function],
+        "format": [Function],
+        "parse": [Function],
+        "pathToFileURL": [Function],
+        "resolve": [Function],
+        "resolveObject": [Function],
+      }
+    }
+  />
+</Image>
+`;

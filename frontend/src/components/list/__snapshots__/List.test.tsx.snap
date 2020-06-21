@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component List match snapshot 1`] = `
+<ol>
+  <li
+    className="ml-6"
+    key="test1"
+  >
+    <div
+      className="w-full flex justify-between"
+    >
+      <span
+        className="mt-4"
+      >
+        test1
+      </span>
+      <WithStyles(ForwardRef(IconButton))
+        aria-label="Delete"
+        onClick={[Function]}
+      >
+        <DeleteIcon
+          fontSize="small"
+        />
+      </WithStyles(ForwardRef(IconButton))>
+    </div>
+  </li>
+  <li
+    className="ml-6"
+    key="test2"
+  >
+    <div
+      className="w-full flex justify-between"
+    >
+      <span
+        className="mt-4"
+      >
+        test2
+      </span>
+      <WithStyles(ForwardRef(IconButton))
+        aria-label="Delete"
+        onClick={[Function]}
+      >
+        <DeleteIcon
+          fontSize="small"
+        />
+      </WithStyles(ForwardRef(IconButton))>
+    </div>
+  </li>
+  <li
+    className="ml-6"
+    key="test3"
+  >
+    <div
+      className="w-full flex justify-between"
+    >
+      <span
+        className="mt-4"
+      >
+        test3
+      </span>
+      <WithStyles(ForwardRef(IconButton))
+        aria-label="Delete"
+        onClick={[Function]}
+      >
+        <DeleteIcon
+          fontSize="small"
+        />
+      </WithStyles(ForwardRef(IconButton))>
+    </div>
+  </li>
+</ol>
+`;

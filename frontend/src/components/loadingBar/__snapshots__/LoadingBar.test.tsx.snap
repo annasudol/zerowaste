@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoadingBar match snapshot 1`] = `
+<div
+  className="flex flex justify-center items-center h-screen"
+>
+  <div
+    className="makeStyles-root-1"
+  >
+    <WithStyles(ForwardRef(CircularProgress))
+      color="secondary"
+    />
+  </div>
+</div>
+`;

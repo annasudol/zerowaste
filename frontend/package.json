@@ -1,0 +1,106 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "@apollo/react-hooks": "^3.1.5",
+    "@craco/craco": "^5.6.4",
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
+    "@reduxjs/toolkit": "^1.3.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.7",
+    "antd": "^4.3.1",
+    "apollo-boost": "^0.4.8",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-ws": "^1.0.20",
+    "classnames": "^2.2.6",
+    "craco-less": "^1.17.0",
+    "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
+    "graphql": "^15.0.0",
+    "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
+    "react-dom": "^16.13.1",
+    "react-filter-search": "^1.0.11",
+    "react-hook-form": "^5.7.2",
+    "react-modal": "^3.11.2",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "subscriptions-transport-ws": "^0.9.16",
+    "superagent": "^5.2.2",
+    "typescript": "~3.7.2"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/superagent": "^4.1.7",
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
+    "@typescript-eslint/parser": "^3.2.0",
+    "antd-scss-theme-plugin": "^1.0.8",
+    "awesome-typescript-loader": "^5.2.1",
+    "eslint": "^6.6.0",
+    "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "image-webpack-loader": "^6.0.0",
+    "json-loader": "^0.5.7",
+    "less-loader": "^6.1.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.21",
+    "rimraf": "^3.0.2",
+    "sass": "^1.26.8",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "tslint": "^6.1.2"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "coverage": "craco test --coverage",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js, ts,tsx}",
+      "!src/index.tsx"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
