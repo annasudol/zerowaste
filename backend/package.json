@@ -24,7 +24,7 @@
     "graphql-resolvers": "^0.3.3",
     "isemail": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.5",
     "multer": "^1.4.2",
     "uuid": "^3.4.0"
   },
