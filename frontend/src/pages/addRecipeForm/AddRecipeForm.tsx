@@ -33,9 +33,8 @@ export const AddRecipeForm: FC = (): ReactElement => {
     }
 
     return (
-
-        <div className='recipes-form'>
-            <div className='flex flex-col w-2/3 recipe-form'>
+        <div className='p-10 h-auto'>
+            <div className='flex flex-col w-2/3'>
                 <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Add Recipe</h1>
                 <RecipeForm handleSubmit={(inputValues: Store, imageUrl: string): void => handleSubmit(inputValues, imageUrl)} fillForm />
             </div>

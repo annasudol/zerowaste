@@ -32,7 +32,7 @@ interface RecipeFormProps {
 export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false, initialValues }): ReactElement => {
     const [ingredients, setIngredients] = React.useState<string[] | []>([])
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
-    const [imageUrl] = useState<string | undefined>(initialValues?.image);
+    const [imageUrl, setImageUrl] = useState<string | undefined>(initialValues?.image);
     const [error, setError] = React.useState<boolean>(false)
     React.useEffect(() => {
         if (initialValues && formRef.current) {
@@ -46,19 +46,15 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
 
 
     const onFinish = async (values: Store) => {
-        const uploadPreset = await process.env.REACT_APP_CLOUD_PRESET || "iiiutyfi";
-        const cloudName= await process.env.REACT_APP_CLOUD_NAME || "drgb4slzt";
-    
+        const uploadPreset = process.env.REACT_APP_CLOUD_PRESET;
+        const cloudName= process.env.REACT_APP_CLOUD_NAME;
         const url = await `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-        await request.post(url)
+        uploadPreset && await request.post(url)
             .field('upload_preset', uploadPreset)
             .field('file', values.image)
             .field('multiple', false)
-            .end((error: any, response: any) => {
-                console.log(response)
-
+            .end((_error: any, response: any) => {
                 if (response.ok) {
-                    console.log(response.body.url)
                     if (imageUrl && response.body.url !== imageUrl) {
                         handlePhotoDelete(imageUrl)
                     }
@@ -89,9 +85,8 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
         const newList = detailedIngredients.filter(ingredient => ingredient !== text)
         setDetailedIngredients([...newList])
     };
-    // { errorFields: { errors: any; }[]; }
-    const onFinishFailed = (errorInfo: any) => {
-        if (errorInfo.errorFields[3].errors) {
+    const onFinishFailed = (errorInfo: { errorFields: { errors: unknown; }[]; }) => {
+        if (errorInfo?.errorFields[3]?.errors) {
             return setError(true);
         }
     };
@@ -120,7 +115,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
             <Form.Item name='instructions' label='Instructions' rules={[{ required: true, min: 10 }]}>
                 <TextArea />
             </Form.Item>
-            <Form.Item name='image' label='Image' rules={[{ required: true, type: 'string' }]}>
+            <Form.Item name='image' label='Image' rules={[{ required: true }]}>
                 <ImageUpload imageUrl={imageUrl} form={(value: FileType | Blob): void => formRef.current?.setFieldsValue({ image: value })} />
             </Form.Item>
             <Form.Item name='sourceUrl' label='Source Url' rules={[{ required: false }]}>

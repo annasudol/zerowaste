@@ -50,8 +50,8 @@ export const RecipeInfo: FC= (): ReactElement => {
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
     const headerInfo = [{ text: 'Ready in: ', value: readyInMinutes }, { text: 'author ', value: author ? author : user?.name }, { text: 'Servings: ', value: servings }]
     return (
-        <div className='content'>
-            <div className='max-w-md p-4'>
+        <div className=''>
+            <div className='max-w-lg p-4'>
                 <button onClick={backRecipes} className='coral-link -ml-3 p-4'><BackspaceIcon /></button>
                 <h2 className='font-bebas uppercase text-darkGray mb-0'>{title}</h2>
                 {headerInfo.map((item: {text: string, value: number | string}): ReactElement => (
@@ -63,19 +63,19 @@ export const RecipeInfo: FC= (): ReactElement => {
 
                 <div className='flex flex-col justify-center items-start md:flex-row-reverse md:justify-between'>
                     <Image src={image} alt={`${title}'s image`} size='full' />
-                    <div>
+                    <div className='md:w-2/3'>
                         <h3 className='font-roboto text-darkGray mb-0 mt-4'>Ingredients:</h3>
                         <List list={detailedIngredients} />
-                        {instructions && (
-                            <>
-                                <h3 className='font-roboto text-darkGray mb- mt-4'>Instructions:</h3>
-                                <p className='font-roboto inline'>{instructions}</p>
-                            </>
-                        )}
-                        <br></br>
-                        {sourceUrl && <Button type='primary' ghost href={sourceUrl} >source link</Button>}
                     </div>
                 </div>
+                {instructions && (
+                    <>
+                        <h3 className='font-roboto text-darkGray mb- mt-4'>Instructions:</h3>
+                        <p className='font-roboto inline'>{instructions}</p>
+                    </>
+                )}
+                <br></br>
+                {sourceUrl && <Button type='primary' ghost href={sourceUrl} >source link</Button>}
             </div>
         </div>
     );

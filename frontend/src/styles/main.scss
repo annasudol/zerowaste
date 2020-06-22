@@ -25,49 +25,32 @@ $darkBlue: '#275ADB';
 } 
 
 body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
+  background-color: #f3efe7;
   border-left: 10px solid #fff;
-  border-right: 10px solid #fff;  
-    &:before, &:after {
-      content: "";
-      position: fixed;
-      background: #fff;
-      left: 0;
-      right: 0;
-      height: 10px;
-    &:before {
-      top: 0;
-    }
-    &:after {
-      bottom: 0;
-    }
+  border-right: 10px solid #fff;
+  &:before, &:after {
+    content: "";
+    position: fixed;
+    background: #fff;
+    left: 0;
+    right: 0;
+    height: 10px;
+    z-index: 13000;
+  }
+  &:before {
+    top: 0;
+  }
+  &:after {
+    bottom: 0;
   }
 }
 
-
 .content {
-  background-color: #f3efe7;
-  width: calc(100vw - 20px);
-  height: calc(100vh - 10px);
-}
-
-.main-fixed {
-  overflow: hidden;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
   width: calc(100vw - 20px);
   height: calc(100vh - 20px);
 }
 
-.flex {
-  position: flex;
-  top: 10px;
-  left: 10px;
-}
+
 
 .opened-nav, .closed-nav {
   height: calc(100vh - 20px);
@@ -114,7 +97,7 @@ body {
 
 
 .nav-btn {
-  position: absolute;
+  position: fixed;
   right: 30px;
   top: 30px;
   z-index: 1100;
@@ -158,23 +141,26 @@ body {
   width: 100%;
   padding-right: 120px;
   z-index: 1000;
-}
-
-@media (min-width: 768px) {
-  .search-form {
-    position: fixed;
-    top: 10px;
-    left: 20px;
-    width: 260px;
-    width: 350px;
-    background-color: transparent;
+  @media (min-width: 768px) {
+      top: 10px;
+      left: 20px;
+      width: 260px;
+      width: 350px;
+      background-color: transparent;
   }
 }
 
 
-.form {
-  width: 16rem;
-}
+.left, .right {
+	background: #fff;
+	position: fixed;
+  z-index: 1;
+  top: 0; bottom: 0;
+  width: 10px;
+	}
+
+	.left { left: 0; }
+	.right { right: 0; }
 
 
 .main {
@@ -183,10 +169,6 @@ body {
   }
 }
 
-
-.recipe-form {
-  min-width: 300px;
-}
 
 
 .coral-link {
@@ -197,10 +179,6 @@ body {
     }
 }
 
-.recipes-form {
-  background-color: #F2F1E9;
-  padding: 10px 0 10px 0;
-}
 
 .appearance-none {
   -webkit-appearance: none;

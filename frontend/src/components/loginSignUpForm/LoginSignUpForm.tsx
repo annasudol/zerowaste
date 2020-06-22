@@ -9,7 +9,7 @@ interface AuthProps {
 }
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 9 },
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
@@ -22,7 +22,7 @@ export const LoginSignUpForm: FC<AuthProps> = ({ errorMessage, handleSubmit, log
   };
   return (
     <div className='content overflow-hidden flex justify-center items-center'>
-      <div className='form  flex flex-col'>
+      <div className='flex flex-col'>
 
         <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>{loginPage ? 'Log in' : 'Sign Up'}</h1>
         {errorMessage && <p className='text-coral text-sm text-center mb-3'>{errorMessage}</p>}

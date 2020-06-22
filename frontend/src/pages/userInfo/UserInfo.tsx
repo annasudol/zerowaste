@@ -38,7 +38,7 @@ export const UserInfo: FC= (): ReactElement => {
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
 
     return (
-        <div className='overflow-hidden'>
+        <div className='overflow-hidden p-2'>
             <div className='mt-2 text-left'>
                 <h1 className='form-header font-bebas uppercase text-darkGray pb-0 m-0'>{`Hello ${data.user.name}`}</h1>
                 <p className='font-bebas text-darkGray inline'>Email: </p>

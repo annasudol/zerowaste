@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './components';
-import './styles/main.scss';
 import 'antd/dist/antd.less';
+import './styles/main.scss';
+
 import { Provider } from 'react-redux';
 import { store } from './state';
 import { ApolloProvider } from '@apollo/react-hooks';

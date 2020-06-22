@@ -12,7 +12,7 @@ export const List: FC<IngredientsListProps> = ({ list, deleteItem }): ReactEleme
         {list.map((item) => (
             <li key={item} className='ml-6'>
                 <div className='w-full flex justify-between'>
-                    <span className='mt-4'>{item}</span>
+                    <span className='mt-1'>{item}</span>
                     {deleteItem && <IconButton
                         aria-label='Delete'
                         onClick={() => deleteItem(item)}>

@@ -42,14 +42,14 @@ export const EditRecipeForm: FC = (): ReactElement => {
             return <Redirect to={{ pathname: `/recipe/${data.updateRecipe.id}`, state: { backPath: '/user', callRefetch: true } }} />
         }
         return (
-            <div className='recipes-form'>
+            <>
                 <button className='coral-link p-4' onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon color='error' /></button>
                 <div className='flex justify-center items-center'>
-                    <div className='w-1/2 recipe-form pb-4 pt-4'>
+                    <div className='w-2/3 min-w-40 pb-4 pt-4'>
                         <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Edit Recipe</h1>
                         <RecipeForm handleSubmit={(inputValues: Store, imageUrl: string): void => handleSubmit(inputValues, imageUrl)} initialValues={initialState} />
                     </div>
                 </div>
-            </div>
+            </>
         )
     };
