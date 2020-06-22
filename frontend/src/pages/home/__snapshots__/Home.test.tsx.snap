@@ -1,40 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`component Home match snapshot 1`] = `
-<div
-  className="content"
->
+<Fragment>
   <div
-    className="main-fixed"
+    className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen"
   >
     <div
-      className="flex flex-col justify-center items-center md:flex-row-reverse items-center h-screen"
+      className="mb-8 text-center md:w-1/3 lg:w-1/4 md:text-left"
     >
-      <div
-        className="mb-8 text-center md:w-1/3 lg:w-1/4 md:text-left"
+      <h1
+        className="font-bebas uppercase text-darkGray mb-3"
       >
-        <h1
-          className="font-bebas uppercase text-darkGray mb-3"
-        >
-          your spare food
-        </h1>
-        <SearchRecipesForm />
-      </div>
-      <Image
-        alt="fridge"
-        size="medium"
-        src={
-          Object {
-            "ReactComponent": Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "render": [Function],
-            },
-            "__esModule": true,
-            "default": "technology.svg",
-          }
-        }
-      />
+        your spare food
+      </h1>
+      <SearchRecipesForm />
     </div>
+    <Image
+      alt="fridge"
+      size="medium"
+      src={
+        Object {
+          "ReactComponent": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "render": [Function],
+          },
+          "__esModule": true,
+          "default": "technology.svg",
+        }
+      }
+    />
   </div>
-</div>
+</Fragment>
 `;
