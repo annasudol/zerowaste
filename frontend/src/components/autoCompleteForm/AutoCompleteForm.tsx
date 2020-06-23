@@ -12,11 +12,11 @@ interface AutoCompleteProps {
     placeholder?: string
     saveList(value: string[]): void
     form?(ingredients: string[]): void
-    list?: string[] | []
+    list?: string[]
     error?: boolean
 }
 
-export const AutoComplete: FC <AutoCompleteProps> = ({ placeholder, form, saveList, list, error = false }): ReactElement => {
+export const AutoCompleteForm: FC <AutoCompleteProps> = ({ placeholder, form, saveList, list =[], error = false }): ReactElement => {
 
     const handleChange = (value: string[]) => {
         if (form) {
@@ -24,7 +24,16 @@ export const AutoComplete: FC <AutoCompleteProps> = ({ placeholder, form, saveLi
         }
         saveList(value);
     }
+    // const matches = newValue.some(val => optionEqualValue(item, val));
 
+    // if (matches) {
+    //    console.error(
+    //         [
+    //             'Material-UI: the `getOptionSelected` method of useAutocomplete do not handle the arguments correctly.',
+    //             `The component expects a single value to match a given option but found ${matches}.`,
+    //         ].join('\n')
+    //    )
+    // }
     return (
         <Autocomplete
             multiple
@@ -34,17 +43,13 @@ export const AutoComplete: FC <AutoCompleteProps> = ({ placeholder, form, saveLi
             }}
             options={productsTitles}
             getOptionLabel={option => option}
-            renderOption={option => (
-                <span>
-                    {option}
-                </span>
-            )}
             renderInput={params => (
                 <TextField
                     {...params}
                     label={placeholder || 'Add at least one product'}
                 />
             )}
+            getOptionSelected={()=> true}
             onChange={(_event, value: string[]): void => handleChange(value)}
             value={list}
         />

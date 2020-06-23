@@ -9,7 +9,7 @@ import { store } from './state';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { HashRouter } from 'react-router-dom';
 import client from './graphql/client';
-import { AuthProvider } from "./components";
+import { AuthProvider } from "./hooks";
 import * as serviceWorker from './serviceWorker';
 
 import dotenv from 'dotenv'

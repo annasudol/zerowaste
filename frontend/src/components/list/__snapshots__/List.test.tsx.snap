@@ -10,7 +10,7 @@ exports[`component List match snapshot 1`] = `
       className="w-full flex justify-between"
     >
       <span
-        className="mt-4"
+        className="mt-1"
       >
         test1
       </span>
@@ -32,7 +32,7 @@ exports[`component List match snapshot 1`] = `
       className="w-full flex justify-between"
     >
       <span
-        className="mt-4"
+        className="mt-1"
       >
         test2
       </span>
@@ -54,7 +54,7 @@ exports[`component List match snapshot 1`] = `
       className="w-full flex justify-between"
     >
       <span
-        className="mt-4"
+        className="mt-1"
       >
         test3
       </span>

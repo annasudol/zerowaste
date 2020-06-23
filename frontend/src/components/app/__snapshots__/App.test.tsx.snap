@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component App match snapshot 1`] = `
+<div>
+  <div
+    className="left"
+  />
+  <div
+    className="right"
+  />
+  <Navigation />
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <PublicRoute
+      component={[Function]}
+      path="/login"
+    />
+    <PublicRoute
+      component={[Function]}
+      path="/signUp"
+    />
+    <PublicRoute
+      component={[Function]}
+      path="/recipes"
+    />
+    <PublicRoute
+      component={[Function]}
+      path="/recipe/:recipeID"
+    />
+    <PrivateRoute
+      component={[Function]}
+      path="/addRecipe"
+    />
+    <PrivateRoute
+      component={[Function]}
+      path="/editRecipe/:recipeID"
+    />
+    <PrivateRoute
+      component={[Function]}
+      path="/user"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
+</div>
+`;

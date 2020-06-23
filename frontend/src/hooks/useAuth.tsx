@@ -5,7 +5,7 @@ import {
     isLoggedIn,
     rememberLogin as RememberLogin,
     logoutUser as LogoutUser,
-} from "../../userAuth";
+} from "../userAuth";
 
 type Context = {
     token: string | null;

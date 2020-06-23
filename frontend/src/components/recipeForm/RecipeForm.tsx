@@ -1,7 +1,7 @@
 import React, { useState, ReactElement, FC } from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { AutoComplete, List, ListInput, ImageUpload, FileType } from '..'
+import { AutoCompleteForm, List, ListInput, ImageUpload, FileType } from '..'
 import { RecipeStateProps } from '../../utils/types';
 import { Store } from 'antd/lib/form/interface';
 import { sampleRecipe } from '../../assets/data/sampleRecipe'
@@ -32,7 +32,7 @@ interface RecipeFormProps {
 export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false, initialValues }): ReactElement => {
     const [ingredients, setIngredients] = React.useState<string[] | []>([])
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
-    const [imageUrl, setImageUrl] = useState<string | undefined>(initialValues?.image);
+    const [imageUrl] = useState<string | undefined>(initialValues?.image);
     const [error, setError] = React.useState<boolean>(false)
     React.useEffect(() => {
         if (initialValues && formRef.current) {
@@ -106,7 +106,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
                 <InputNumber />
             </Form.Item>
             <Form.Item label='Ingredients' name='ingredients' rules={[{ required: true, type: 'array', min: 1, max: 20 }]}>
-                <AutoComplete error={error} list={ingredients} saveList={(value: string[]): void => setIngredients(value)} form={(value: string[]): void => formRef.current?.setFieldsValue({ ingredients: value })} />
+                <AutoCompleteForm error={error} list={ingredients} saveList={(value: string[]): void => setIngredients(value)} form={(value: string[]): void => formRef.current?.setFieldsValue({ ingredients: value })} />
             </Form.Item>
             <Form.Item label='Detailed Ingredients' name='detailedIngredients' rules={[{ required: true, type: 'array', min: 1, max: 10 }]}>
                 <ListInput detailedIngredients={detailedIngredients} setDetailedIngredients={(value: string[]): void => setDetailedIngredients(value)} form={(value: string[]): void => formRef.current?.setFieldsValue({ detailedIngredients: value })} />

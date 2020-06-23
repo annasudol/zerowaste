@@ -48,7 +48,7 @@ interface DialogDeleteRecipeProps {
     toggleOpen(val: boolean): void
     recipeId: string
     title: string
-    image: string;
+    image: string
 }
 export const DialogDeleteRecipe: FC <DialogDeleteRecipeProps> = ({open, toggleOpen, recipeId, title, image}): ReactElement => {
     const [deleteRecipe, {error}] = useMutation(DELETE_RECIPE);

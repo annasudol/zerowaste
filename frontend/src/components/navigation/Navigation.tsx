@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { useAuth } from "..";
+import { useAuth } from "../../hooks";
 
 export const Navigation: FC = (): ReactElement => {
         const [open, toggleOpen] = React.useState<boolean>(true);
@@ -17,7 +17,6 @@ export const Navigation: FC = (): ReactElement => {
             logoutUser()
             history.push(`${AppRoutes.Home}`)
         }
-
 
         const loggedIn = (<>
             <ul>

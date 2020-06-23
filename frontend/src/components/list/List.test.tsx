@@ -1,17 +1,17 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 import { List } from './List';
 import toJson from 'enzyme-to-json';
-import { act } from "react-dom/test-utils";
 const listProps = ["test1", "test2", "test3"];
 
-const deleteMock = jest.fn();
+const deleteItem = jest.fn();
+
 describe('component', (): void => {
   describe('List', (): void => {
     it('match snapshot', (): void => {
       const wrapper = shallow(
-        <List list={listProps} deleteItem={deleteMock}/>,
+        <List list={listProps} deleteItem={deleteItem}/>,
       );
 
       expect(toJson(wrapper)).toMatchSnapshot();
@@ -22,20 +22,19 @@ describe('component', (): void => {
           <List list={listProps} deleteItem={jest.fn()}/>,
         );
 
-        wrapper.find("span").map((item, index)=> {
+        wrapper.find("span").map((item, index): void => {
             expect(item.text()).toBe(listProps[index]);
         })
     });
 
-    it('delete item upon clicking delete icon', (): void => {
+    it('deleteItem function was called upon clicking delete icon', (): void => {
         const wrapper = shallow(
-          <List list={listProps} deleteItem={jest.fn()}/>,
+          <List list={listProps} deleteItem={()=>deleteItem()}/>,
         );
-        act(() => {
-            wrapper.find(DeleteIcon).at(0).simulate('click');
 
-        })
-        expect(wrapper.update().find("span")).toHaveLength(2);
+        wrapper.find(IconButton).at(0).simulate('click')
+
+        expect(deleteItem).toHaveBeenCalled();
 
     })
   });

@@ -12,7 +12,7 @@ export interface FileType {
     uid: string
 }
 interface ImageUploadProps {
-    imageUrl: string | undefined
+    imageUrl?: string
     form?(file: FileType | Blob): void
 }
 

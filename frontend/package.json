@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@apollo/react-hooks": "^3.1.5",
+    "@apollo/react-testing": "^3.1.4",
     "@craco/craco": "^5.6.4",
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
@@ -29,6 +30,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
     "graphql": "^15.0.0",
+    "jest-sinon": "^1.0.4",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
@@ -39,11 +41,13 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
+    "sinon": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
     "superagent": "^5.2.2",
     "typescript": "~3.7.2"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.3.0",
     "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
@@ -85,12 +89,27 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js, ts,tsx}",
-      "!src/index.tsx"
-    ]
+  "setupFiles": [
+    "src/**/*.{js, ts,tsx}",
+    "!src/index.tsx"
+  ],
+  "collectCoverage": true,
+  "coverageReporters": [
+    "lcov"
+  ],
+  "coverageDirectory": "test-coverage",
+  "coverageThreshold": {
+    "global": {
+      "branches": 0,
+      "functions": 0,
+      "lines": 0,
+      "statements": 0
+    }
   },
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",

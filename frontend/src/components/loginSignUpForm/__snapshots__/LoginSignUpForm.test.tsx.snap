@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoginSignUpForm match snapshot 1`] = `
+<div
+  className="content overflow-hidden flex justify-center items-center"
+>
+  <div
+    className="flex flex-col"
+  >
+    <h1
+      className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0"
+    >
+      Log in
+    </h1>
+    <ForwardRef(InternalForm)
+      initialValues={
+        Object {
+          "remember": true,
+        }
+      }
+      labelCol={
+        Object {
+          "span": 9,
+        }
+      }
+      name="basic"
+      onFinish={[Function]}
+      wrapperCol={
+        Object {
+          "span": 16,
+        }
+      }
+    >
+      <FormItem
+        label="Email"
+        name="email"
+        rules={
+          Array [
+            Object {
+              "message": "Please input your email!",
+              "required": true,
+              "type": "email",
+            },
+          ]
+        }
+      >
+        <Input
+          type="text"
+        />
+      </FormItem>
+      <FormItem
+        label="Password"
+        name="password"
+        rules={
+          Array [
+            Object {
+              "message": "Please input your password!",
+              "required": true,
+            },
+          ]
+        }
+      >
+        <Password
+          action="click"
+          iconRender={[Function]}
+          visibilityToggle={true}
+        />
+      </FormItem>
+      <FormItem
+        wrapperCol={
+          Object {
+            "offset": 8,
+            "span": 16,
+          }
+        }
+      >
+        <Button
+          block={false}
+          ghost={false}
+          htmlType="submit"
+          loading={false}
+          type="primary"
+        >
+          Submit
+        </Button>
+      </FormItem>
+    </ForwardRef(InternalForm)>
+  </div>
+</div>
+`;
+
+exports[`component LoginSignUpForm match snapshot with prop signInPage true 1`] = `
+<div
+  className="content overflow-hidden flex justify-center items-center"
+>
+  <div
+    className="flex flex-col"
+  >
+    <h1
+      className="form-header font-bebas uppercase text-darkGray text-center pb-0 m-0"
+    >
+      Sign Up
+    </h1>
+    <ForwardRef(InternalForm)
+      initialValues={
+        Object {
+          "remember": true,
+        }
+      }
+      labelCol={
+        Object {
+          "span": 9,
+        }
+      }
+      name="basic"
+      onFinish={[Function]}
+      wrapperCol={
+        Object {
+          "span": 16,
+        }
+      }
+    >
+      <FormItem
+        label="Username"
+        name="name"
+        rules={
+          Array [
+            Object {
+              "message": "Please input your username!",
+              "min": 5,
+              "required": true,
+              "type": "string",
+            },
+          ]
+        }
+      >
+        <Input
+          type="text"
+        />
+      </FormItem>
+      <FormItem
+        label="Email"
+        name="email"
+        rules={
+          Array [
+            Object {
+              "message": "Please input your email!",
+              "required": true,
+              "type": "email",
+            },
+          ]
+        }
+      >
+        <Input
+          type="text"
+        />
+      </FormItem>
+      <FormItem
+        label="Password"
+        name="password"
+        rules={
+          Array [
+            Object {
+              "message": "Please input your password!",
+              "required": true,
+            },
+          ]
+        }
+      >
+        <Password
+          action="click"
+          iconRender={[Function]}
+          visibilityToggle={true}
+        />
+      </FormItem>
+      <FormItem
+        wrapperCol={
+          Object {
+            "offset": 8,
+            "span": 16,
+          }
+        }
+      >
+        <Button
+          block={false}
+          ghost={false}
+          htmlType="submit"
+          loading={false}
+          type="primary"
+        >
+          Submit
+        </Button>
+      </FormItem>
+    </ForwardRef(InternalForm)>
+  </div>
+</div>
+`;

@@ -39,6 +39,6 @@ export const SignUp: FC= (): ReactElement => {
     return <Redirect to={AppRoutes.Login} />
   }
 
-  return <LoginSignUpForm errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={false} />
+  return <LoginSignUpForm errorMessage={error && error.message} handleSubmit={handleSubmit} signInPage />
 
 }
