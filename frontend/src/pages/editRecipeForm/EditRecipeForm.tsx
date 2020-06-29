@@ -29,7 +29,8 @@ export interface LocationTypes {
 export const EditRecipeForm: FC = (): ReactElement => {
         const location: LocationTypes = useLocation();
         const initialState: RecipeStateProps = location.state;
-        const { recipeID } = useParams();
+        console.log(initialState, "initialState")
+        const { recipeID } = useParams<{recipeID: string}>();
         const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
         const history = useHistory();
 

@@ -1,11 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 
-import { LoadingBar, LoginSignUpForm, useAuth } from '../../components';
+import { LoadingBar, LoginSignUpForm } from '../../components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router';
 import { AppRoutes } from '../../routes';
 import { Store } from 'antd/lib/form/interface';
+import { useAuth } from "../../hooks";
 
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
@@ -42,5 +43,5 @@ export const Login: FC= (): ReactElement => {
   if (data) {
     return <Redirect to={AppRoutes.Home} />
   }
-  return <LoginSignUpForm errorMessage={error && error.message} handleSubmit={handleSubmit} loginPage={true} />
+  return <LoginSignUpForm errorMessage={error && error.message} handleSubmit={handleSubmit}/>
 }

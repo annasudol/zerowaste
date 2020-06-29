@@ -4,19 +4,13 @@ import { PlusOutlined } from '@ant-design/icons';
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 
-export interface FileType {
-    lastModified: number
-    name: string
-    size: number
-    type: "image/jpeg"
-    uid: string
-}
+
 interface ImageUploadProps {
     imageUrl?: string
-    form?(file: FileType | Blob): void
+    form?(file: Blob): void
 }
 
-function getBase64(img: any, callback: any) {
+function getBase64(img: Blob, callback: any) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
@@ -39,13 +33,14 @@ export const ImageUpload: FC<ImageUploadProps> = ({ imageUrl, form }): ReactElem
     const [file, setFile] = React.useState<any>()
 
     const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
-        if (info.file.originFileObj) {
-            // tslint:disable-next-line: no-shadowed-variable
-            getBase64(info.file.originFileObj, (imageUrl: string) => {
+        const file =info?.file?.originFileObj
+
+         if (file) {
+            getBase64(file, (imageUrl: string) => {
                 setImg(imageUrl);
-                if (form && info.file.originFileObj) {
-                    setFile(info.file.originFileObj);
-                    form(info.file.originFileObj);
+                if (form) {
+                    setFile(file);
+                    form(file);
                 }
             })
         }

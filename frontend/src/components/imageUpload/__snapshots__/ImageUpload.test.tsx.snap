@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component ImageUpload match snapshot 1`] = `
+<Fragment>
+  <Upload
+    accept=""
+    action=""
+    beforeUpload={[Function]}
+    className="avatar-uploader"
+    data={Object {}}
+    disabled={false}
+    listType="picture-card"
+    multiple={false}
+    name="avatar"
+    onChange={[Function]}
+    showUploadList={false}
+    supportServerRender={true}
+    type="select"
+  >
+    <div>
+      <ForwardRef(PlusOutlined) />
+      <div
+        className="ant-upload-text"
+      >
+        Upload
+      </div>
+    </div>
+  </Upload>
+</Fragment>
+`;

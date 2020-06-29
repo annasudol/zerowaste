@@ -1,7 +1,7 @@
 import React, { useState, ReactElement, FC } from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { AutoCompleteForm, List, ListInput, ImageUpload, FileType } from '..'
+import { AutoCompleteForm, List, ListInput, ImageUpload } from '../../components'
 import { RecipeStateProps } from '../../utils/types';
 import { Store } from 'antd/lib/form/interface';
 import { sampleRecipe } from '../../assets/data/sampleRecipe'
@@ -116,7 +116,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
                 <TextArea />
             </Form.Item>
             <Form.Item name='image' label='Image' rules={[{ required: true }]}>
-                <ImageUpload imageUrl={imageUrl} form={(value: FileType | Blob): void => formRef.current?.setFieldsValue({ image: value })} />
+                <ImageUpload imageUrl={imageUrl} form={(value: Blob): void => formRef.current?.setFieldsValue({ image: value })} />
             </Form.Item>
             <Form.Item name='sourceUrl' label='Source Url' rules={[{ required: false }]}>
                 <Input addonBefore='http://' />

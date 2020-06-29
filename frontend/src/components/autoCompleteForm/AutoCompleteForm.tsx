@@ -24,16 +24,7 @@ export const AutoCompleteForm: FC <AutoCompleteProps> = ({ placeholder, form, sa
         }
         saveList(value);
     }
-    // const matches = newValue.some(val => optionEqualValue(item, val));
 
-    // if (matches) {
-    //    console.error(
-    //         [
-    //             'Material-UI: the `getOptionSelected` method of useAutocomplete do not handle the arguments correctly.',
-    //             `The component expects a single value to match a given option but found ${matches}.`,
-    //         ].join('\n')
-    //    )
-    // }
     return (
         <Autocomplete
             multiple
@@ -43,13 +34,14 @@ export const AutoCompleteForm: FC <AutoCompleteProps> = ({ placeholder, form, sa
             }}
             options={productsTitles}
             getOptionLabel={option => option}
+
             renderInput={params => (
                 <TextField
                     {...params}
                     label={placeholder || 'Add at least one product'}
                 />
             )}
-            getOptionSelected={()=> true}
+            // getOptionSelected={()=> true}
             onChange={(_event, value: string[]): void => handleChange(value)}
             value={list}
         />

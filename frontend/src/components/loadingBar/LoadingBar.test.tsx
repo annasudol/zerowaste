@@ -12,7 +12,5 @@ describe('component', (): void => {
 
       expect(toJson(wrapper)).toMatchSnapshot();
     });
-});
-
-
+  });
 });

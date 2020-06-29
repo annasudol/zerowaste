@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoginSignUpForm match snapshot 1`] = `
+<Fragment>
+  <div
+    className="nav-btn"
+  />
+  <div
+    className="opened-nav"
+  >
+    <nav
+      className="nav"
+    >
+      <Button
+        block={false}
+        ghost={false}
+        htmlType="button"
+        loading={false}
+        onClick={[Function]}
+        type="link"
+      >
+        <CancelIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />
+      </Button>
+      <ul>
+        <li
+          className="mb-4"
+        >
+          <Link
+            className="pt-2 pb-2"
+            to="/"
+          >
+            Home
+          </Link>
+        </li>
+        <li
+          className="mb-4"
+        >
+          <Link
+            className="pt-2 pb-2"
+            to="/login"
+          >
+            Login
+          </Link>
+        </li>
+        <li
+          className="mb-4"
+        >
+          <Link
+            className="pt-2 pb-2"
+            to="/signUp"
+          >
+            Sign up
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</Fragment>
+`;

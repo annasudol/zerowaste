@@ -1,0 +1,600 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoginSignUpForm  1`] = `
+<ForwardRef(InternalForm)
+  labelCol={
+    Object {
+      "span": 10,
+    }
+  }
+  layout="horizontal"
+  name="control-ref"
+  onFinish={[Function]}
+  onFinishFailed={[Function]}
+  validateMessages={
+    Object {
+      "number": Object {
+        "range": "\${label} must be between \${min} and \${max}",
+      },
+      "required": "\${label} is required!",
+    }
+  }
+  wrapperCol={
+    Object {
+      "span": 20,
+    }
+  }
+>
+  <FormItem
+    label="Title"
+    name="title"
+    rules={
+      Array [
+        Object {
+          "min": 3,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <Input
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    label="Servings"
+    name="servings"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ready in Min."
+    name="readyInMinutes"
+    rules={
+      Array [
+        Object {
+          "max": 400,
+          "min": 5,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ingredients"
+    name="ingredients"
+    rules={
+      Array [
+        Object {
+          "max": 20,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <AutoCompleteForm
+      error={false}
+      form={[Function]}
+      list={Array []}
+      saveList={[Function]}
+    />
+  </FormItem>
+  <FormItem
+    label="Detailed Ingredients"
+    name="detailedIngredients"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <ListInput
+      detailedIngredients={Array []}
+      form={[Function]}
+      setDetailedIngredients={[Function]}
+    />
+    <List
+      deleteItem={[Function]}
+      list={Array []}
+    />
+  </FormItem>
+  <FormItem
+    label="Instructions"
+    name="instructions"
+    rules={
+      Array [
+        Object {
+          "min": 10,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <TextArea />
+  </FormItem>
+  <FormItem
+    label="Image"
+    name="image"
+    rules={
+      Array [
+        Object {
+          "required": true,
+        },
+      ]
+    }
+  >
+    <ImageUpload
+      form={[Function]}
+      imageUrl="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABWCAYAAABVVmH3AAAMSGlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnltSSWiBCEgJvQkiSJcSQosgIFWwEZJAQokhIYjYlWUVXLuIgA1dFVF0dQVkrahrXQR7f1hQUdbFgg2VNymg637vve+d75t7/5w55z8lc++dAUCnhieV5qK6AORJCmTxESGsCalpLNIjgAMMaAEjYMTjy6XsuLhoAGXw/nd5ew0gyvtlFyXXP+f/q+gJhHI+AEgcxBkCOT8P4l8BwEv4UlkBAEQfqLeeXiBV4kkQG8hgghBLlThLjUuUOEONK1U2ifEciHcBQKbxeLIsALSboZ5VyM+CPNo3IHaTCMQSAHTIEAfyRTwBxJEQj8jLm6bE0A44ZHzDk/U3zowhTh4vawira1EJOVQsl+byZvyf7fjfkperGIxhBwdNJIuMV9YM+3YjZ1qUEtMg7pFkxMRCrA/xe7FAZQ8xShUpIpPU9qgpX86BPQNMiN0EvNAoiE0hDpfkxkRr9BmZ4nAuxHCFoEXiAm6ixneRUB6WoOGskU2Ljx3EmTIOW+PbwJOp4irtTypyktga/hsiIXeQ/02xKDFFnTNGLRQnx0CsDTFTnpMQpbbBbIpFnJhBG5kiXpm/DcR+QklEiJofm5IpC4/X2Mvy5IP1YotEYm6MBlcViBIjNTy7+DxV/kYQNwsl7KRBHqF8QvRgLQJhaJi6dqxdKEnS1It1SgtC4jW+r6S5cRp7nCrMjVDqrSA2lRcmaHzxwAK4INX8eIy0IC5RnSeekc0bG6fOBy8C0YADQgELKODIANNANhC39TT1wF/qmXDAAzKQBYTARaMZ9EhRzUjgNQEUgz8hEgL5kF+IalYICqH+85BWfXUBmarZQpVHDngMcR6IArnwt0LlJRmKlgweQY34H9H5MNdcOJRz/9SxoSZao1EM8rJ0Bi2JYcRQYi…"
+    />
+  </FormItem>
+  <FormItem
+    label="Source Url"
+    name="sourceUrl"
+    rules={
+      Array [
+        Object {
+          "required": false,
+        },
+      ]
+    }
+  >
+    <Input
+      addonBefore="http://"
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    wrapperCol={
+      Object {
+        "offset": 10,
+        "span": 12,
+      }
+    }
+  >
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="submit"
+      loading={false}
+      type="primary"
+    >
+      Submit
+    </Button>
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="button"
+      loading={false}
+      onClick={[Function]}
+    >
+      Reset
+    </Button>
+  </FormItem>
+</ForwardRef(InternalForm)>
+`;
+
+exports[`component LoginSignUpForm match snapshot 1`] = `
+<ForwardRef(InternalForm)
+  labelCol={
+    Object {
+      "span": 10,
+    }
+  }
+  layout="horizontal"
+  name="control-ref"
+  onFinish={[Function]}
+  onFinishFailed={[Function]}
+  validateMessages={
+    Object {
+      "number": Object {
+        "range": "\${label} must be between \${min} and \${max}",
+      },
+      "required": "\${label} is required!",
+    }
+  }
+  wrapperCol={
+    Object {
+      "span": 20,
+    }
+  }
+>
+  <FormItem
+    label="Title"
+    name="title"
+    rules={
+      Array [
+        Object {
+          "min": 3,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <Input
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    label="Servings"
+    name="servings"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ready in Min."
+    name="readyInMinutes"
+    rules={
+      Array [
+        Object {
+          "max": 400,
+          "min": 5,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ingredients"
+    name="ingredients"
+    rules={
+      Array [
+        Object {
+          "max": 20,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <AutoCompleteForm
+      error={false}
+      form={[Function]}
+      list={Array []}
+      saveList={[Function]}
+    />
+  </FormItem>
+  <FormItem
+    label="Detailed Ingredients"
+    name="detailedIngredients"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <ListInput
+      detailedIngredients={Array []}
+      form={[Function]}
+      setDetailedIngredients={[Function]}
+    />
+    <List
+      deleteItem={[Function]}
+      list={Array []}
+    />
+  </FormItem>
+  <FormItem
+    label="Instructions"
+    name="instructions"
+    rules={
+      Array [
+        Object {
+          "min": 10,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <TextArea />
+  </FormItem>
+  <FormItem
+    label="Image"
+    name="image"
+    rules={
+      Array [
+        Object {
+          "required": true,
+        },
+      ]
+    }
+  >
+    <ImageUpload
+      form={[Function]}
+    />
+  </FormItem>
+  <FormItem
+    label="Source Url"
+    name="sourceUrl"
+    rules={
+      Array [
+        Object {
+          "required": false,
+        },
+      ]
+    }
+  >
+    <Input
+      addonBefore="http://"
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    wrapperCol={
+      Object {
+        "offset": 10,
+        "span": 12,
+      }
+    }
+  >
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="submit"
+      loading={false}
+      type="primary"
+    >
+      Submit
+    </Button>
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="button"
+      loading={false}
+      onClick={[Function]}
+    >
+      Reset
+    </Button>
+  </FormItem>
+</ForwardRef(InternalForm)>
+`;
+
+exports[`component LoginSignUpForm match snapshot when initialValues props are given 1`] = `
+<ForwardRef(InternalForm)
+  labelCol={
+    Object {
+      "span": 10,
+    }
+  }
+  layout="horizontal"
+  name="control-ref"
+  onFinish={[Function]}
+  onFinishFailed={[Function]}
+  validateMessages={
+    Object {
+      "number": Object {
+        "range": "\${label} must be between \${min} and \${max}",
+      },
+      "required": "\${label} is required!",
+    }
+  }
+  wrapperCol={
+    Object {
+      "span": 20,
+    }
+  }
+>
+  <FormItem
+    label="Title"
+    name="title"
+    rules={
+      Array [
+        Object {
+          "min": 3,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <Input
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    label="Servings"
+    name="servings"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ready in Min."
+    name="readyInMinutes"
+    rules={
+      Array [
+        Object {
+          "max": 400,
+          "min": 5,
+          "required": true,
+          "type": "number",
+        },
+      ]
+    }
+  >
+    <ForwardRef
+      step={1}
+    />
+  </FormItem>
+  <FormItem
+    label="Ingredients"
+    name="ingredients"
+    rules={
+      Array [
+        Object {
+          "max": 20,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <AutoCompleteForm
+      error={false}
+      form={[Function]}
+      list={Array []}
+      saveList={[Function]}
+    />
+  </FormItem>
+  <FormItem
+    label="Detailed Ingredients"
+    name="detailedIngredients"
+    rules={
+      Array [
+        Object {
+          "max": 10,
+          "min": 1,
+          "required": true,
+          "type": "array",
+        },
+      ]
+    }
+  >
+    <ListInput
+      detailedIngredients={Array []}
+      form={[Function]}
+      setDetailedIngredients={[Function]}
+    />
+    <List
+      deleteItem={[Function]}
+      list={Array []}
+    />
+  </FormItem>
+  <FormItem
+    label="Instructions"
+    name="instructions"
+    rules={
+      Array [
+        Object {
+          "min": 10,
+          "required": true,
+        },
+      ]
+    }
+  >
+    <TextArea />
+  </FormItem>
+  <FormItem
+    label="Image"
+    name="image"
+    rules={
+      Array [
+        Object {
+          "required": true,
+        },
+      ]
+    }
+  >
+    <ImageUpload
+      form={[Function]}
+      imageUrl="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABWCAYAAABVVmH3AAAMSGlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnltSSWiBCEgJvQkiSJcSQosgIFWwEZJAQokhIYjYlWUVXLuIgA1dFVF0dQVkrahrXQR7f1hQUdbFgg2VNymg637vve+d75t7/5w55z8lc++dAUCnhieV5qK6AORJCmTxESGsCalpLNIjgAMMaAEjYMTjy6XsuLhoAGXw/nd5ew0gyvtlFyXXP+f/q+gJhHI+AEgcxBkCOT8P4l8BwEv4UlkBAEQfqLeeXiBV4kkQG8hgghBLlThLjUuUOEONK1U2ifEciHcBQKbxeLIsALSboZ5VyM+CPNo3IHaTCMQSAHTIEAfyRTwBxJEQj8jLm6bE0A44ZHzDk/U3zowhTh4vawira1EJOVQsl+byZvyf7fjfkperGIxhBwdNJIuMV9YM+3YjZ1qUEtMg7pFkxMRCrA/xe7FAZQ8xShUpIpPU9qgpX86BPQNMiN0EvNAoiE0hDpfkxkRr9BmZ4nAuxHCFoEXiAm6ixneRUB6WoOGskU2Ljx3EmTIOW+PbwJOp4irtTypyktga/hsiIXeQ/02xKDFFnTNGLRQnx0CsDTFTnpMQpbbBbIpFnJhBG5kiXpm/DcR+QklEiJofm5IpC4/X2Mvy5IP1YotEYm6MBlcViBIjNTy7+DxV/kYQNwsl7KRBHqF8QvRgLQJhaJi6dqxdKEnS1It1SgtC4jW+r6S5cRp7nCrMjVDqrSA2lRcmaHzxwAK4INX8eIy0IC5RnSeekc0bG6fOBy8C0YADQgELKODIANNANhC39TT1wF/qmXDAAzKQBYTARaMZ9EhRzUjgNQEUgz8hEgL5kF+IalYICqH+85BWfXUBmarZQpVHDngMcR6IArnwt0LlJRmKlgweQY34H9H5MNdcOJRz/9SxoSZao1EM8rJ0Bi2JYcRQYi…"
+    />
+  </FormItem>
+  <FormItem
+    label="Source Url"
+    name="sourceUrl"
+    rules={
+      Array [
+        Object {
+          "required": false,
+        },
+      ]
+    }
+  >
+    <Input
+      addonBefore="http://"
+      type="text"
+    />
+  </FormItem>
+  <FormItem
+    wrapperCol={
+      Object {
+        "offset": 10,
+        "span": 12,
+      }
+    }
+  >
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="submit"
+      loading={false}
+      type="primary"
+    >
+      Submit
+    </Button>
+    <Button
+      block={false}
+      className="mr-2"
+      ghost={false}
+      htmlType="button"
+      loading={false}
+      onClick={[Function]}
+    >
+      Reset
+    </Button>
+  </FormItem>
+</ForwardRef(InternalForm)>
+`;

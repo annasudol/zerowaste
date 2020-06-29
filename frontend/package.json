@@ -20,6 +20,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "antd": "^4.3.1",
+    "antd-enzyme": "0.0.1",
     "apollo-boost": "^0.4.8",
     "apollo-link-context": "^1.0.20",
     "apollo-link-ws": "^1.0.20",
@@ -44,7 +45,8 @@
     "sinon": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
     "superagent": "^5.2.2",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "waait": "^1.0.5"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.3.0",

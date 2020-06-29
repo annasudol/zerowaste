@@ -6,8 +6,8 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities'
 import { onError } from "apollo-link-error";
 
-const httpUrl = `http://localhost:${process.env.REACT_APP_PORT}/graphql`;
-const uri = `ws://localhost:${process.env.REACT_APP_PORT}/subscriptions`;
+const httpUrl = `http://localhost:${process.env.REACT_APP_PORT || 9000}/graphql`;
+const uri = `ws://localhost:${process.env.REACT_APP_PORT || 9000}/subscriptions`;
 
 const wslink = new WebSocketLink({
     uri, options: {

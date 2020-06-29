@@ -5,10 +5,9 @@ import {
     Redirect,
     RouteComponentProps,
     Route
-} from 'react-router-dom'
-import { isLoggedIn } from '../../userAuth'
-import { AppRoutes } from '../../routes'
-    ;
+} from 'react-router-dom';
+import { isLoggedIn } from '../../userAuth';
+import { AppRoutes } from '../../routes';
 
 interface Props extends RouteProps {
     allowed?: boolean
