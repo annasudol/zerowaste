@@ -34,14 +34,12 @@ export const AutoCompleteForm: FC <AutoCompleteProps> = ({ placeholder, form, sa
             }}
             options={productsTitles}
             getOptionLabel={option => option}
-
             renderInput={params => (
                 <TextField
                     {...params}
                     label={placeholder || 'Add at least one product'}
                 />
             )}
-            // getOptionSelected={()=> true}
             onChange={(_event, value: string[]): void => handleChange(value)}
             value={list}
         />

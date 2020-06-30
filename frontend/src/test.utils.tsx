@@ -3,7 +3,11 @@ import { render } from '@testing-library/react';
 // this adds custom jest matchers from jest-dom
 import '@testing-library/jest-dom/extend-expect';
 import { MockedProvider, MockedResponse } from '@apollo/react-testing';
-
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { store } from './state';
+export * from '@testing-library/react';
 type RenderApolloOptions = { 
   mocks?: MockedResponse[], 
   addTypename?: any, 
@@ -14,6 +18,21 @@ type RenderApolloOptions = {
 }
 
 const renderApollo = (node: any, { mocks, addTypename, defaultOptions, cache, resolvers, ...options }: RenderApolloOptions = {}) => {
+
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(query => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+  });
+
   return render(
     <MockedProvider
       mocks={mocks}
@@ -28,5 +47,20 @@ const renderApollo = (node: any, { mocks, addTypename, defaultOptions, cache, re
   );
 };
 
-export * from '@testing-library/react';
-export { renderApollo };
+
+
+
+const renderReact = (node: any) => {
+
+const history = createMemoryHistory()
+return render(
+  <Provider store={store}>
+    <Router history={history}>
+      {node}
+    </Router>
+    </Provider>,
+  );
+};
+
+
+export { renderApollo, renderReact };

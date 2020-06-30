@@ -1,22 +1,31 @@
-import { mount } from 'enzyme';
 import React from 'react';
-
-import toJson from 'enzyme-to-json';
 import { Image } from './Image';
+import {render} from '@testing-library/react'
 
 describe('component', (): void => {
   describe('Image', (): void => {
     it('match snapshot with medium size image', (): void => {
-      const image = mount(<Image src={require('url')} size="medium" alt="test" />);
-      expect(toJson(image)).toMatchSnapshot();
+      const {getByAltText} = render(<Image src='url' size="medium" alt="test" />);
+   
+     expect(getByAltText('test')).toBeInTheDocument();
     });
     it('match snapshot with small size image', (): void => {
-      const image = mount(<Image src={require('url')} size="small" alt="test" />);
-      expect(toJson(image)).toMatchSnapshot();
+      const {getByAltText} = render(<Image src='url' size="small" alt="test" />);
+      expect(getByAltText('test')).toBeInTheDocument();
     });
-    it('match snapshot with large size and rounded image', (): void => {
-      const image = mount(<Image src={require('url')} size="large" alt="test"/>);
-      expect(toJson(image)).toMatchSnapshot();
+    it('match snapshot with large size image', (): void => {
+      const {getByAltText} = render(<Image src='url' size="large" alt="test"/>);
+      expect(getByAltText('test')).toBeInTheDocument();
+    });
+
+    it('match snapshot with full size image', (): void => {
+      const {getByAltText} = render(<Image src='url' size="full" alt="test"/>);
+      expect(getByAltText('test')).toBeInTheDocument();
+    });
+
+    it('match snapshot with no image size', (): void => {
+      const {getByAltText} = render(<Image src='url' alt="test"/>);
+      expect(getByAltText('test')).toBeInTheDocument();
     });
   });
 });

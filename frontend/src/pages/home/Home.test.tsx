@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { Home } from './Home';
 import toJson from 'enzyme-to-json';
 

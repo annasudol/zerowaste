@@ -1,10 +1,9 @@
 import React from 'react';
 import { EditRecipeForm, UPDATE_RECIPE } from './EditRecipeForm';
 import { renderApollo, cleanup,  fireEvent, waitForElement } from '../../test.utils';
-import toJson from 'enzyme-to-json';
 
 import * as router from 'react-router';
-import { shallow } from "enzyme";
+
 const location = {
   pathname: '/editRecipe/5efb130b3d664b27045bf085',
   state: {
@@ -36,24 +35,9 @@ describe('component', (): void => {
     beforeEach(() => {
       jest.spyOn(router, 'useLocation').mockReturnValue({ ...location });
       jest.spyOn(router, 'useParams').mockReturnValue({ recipeID: "5efb130b3d664b27045bf085" });
-      // jest.spyOn(router, 'useHistory').mockReturnValue({ pathname: "test" });
-
-      Object.defineProperty(window, 'matchMedia', {
-        writable: true,
-        value: jest.fn().mockImplementation(query => ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addListener: jest.fn(), // deprecated
-          removeListener: jest.fn(), // deprecated
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
-        })),
-    });
   });
 
-    it('match snapshot when clicking back button', async () => {
+    it('render without error', async () => {
 
         const mocks = [
             {
@@ -64,12 +48,23 @@ describe('component', (): void => {
             results: { recipe:  {id: "5ef248ca324f6aaa02bfd7a0"}},
           }
           ];
-         const {findByTitle, container} = renderApollo(<EditRecipeForm/>, {mocks});
-        const backButton =  await waitForElement(() => findByTitle('back'))
-        fireEvent.click(backButton);
+        renderApollo(<EditRecipeForm/>, {mocks});
+    });
 
-        expect(container).toMatchSnapshot();
+    it('render without error upon clicking back button', async () => {
 
+      const mocks = [
+          {
+            request: {
+              query: UPDATE_RECIPE,
+              variables: { id: "5ef248ca324f6aaa02bfd7a0", title: "test", servings: 10, image: "test", readyInMinutes: 10, ingredients: ["test1"], detailedIngredients: ["test2"], instructions: "inst", sourceUrl: "myBlog.com"},
+          },
+          results: { recipe:  {id: "5ef248ca324f6aaa02bfd7a0"}},
+        }
+        ];
+       const {getByTitle}= renderApollo(<EditRecipeForm/>, {mocks});
+       const backButton =  await waitForElement(() => getByTitle('back-btn'));
+       fireEvent.click(backButton);
     });
   });
 });

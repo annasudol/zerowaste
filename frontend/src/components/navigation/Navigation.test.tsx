@@ -2,12 +2,6 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { Navigation } from './Navigation';
 import toJson from 'enzyme-to-json';
-import * as router from 'react-router';
-
-// import { renderHook } from '@testing-library/react-hooks';
-
-// require('../../hooks');
-// const useAuth = require('../../hooks').useAuth as jest.Mock;
 
 describe('component', (): void => {
   describe('LoginSignUpForm', (): void => {
@@ -33,6 +27,4 @@ describe('component', (): void => {
 
     });
   });
-
-
 });

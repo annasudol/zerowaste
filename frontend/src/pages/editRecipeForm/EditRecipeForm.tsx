@@ -43,7 +43,7 @@ export const EditRecipeForm: FC = (): ReactElement => {
         }
         return (
             <>
-                <button className='coral-link p-4' title="back" onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon color='error' /></button>
+                <button className='coral-link p-4' title="back-btn" onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon color='error' /></button>
                 <div className='flex justify-center items-center'>
                     <div className='w-2/3 min-w-40 pb-4 pt-4'>
                         <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Edit Recipe</h1>

@@ -35,7 +35,7 @@ export const LoginSignUpForm: FC<AuthProps> = ({ errorMessage, handleSubmit, sig
               label='Username'
               name='name'
               rules={[{ required: true, type: 'string', min: 5, message: 'Please input your username!' }]}>
-              <Input />
+              <Input data-testid="name-input"/>
             </Form.Item>
           )}
           <Form.Item
@@ -44,14 +44,14 @@ export const LoginSignUpForm: FC<AuthProps> = ({ errorMessage, handleSubmit, sig
             name='email'
             rules={[{ required: true, type: 'email', message: 'Please input your email!' }]}
           >
-            <Input />
+            <Input data-testid="email-input"/>
           </Form.Item>
           <Form.Item
             label='Password'
             name='password'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password />
+            <Input.Password data-testid="password-input"/>
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type='primary' htmlType='submit'>

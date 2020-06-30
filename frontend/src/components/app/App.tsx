@@ -1,8 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Navigation, PublicRoute, PrivateRoute, ErrorMessage } from '../../components';
 import { Login, SignUp, Home, RecipesList, AddRecipeForm, RecipeInfo, UserInfo, EditRecipeForm } from '../../pages';
-import { AppRoutes } from '../../routes'
-;
+import { AppRoutes } from '../../routes';
 import { Route, Switch } from 'react-router-dom';
 
 
