@@ -9,7 +9,7 @@ interface IngredientsListProps {
 }
 export const List: FC<IngredientsListProps> = ({ list, deleteItem }): ReactElement => (
     <ol>
-        {list.map((item) => (
+        {list?.map((item) => (
             <li key={item} className='ml-6'>
                 <div className='w-full flex justify-between'>
                     <span className='mt-1'>{item}</span>

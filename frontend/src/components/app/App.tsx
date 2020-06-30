@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 
 
 export const App: FC = (): ReactElement => (
-        <div>
+        <>
         <div className="left"></div>
         <div className="right"></div>
             <Navigation />
@@ -22,5 +22,5 @@ export const App: FC = (): ReactElement => (
                 <PrivateRoute path={AppRoutes.User} component={UserInfo} />
                 <Route component={ErrorMessage} />
             </Switch>
-        </div>
+        </>
     )

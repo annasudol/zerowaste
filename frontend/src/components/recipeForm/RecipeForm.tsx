@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, FC } from 'react';
+import React, { useState, ReactElement, FC, useEffect } from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { AutoCompleteForm, List, ListInput, ImageUpload } from '../../components'
@@ -10,8 +10,6 @@ import * as request from 'superagent';
 import { handlePhotoDelete } from "../../utils/handlePhotoDelete";
 const { TextArea } = Input;
 const tailLayout = { wrapperCol: { offset: 10, span: 12 } };
-const formRef = React.createRef<FormInstance>();
-
 
 const validateMessages = {
     // eslint-disable-next-line no-template-curly-in-string
@@ -34,13 +32,14 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
     const [imageUrl] = useState<string | undefined>(initialValues?.image);
     const [error, setError] = React.useState<boolean>(false)
-    React.useEffect(() => {
-        if (initialValues && formRef.current) {
-            formRef.current.setFieldsValue({ ...initialValues });
+    const formRef = React.createRef<FormInstance>();
+    useEffect(() => {
+        if (initialValues) {
+            formRef?.current?.setFieldsValue({ ...initialValues });
             setIngredients(initialValues.ingredients)
             setDetailedIngredients(initialValues.detailedIngredients)
         }
-    }, [initialValues]);
+    }, [formRef, initialValues]);
 
 
 

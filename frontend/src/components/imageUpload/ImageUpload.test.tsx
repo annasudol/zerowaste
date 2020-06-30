@@ -4,7 +4,6 @@ import { Upload } from 'antd';
 
 import toJson from 'enzyme-to-json';
 import { ImageUpload } from './ImageUpload';
-import { act } from "react-dom/test-utils";
 
 describe('component', (): void => {
   describe('ImageUpload', (): void => {
@@ -18,7 +17,7 @@ describe('component', (): void => {
         expect(wrapper.find('img').prop("src")).toBe(imageUrl);
       });
       //TODO: finish test
-    it('zzz', ()=> {
+    it('test', ()=> {
       const imageUrl = "https://res.cloudinary.com/drgb4slzt/image/upload/v1593443213/belhdjaq4pevmwydoept.jpg"
       const file = {
         lastModified: 1592474852973,

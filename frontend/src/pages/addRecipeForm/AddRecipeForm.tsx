@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
 import { Store } from 'antd/lib/form/interface';
 
-const ADD_RECIPE = gql`
+export const ADD_RECIPE = gql`
   mutation CreateRecipe($title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $instructions: String! $sourceUrl: String) {
     createRecipe(title: $title, servings: $servings image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, instructions: $instructions, sourceUrl: $sourceUrl) {
         id

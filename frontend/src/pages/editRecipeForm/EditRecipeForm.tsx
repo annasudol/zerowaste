@@ -9,7 +9,7 @@ import { RecipeStateProps } from '../../utils/types';
 import { AppRoutes } from '../../routes';
 import { Store } from 'antd/lib/form/interface';
 
-const UPDATE_RECIPE = gql`
+export const UPDATE_RECIPE = gql`
   mutation UpdateRecipe($id: ID! $title: String! $servings: Int! $image: String!, $readyInMinutes: Int! $ingredients: [String!]! $detailedIngredients: [String!]! $instructions: String! $sourceUrl: String) {
     updateRecipe(id: $id title: $title, servings: $servings image: $image, readyInMinutes: $readyInMinutes, ingredients: $ingredients, detailedIngredients: $detailedIngredients, instructions: $instructions, sourceUrl: $sourceUrl) {
         id
@@ -28,8 +28,7 @@ export interface LocationTypes {
 
 export const EditRecipeForm: FC = (): ReactElement => {
         const location: LocationTypes = useLocation();
-        const initialState: RecipeStateProps = location.state;
-        console.log(initialState, "initialState")
+        const initialState: RecipeStateProps = location?.state;
         const { recipeID } = useParams<{recipeID: string}>();
         const [updateRecipe, { data }] = useMutation(UPDATE_RECIPE);
         const history = useHistory();
@@ -44,7 +43,7 @@ export const EditRecipeForm: FC = (): ReactElement => {
         }
         return (
             <>
-                <button className='coral-link p-4' onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon color='error' /></button>
+                <button className='coral-link p-4' title="back" onClick={(): any => history.push({ pathname: AppRoutes.User })}> <BackspaceIcon color='error' /></button>
                 <div className='flex justify-center items-center'>
                     <div className='w-2/3 min-w-40 pb-4 pt-4'>
                         <h1 className='form-header font-bebas uppercase text-darkGray text-center pb-0 m-0'>Edit Recipe</h1>

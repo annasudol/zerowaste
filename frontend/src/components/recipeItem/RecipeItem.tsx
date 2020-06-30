@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-
 import { Image, DialogDeleteRecipe } from '..';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
@@ -7,7 +6,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 
-const GET_RECIPE_DETAILS = gql`
+export const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
     recipe(id: $id) {
         title
