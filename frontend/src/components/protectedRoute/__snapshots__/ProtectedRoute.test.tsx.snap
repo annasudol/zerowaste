@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoginSignUpForm match snapshot PrivateRoute 1`] = `
+<ProtectedRoute
+  allowed={false}
+  component={[Function]}
+  path="newPath"
+  redirectTo="/signUp"
+/>
+`;
+
+exports[`component LoginSignUpForm match snapshot PublicRoute 1`] = `
+<ProtectedRoute
+  allowed={true}
+  component={[Function]}
+  path="newPath"
+  redirectTo="/"
+/>
+`;

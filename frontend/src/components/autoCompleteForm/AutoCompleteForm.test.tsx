@@ -3,38 +3,28 @@ import React from 'react';
 
 import { AutoCompleteForm } from './AutoCompleteForm';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-import { renderReact } from "../../test.utils";
-
-import { screen } from '@testing-library/react'
 const list = ["test1", "test2", "test3"];
 
 describe('component', (): void => {
   describe('AutoCompleteForm', (): void => {
-    it('when prop list was not given does not display button', (): void => {
-      renderReact(<AutoCompleteForm saveList={jest.fn()}/>);
-      // expect(screen.getByRole('span')).toBeNull();
+    it('when prop list was not given renders empty array', (): void => {
+      const wrapper = shallow(<AutoCompleteForm saveList={jest.fn()}/>);
+      expect(wrapper.find(Autocomplete).prop('value')).toEqual([]);
     });
 
     it('when error prop is true has red border', (): void => {
-      const {container} = renderReact(<AutoCompleteForm list={list} saveList={jest.fn()} error />);
-      expect(container.firstChild).toHaveStyle('border: 1px solid red');
-    });
-
-    it('renders list props', (): void => {
-      renderReact(<AutoCompleteForm list={list} saveList={jest.fn()} />);
-      list.map((listItem: string)=> expect(screen.getByText(listItem)).toBeInTheDocument());
+      const wrapper = shallow(<AutoCompleteForm list={list} saveList={jest.fn()} error/>);
+      expect(wrapper.find(Autocomplete).prop('style')).toEqual({ border: '1px solid red' });
     });
 
     it('render placeholder props', (): void => {
-        renderReact(<AutoCompleteForm list={list} saveList={jest.fn()} placeholder="example placeholder"/>);
-        expect(screen.getByText("example placeholder")).toBeInTheDocument();
+        const wrapper = mount(<AutoCompleteForm list={list} saveList={jest.fn()} placeholder="example placeholder"/>);
+        expect(wrapper.find('label').text()).toBe("example placeholder")
     });
 
     it('render default placeholder', (): void => {
-        renderReact(<AutoCompleteForm list={list} saveList={jest.fn()} />);
-        expect(screen.getByText("Add at least one product")).toBeInTheDocument();
-
+        const wrapper = mount(<AutoCompleteForm list={list} saveList={jest.fn()} />);
+        expect(wrapper.find('label').text()).toBe("Add at least one product")
     });
 
     it('responds to handleChange function', (): void => {

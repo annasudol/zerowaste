@@ -3,7 +3,7 @@ import React from 'react';
 import { LoginSignUpForm } from './LoginSignUpForm';
 import toJson from 'enzyme-to-json';
 import { Button, Form } from 'antd';
-
+import { Store } from 'antd/lib/form/interface';
 describe('component', (): void => {
   describe('LoginSignUpForm', (): void => {
     it('match snapshot', (): void => {
@@ -21,14 +21,14 @@ describe('component', (): void => {
 
         expect(wrapper.find('p').text()).toBe("test");
       });
-     //TODO: finish test
       it('calls handleSubmit upon clicking submit button', (): void => {
         const mockHandleSubmit = jest.fn();
-        const wrapper = shallow(<LoginSignUpForm handleSubmit={jest.fn()} />);
-        wrapper.find(Form).simulate("onFinish");
-        wrapper.find(Button).simulate('submit');
-        wrapper.find(Button).at(0).simulate('click')
-        expect(mockHandleSubmit).toHaveBeenCalledTimes(0);
+        const wrapper = shallow(<LoginSignUpForm handleSubmit={mockHandleSubmit} />);
+        wrapper.find(Form).prop<Function>('onFinish')({email: "example@email.com", password: "Pas321!"});
+        wrapper.find(Button).simulate('submit', {email: "example@email.com", password: "Pas321!"}); 
+        wrapper.find(Button).at(0).simulate('click');
+
+        expect(mockHandleSubmit).toHaveBeenCalledTimes(1);
       });
 });
 
