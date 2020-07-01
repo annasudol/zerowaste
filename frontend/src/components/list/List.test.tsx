@@ -29,7 +29,6 @@ describe('component', (): void => {
 
     it('deleteItem function was called upon clicking delete icon', (): void => {
         const wrapper = shallow(<List list={listProps} deleteItem={()=>deleteItem()}/>);
-
         wrapper.find(IconButton).at(0).simulate('click');
 
         expect(deleteItem).toHaveBeenCalledTimes(1);

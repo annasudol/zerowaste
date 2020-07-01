@@ -10,10 +10,10 @@ interface ImageUploadProps {
     form?(file: Blob): void
 }
 
-function getBase64(img: Blob, callback: any) {
+const getBase64 = (img: Blob, callback: any)=> {
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
+   reader.addEventListener('load', () => callback(reader.result));
+   reader.readAsDataURL(img);
 }
 
 function beforeUpload(file: { type: string; size: number; }) {
@@ -34,7 +34,6 @@ export const ImageUpload: FC<ImageUploadProps> = ({ imageUrl, form }): ReactElem
 
     const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
         const file =info?.file?.originFileObj
-
          if (file) {
             getBase64(file, (imageUrl: string) => {
                 setImg(imageUrl);
@@ -65,7 +64,6 @@ export const ImageUpload: FC<ImageUploadProps> = ({ imageUrl, form }): ReactElem
                 action={file}
                 beforeUpload={beforeUpload}
                 onChange={(info)=> handleChange(info)}
-
             >
                 {img || imageUrl ? <img src={img || imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
