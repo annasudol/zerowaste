@@ -5,6 +5,7 @@ import toJson from 'enzyme-to-json';
 import { renderApollo, cleanup,  fireEvent, waitForElement } from '../../test.utils';
 import { HashRouter } from 'react-router-dom';
 import { act } from "react-dom/test-utils";
+import {screen} from '@testing-library/react'
 
 
 
@@ -31,29 +32,28 @@ describe('component', (): void => {
               request: {
                 query: GET_RECIPE_DETAILS,
                 variables: { id: "5ef248ca324f6aaa02bfd7a0" },
-                results: { recipe:  {
-                    _typename: "RecipeDetails",
-                    author: null,
-                    detailedIngredients: ['test'],
-                    image: "http://res.cloudinary.com/drgb4slzt/image/upload/v1593443213/belhdjaq4pevmwydoept.jpg",
-                    instructions: "test",
-                    readyInMinutes: 130,
-                    servings: 8,
-                    sourceUrl: "myblog.com",
-                    title: "Apple Pie",
-                    user: {
-                        __typename: "User",
-                        name: "anna"
-                    }
-                }},
-              }
-            }
+              },
+              result: { data: { recipe:  {
+                _typename: "RecipeDetails",
+                author: null,
+                detailedIngredients: ['test'],
+                image: "http://res.cloudinary.com/drgb4slzt/image/upload/v1593443213/belhdjaq4pevmwydoept.jpg",
+                instructions: "test",
+                readyInMinutes: 130,
+                servings: 8,
+                sourceUrl: "myblog.com",
+                title: "Apple Pie",
+                user: {
+                    __typename: "User",
+                    name: "anna"
+                }
+            }},
+          }}
           ]
-          const {findByText} = renderApollo(<HashRouter><RecipeItem  id="5ef248ca324f6aaa02bfd7a0" title="test" image="img" ingredients={["ing1"]} deleteEditBtn/></HashRouter>, {mocks})
+          const {findByText} = renderApollo(<HashRouter><RecipeItem  id="5ef248ca324f6aaa02bfd7a0" title="test" image="img" ingredients={["ing1"]} deleteEditBtn /></HashRouter>, {mocks})
           const editButton =  await waitForElement(() => findByText(/edit Recipe/i));
-          act(()=> {
-            fireEvent.click(editButton);
-          })
+        
+          fireEvent.click(editButton);
       });
     });
 });

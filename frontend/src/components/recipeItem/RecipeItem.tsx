@@ -38,7 +38,6 @@ export const RecipeItem: FC<RecipeItemProps> = ({ id, title, image, ingredients,
     const [getRecipeData, { data }] = useLazyQuery(GET_RECIPE_DETAILS);
     const editRecipe = () => getRecipeData({ variables: { id } })
 
-
     if (data) {
         const { servings, instructions, readyInMinutes, detailedIngredients, sourceUrl } = data.recipe
         return <Redirect to={{ pathname: `/editRecipe/${id}`, state: { title, image, servings, instructions, ingredients, readyInMinutes, detailedIngredients, sourceUrl } }} />

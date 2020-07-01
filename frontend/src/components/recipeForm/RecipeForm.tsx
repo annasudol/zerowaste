@@ -10,6 +10,7 @@ import * as request from 'superagent';
 import { handlePhotoDelete } from "../../utils/handlePhotoDelete";
 const { TextArea } = Input;
 const tailLayout = { wrapperCol: { offset: 10, span: 12 } };
+export const formRef = React.createRef<FormInstance>();
 
 const validateMessages = {
     // eslint-disable-next-line no-template-curly-in-string
@@ -32,17 +33,13 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
     const [detailedIngredients, setDetailedIngredients] = React.useState<string[] | []>([])
     const [imageUrl] = useState<string | undefined>(initialValues?.image);
     const [error, setError] = React.useState<boolean>(false)
-    const formRef = React.createRef<FormInstance>();
     useEffect(() => {
         if (initialValues) {
             formRef?.current?.setFieldsValue({ ...initialValues });
             setIngredients(initialValues.ingredients)
             setDetailedIngredients(initialValues.detailedIngredients)
         }
-    }, [formRef, initialValues]);
-
-
-
+    }, [initialValues]);
 
     const onFinish = async (values: Store) => {
         const uploadPreset = process.env.REACT_APP_CLOUD_PRESET;
@@ -60,14 +57,11 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
                     return handleSubmit(values, response.body.url)
                 }
             });
-
-    
     };
 
     const onReset = () => {
         setDetailedIngredients([]);
         setIngredients([]);
-
         setError(false);
         formRef.current?.resetFields();
     };
@@ -85,7 +79,7 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
         setDetailedIngredients([...newList])
     };
     const onFinishFailed = (errorInfo: { errorFields: { errors: unknown; }[]; }) => {
-        if (errorInfo?.errorFields[3]?.errors) {
+        if (errorInfo?.errorFields?.length) {
             return setError(true);
         }
     };
