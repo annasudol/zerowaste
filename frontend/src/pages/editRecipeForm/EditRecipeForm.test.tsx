@@ -66,5 +66,23 @@ describe('component', (): void => {
        const backButton =  await waitForElement(() => getByTitle('back-btn'));
        fireEvent.click(backButton);
     });
+
+    it('render without error after editing recipe and saving changes', async () => {
+
+      const mocks = [
+          {
+            request: {
+              query: UPDATE_RECIPE,
+              variables: { id: "5ef248ca324f6aaa02bfd7a0", title: "test", servings: 10, image: "test", readyInMinutes: 10, ingredients: ["test1"], detailedIngredients: ["test2"], instructions: "inst", sourceUrl: "myBlog.com"},
+          },
+          results: { data: { recipe:  {id: "5ef248ca324f6aaa02bfd7a0"}}},
+        }
+        ];
+        const utils = renderApollo(<EditRecipeForm/>, {mocks});
+        const input = utils.getByLabelText('Title')
+
+        fireEvent.change(input, { target: { value: '2334' } });
+        fireEvent.click(utils.getByText(/save changes/i));
+      });
   });
 });

@@ -183,7 +183,7 @@ exports[`component LoginSignUpForm match snapshot 1`] = `
       loading={false}
       type="primary"
     >
-      Submit
+      Add recipe
     </Button>
     <Button
       block={false}
@@ -383,7 +383,7 @@ exports[`component LoginSignUpForm match snapshot when initialValues props are g
       loading={false}
       type="primary"
     >
-      Submit
+      Save changes
     </Button>
     <Button
       block={false}

@@ -10,7 +10,7 @@ import { LocationTypes } from '../../utils/types';
 import { Button } from 'antd';
 
 
-const GET_RECIPE_DETAILS = gql`
+export const GET_RECIPE_DETAILS = gql`
   query GetRecipeDetails($id: ID!) {
     recipe(id: $id) {
         title
@@ -29,7 +29,7 @@ const GET_RECIPE_DETAILS = gql`
 `;
 
 export const RecipeInfo: FC= (): ReactElement => {
-    const { recipeID } = useParams();
+    const { recipeID } = useParams<{recipeID: string}>();
     const history = useHistory();
     const location: LocationTypes = useLocation();
     const backPath = location?.state?.backPath;
@@ -41,10 +41,9 @@ export const RecipeInfo: FC= (): ReactElement => {
     useEffect(() => {
         refetch()
     }, [refetch]);
-
-
+    console.log(data, loading, error)
     if (loading) return <LoadingBar />
-    if (error) return <ErrorMessage message={`ERROR: ${error.message}`}></ErrorMessage>;
+    if (error) return <ErrorMessage message={`ERROR: ${error?.message}`}></ErrorMessage>;
     if (!data) return <ErrorMessage message='Not found'></ErrorMessage>;
     const backRecipes = (): void =>  history.push({ pathname: backPath ? backPath : AppRoutes.RecipesList, state: { callRefetch: true } });
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;

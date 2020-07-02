@@ -5,7 +5,6 @@ import toJson from 'enzyme-to-json';
 import { renderApollo, cleanup,  fireEvent, waitForElement } from '../../test.utils';
 import { HashRouter } from 'react-router-dom';
 import { act } from "react-dom/test-utils";
-import {screen} from '@testing-library/react'
 
 
 
@@ -52,7 +51,7 @@ describe('component', (): void => {
           ]
           const {findByText} = renderApollo(<HashRouter><RecipeItem  id="5ef248ca324f6aaa02bfd7a0" title="test" image="img" ingredients={["ing1"]} deleteEditBtn /></HashRouter>, {mocks})
           const editButton =  await waitForElement(() => findByText(/edit Recipe/i));
-        
+
           fireEvent.click(editButton);
       });
     });

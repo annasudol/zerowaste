@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { getProducts } from '../../state/products/selectors';
 import { useUserRecipes } from "../../hooks/useUserRecipes";
 
-const GET_RECIPES = gql`
+export const GET_RECIPES = gql`
   query GetRecipes($ingredients: [String!]!) {
     recipes(ingredients: $ingredients) {
         id

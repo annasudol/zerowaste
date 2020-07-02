@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-// this adds custom jest matchers from jest-dom
+
 import '@testing-library/jest-dom/extend-expect';
 import { MockedProvider, MockedResponse } from '@apollo/react-testing';
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { store } from './state';
+
 export * from '@testing-library/react';
 type RenderApolloOptions = { 
   mocks?: MockedResponse[], 
@@ -46,6 +47,8 @@ const renderApollo = (node: any, { mocks, addTypename, defaultOptions, cache, re
     options,
   );
 };
+
+
 
 
 

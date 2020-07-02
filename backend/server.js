@@ -91,6 +91,9 @@ const apolloServer = new ApolloServer({
     onDisconnect: async (_webSocket, _context) => {
       console.log(`Subscription client disconnected.`)
     }
+  },
+  engine: {
+    reportSchema: true
   }
 });
 

@@ -60,7 +60,7 @@ describe('component', (): void => {
 
       beforeEach(()=>{
         const useStateSpy = jest.spyOn(React, 'useState')
-        useStateSpy.mockImplementation((init) => [init, setState]);
+        useStateSpy.mockImplementation<unknown>((init: string) => [init, setState]);
        })
       it('adding detailedIngredients', (): void=> {
         const wrapper = shallow(<RecipeForm handleSubmit={jest.fn()} />);
@@ -71,7 +71,6 @@ describe('component', (): void => {
       it('deleting detailedIngredients', (): void=> {
         const wrapper = shallow(<RecipeForm handleSubmit={jest.fn()} initialValues={sampleRecipe} />);
         wrapper.find(List).prop<Function>('deleteItem')('1/2 cup sugar');
-
       });
      })
   });

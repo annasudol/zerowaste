@@ -116,13 +116,13 @@ export const RecipeForm: FC<RecipeFormProps> = ({ handleSubmit, fillForm = false
             </Form.Item>
             <Form.Item {...tailLayout}>
                 <Button type='primary' htmlType='submit' className='mr-2'>
-                    Submit
+                    {initialValues ? 'Save changes' : 'Add recipe'}
                 </Button>
                 <Button htmlType='button' onClick={onReset} className='mr-2'>
                     Reset
                 </Button>
                 {fillForm && (<Button type='dashed' htmlType='button' onClick={onFill}>
-                    Fill form
+                    Fill form by example
                 </Button>)}
             </Form.Item>
         </Form>

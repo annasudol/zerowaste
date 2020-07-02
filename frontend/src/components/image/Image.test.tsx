@@ -6,7 +6,6 @@ describe('component', (): void => {
   describe('Image', (): void => {
     it('match snapshot with medium size image', (): void => {
       const {getByAltText} = render(<Image src='url' size="medium" alt="test" />);
-   
      expect(getByAltText('test')).toBeInTheDocument();
     });
     it('match snapshot with small size image', (): void => {

@@ -55,15 +55,6 @@ module.exports = {
       }
     }
   },
-  // Subscription: {
-  //   userCreated: {
-  //     subscribe: () => PubSub.asyncIterator('USER_CREATED')
-  //   },
-  //   addedRecipe: {
-  //     subscribe: () => PubSub.asyncIterator('USER_CREATED')
-  //   }
-  // },
-  // PubSub.publish('USER_CREATED', { userCreated: newUser });
 
   User: {
     recipes: async ({ id }) => {

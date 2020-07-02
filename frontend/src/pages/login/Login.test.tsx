@@ -2,7 +2,6 @@ import React from 'react';
 import { Login, LOGIN_USER } from './Login';
 import { renderApollo, cleanup,  fireEvent, waitForElement } from '../../test.utils';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import { gql } from "apollo-boost";
 
 describe('component', (): void => {
   describe('Login', (): void => {
@@ -42,23 +41,10 @@ describe('component', (): void => {
             fireEvent.change(getByTestId('password-input'), {
                 target: {value: "Test098"},
             });
-  
 
             fireEvent.click(getByText(/submit/i));
 
-            // login is done if loader is gone
             await waitForElement(() => getByText(/submit/i));
-        
-            // check to make sure the cache's contents have been updated
-            // const response: any = cache.readQuery({
-            //   query: gql`
-            //     query IsUserLoggedIn {
-            //       isLoggedIn @client
-            //     }
-            //   `,
-            // });
-            // const {isLoggedIn} = response;
-            // expect(isLoggedIn).toBeTruthy();
           });
     });
 });
