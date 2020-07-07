@@ -41,7 +41,7 @@ export const RecipeInfo: FC= (): ReactElement => {
     useEffect(() => {
         refetch()
     }, [refetch]);
-    console.log(data, loading, error)
+    
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error?.message}`}></ErrorMessage>;
     if (!data) return <ErrorMessage message='Not found'></ErrorMessage>;
@@ -49,7 +49,7 @@ export const RecipeInfo: FC= (): ReactElement => {
     const { readyInMinutes, title, author, servings, image, detailedIngredients, sourceUrl, user, instructions } = data.recipe;
     const headerInfo = [{ text: 'Ready in: ', value: readyInMinutes }, { text: 'author ', value: author ? author : user?.name }, { text: 'Servings: ', value: servings }]
     return (
-        <div className=''>
+        <>
             <div className='max-w-lg p-4'>
                 <button onClick={backRecipes} className='coral-link -ml-3 p-4'><BackspaceIcon /></button>
                 <h2 className='font-bebas uppercase text-darkGray mb-0'>{title}</h2>
@@ -74,8 +74,8 @@ export const RecipeInfo: FC= (): ReactElement => {
                     </>
                 )}
                 <br></br>
-                {sourceUrl && <Button type='primary' ghost href={sourceUrl} >source link</Button>}
+                {sourceUrl && <Button type='primary' ghost href={`http://${sourceUrl}`} target="_blank" rel='noopener noreferrer'>source link</Button>}
             </div>
-        </div>
+        </>
     );
 };

@@ -19,9 +19,9 @@ export const SearchRecipesForm: FC<{ btnText?: string }> = ({ btnText = 'Search 
         return history.push({ pathname: AppRoutes.RecipesList });
     }
     return (<>
-        <AutoCompleteForm list={ingredients} saveList={(value: string[]): void => setIngredients(value)} />
-        {ingredients?.length > 0 && <Button type='primary' onClick={searchRecipes}>{btnText}</Button>}
-    </>
+                <AutoCompleteForm list={ingredients} saveList={(value: string[]): void => setIngredients(value)} />
+                {ingredients?.length > 0 && <Button type='primary' onClick={searchRecipes}>{btnText}</Button>}
+            </>
     )
 }
 
