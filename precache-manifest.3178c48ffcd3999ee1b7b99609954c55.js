@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68a2a997c8cb6c01c404e13181a44477",
+    "revision": "b16a7e61ce380880254a54c8d259c2c7",
     "url": "/zerowaste/index.html"
   },
   {
-    "revision": "d5366ce5b87e75e1f100",
-    "url": "/zerowaste/static/css/2.e3114f99.chunk.css"
+    "revision": "7eb49f83759aa547f662",
+    "url": "/zerowaste/static/css/2.919b51fa.chunk.css"
   },
   {
     "revision": "172a36d5a1dd9c376d89",
     "url": "/zerowaste/static/css/main.9ec51c13.chunk.css"
   },
   {
-    "revision": "d5366ce5b87e75e1f100",
+    "revision": "7eb49f83759aa547f662",
     "url": "/zerowaste/static/js/2.0672b784.chunk.js"
   },
   {
