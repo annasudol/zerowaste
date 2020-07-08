@@ -5,9 +5,14 @@ import { getAccessToken } from '../userAuth';
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from 'apollo-utilities'
 import { onError } from "apollo-link-error";
+let path = 'test-app-gql.herokuapp.com'
+if(process.env.NODE_ENV === "development"){
+    path = `localhost:${process.env.REACT_APP_PORT}`
+}
 
-const httpUrl = `http://localhost:${process.env.REACT_APP_PORT || 9000}/graphql`;
-const uri = `ws://localhost:${process.env.REACT_APP_PORT || 9000}/subscriptions`;
+
+const httpUrl = `http://${path}/graphql`;
+const uri = `ws://${path}/subscriptions`;
 
 const wslink = new WebSocketLink({
     uri, options: {

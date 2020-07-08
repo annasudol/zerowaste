@@ -6,7 +6,7 @@ const { isAuthenticated, isRecipeOwner } = require('./middleware');
 const { PubSub } = require('graphql-subscriptions');
 const pubSub = new PubSub();
 const CHANGES_IN_RECIPE = 'CHANGES_IN_RECIPE';
-const DELETE_RECIPE = 'CHANGES_IN_RECIPE';
+const DELETE_RECIPE = 'DELETE_RECIPE';
 
 module.exports = {
   Query: {

@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useMutation, useSubscription } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Button } from 'antd';
 import { handlePhotoDelete } from '../../utils/handlePhotoDelete';
@@ -15,22 +15,6 @@ export const DELETE_RECIPE = gql`
   }
 `;
 
-export const DELETE_RECIPE_SUBSCRIPTION = gql`
- subscription deleteRecipe {
-  deleteRecipe {
-    user {
-      name
-      email
-      recipes{
-        title
-        id
-        image
-        ingredients
-      }
-    }
-  }
- }
-`;
 
 
 
@@ -48,7 +32,6 @@ export const DialogDeleteRecipe: FC <DialogDeleteRecipeProps> = ({open, toggleOp
           console.log(err);
         },
     });
-    useSubscription(DELETE_RECIPE_SUBSCRIPTION);
 
     const handleDeleteRecipe = () => {
         handlePhotoDelete(image)
