@@ -20,13 +20,8 @@ Key tools used in this React project are:
 [Graphql](https://graphql.org/) | GraphQL was used to wrap spoonacular's REST API with user's recipes stored in mongo database.
 
 ## Demo:
-[https://guess-song-game.netlify.app/](https://guess-song-game.netlify.app/)
+[https://sudolann.github.io/zerowaste//](https://sudolann.github.io/zerowaste/)
 
-## Login to Spotify:
-if you don't have Spotify account, please sing in:
-
-| email: | spottifysample321@gmail.com |
-| password:| sample
 
 
 ## Installation
