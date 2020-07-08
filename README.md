@@ -1,7 +1,7 @@
 # ZERO WASTE APP
 A responsive [React](http://facebook.github.io/react/index.html) Desktop app for searching recipes based in given ingredients. User can add, modify and delete their own recipes after signing up. Powered by spoonacular's API
 
-![](https://github.com/sudolann/zerowaste/captured.gif)
+![](https://github.com/sudolann/zerowaste/blob/master/captured.gif)
 
 ## Tools
 Key tools used in this React project are:
@@ -20,11 +20,12 @@ Key tools used in this React project are:
 [Graphql](https://graphql.org/) | GraphQL was used to wrap spoonacular's REST API with user's recipes stored in mongo database.
 
 ## Demo:
-[https://sudolann.github.io/zerowaste//](https://sudolann.github.io/zerowaste/)
+[https://sudolann.github.io/zerowaste/](https://sudolann.github.io/zerowaste/)
 
 
 
 ## Installation
+
 ## Frontend
 1. Clone the repo: `https://github.com/sudolann/zerowaste.git`
 2. `cd zerowaste/frontend`
