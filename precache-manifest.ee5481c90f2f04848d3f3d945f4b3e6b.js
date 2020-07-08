@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9b1566b7150e683a4e400a7a4a8d0558",
+    "revision": "8634ffe0a0d2c93818817a4819f3a717",
     "url": "/zerowaste/index.html"
   },
   {
-    "revision": "9e7c97ba52568cdb398a",
-    "url": "/zerowaste/static/css/2.919b51fa.chunk.css"
+    "revision": "d22a1ebd68066c3ab52b",
+    "url": "/zerowaste/static/css/2.e3114f99.chunk.css"
   },
   {
-    "revision": "848cf8f4dd45d3f855ae",
+    "revision": "20d3cac8a764d55aea30",
     "url": "/zerowaste/static/css/main.9ec51c13.chunk.css"
   },
   {
-    "revision": "9e7c97ba52568cdb398a",
-    "url": "/zerowaste/static/js/2.ccb91f66.chunk.js"
+    "revision": "d22a1ebd68066c3ab52b",
+    "url": "/zerowaste/static/js/2.c6ec0028.chunk.js"
   },
   {
     "revision": "a41c879f8bdb54796b2468bd148c705b",
-    "url": "/zerowaste/static/js/2.ccb91f66.chunk.js.LICENSE.txt"
+    "url": "/zerowaste/static/js/2.c6ec0028.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "848cf8f4dd45d3f855ae",
-    "url": "/zerowaste/static/js/main.e8d41f18.chunk.js"
+    "revision": "20d3cac8a764d55aea30",
+    "url": "/zerowaste/static/js/main.8b18fbe2.chunk.js"
   },
   {
     "revision": "8cd2c687faa857e642d8",
