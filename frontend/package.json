@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sudolann.github.io/zerowaste",
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@apollo/react-hooks": "^3.1.5",
@@ -87,7 +88,9 @@
     "build": "craco build",
     "test": "craco test",
     "coverage": "craco test --coverage",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

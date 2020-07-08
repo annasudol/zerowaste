@@ -34,7 +34,6 @@ export const UserInfo: FC= (): ReactElement => {
 
     if (loading) return <LoadingBar />
     if (error) return <ErrorMessage message={`ERROR: ${error.message}`} />;
-    console.log(updatedRecipes, "updatedRecipes");
     return (
         <div className='overflow-hidden p-2'>
             <div className='mt-2 text-left'>
