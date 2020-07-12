@@ -17,13 +17,11 @@ exports[`component ImageUpload match snapshot 1`] = `
     supportServerRender={true}
     type="select"
   >
-    <div>
-      <ForwardRef(PlusOutlined) />
-      <div
-        className="ant-upload-text"
-      >
-        Upload
-      </div>
+    <ForwardRef(PlusOutlined) />
+    <div
+      className="ant-upload-text"
+    >
+      Upload
     </div>
   </Upload>
 </Fragment>
@@ -46,13 +44,11 @@ exports[`component ImageUpload match snapshot when given correct file format 1`]
     supportServerRender={true}
     type="select"
   >
-    <div>
-      <ForwardRef(PlusOutlined) />
-      <div
-        className="ant-upload-text"
-      >
-        Upload
-      </div>
+    <ForwardRef(PlusOutlined) />
+    <div
+      className="ant-upload-text"
+    >
+      Upload
     </div>
   </Upload>
 </Fragment>
@@ -75,13 +71,11 @@ exports[`component ImageUpload match snapshot when too large image was given 1`]
     supportServerRender={true}
     type="select"
   >
-    <div>
-      <ForwardRef(PlusOutlined) />
-      <div
-        className="ant-upload-text"
-      >
-        Upload
-      </div>
+    <ForwardRef(PlusOutlined) />
+    <div
+      className="ant-upload-text"
+    >
+      Upload
     </div>
   </Upload>
 </Fragment>
@@ -104,13 +98,11 @@ exports[`component ImageUpload match snapshot when wrong file format was given 1
     supportServerRender={true}
     type="select"
   >
-    <div>
-      <ForwardRef(PlusOutlined) />
-      <div
-        className="ant-upload-text"
-      >
-        Upload
-      </div>
+    <ForwardRef(PlusOutlined) />
+    <div
+      className="ant-upload-text"
+    >
+      Upload
     </div>
   </Upload>
 </Fragment>

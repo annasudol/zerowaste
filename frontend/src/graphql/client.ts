@@ -7,7 +7,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import { onError } from "apollo-link-error";
 let path = 'test-app-gql.herokuapp.com'
 if(process.env.NODE_ENV === "development"){
-    path = `localhost:${process.env.REACT_APP_PORT}`
+    path = `localhost:${process.env.REACT_APP_PORT || 9000}`
 }
 
 

@@ -40,6 +40,7 @@ export const AutoCompleteForm: FC <AutoCompleteProps> = ({ placeholder, form, sa
                     label={placeholder || 'Add at least one product'}
                 />
             )}
+            getOptionSelected={(option: string, value: string) => true}
             onChange={(_event, value: string[]): void => handleChange(value)}
             value={list}
         />
